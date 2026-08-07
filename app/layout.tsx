@@ -1,60 +1,61 @@
-import type { Metadata } from 'next';
-import { Roboto } from 'next/font/google';
-import Header from '@/components/Header/Header';
-import Footer from '@/components/Footer/Footer';
-import TanStackProvider from '@/components/TanStackProvider/TanStackProvider';
-import AuthProvider from '@/components/AuthProvider/AuthProvider';
-import './globals.css';
+// import type { Metadata } from 'next';
+// import { Roboto } from 'next/font/google';
+// import Header from '@/components/Header/Header';
+// import Footer from '@/components/Footer/Footer';
+// import TanStackProvider from '@/components/TanStackProvider/TanStackProvider';
+// import AuthProvider from '@/components/AuthProvider/AuthProvider';
+// import 'modern-normalize/modern-normalize.css';
+// import './globals.css';
 
-export const metadata: Metadata = {
-  title: 'NoteHub',
-  description: 'A simple note-taking app.',
+// export const metadata: Metadata = {
+//   title: 'NoteHub',
+//   description: 'A simple note-taking app.',
 
-  openGraph: {
-    title: 'NoteHub',
-    description: 'A simple note-taking app.',
+//   openGraph: {
+//     title: 'NoteHub',
+//     description: 'A simple note-taking app.',
 
-    images: [
-      {
-        url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'NoteHub app preview',
-      },
-    ],
-  },
-};
+//     images: [
+//       {
+//         url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+//         width: 1200,
+//         height: 630,
+//         alt: 'NoteHub app preview',
+//       },
+//     ],
+//   },
+// };
 
-const roboto = Roboto({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-roboto',
-  display: 'swap',
-});
+// const roboto = Roboto({
+//   subsets: ['latin'],
+//   weight: ['400', '700'],
+//   variable: '--font-roboto',
+//   display: 'swap',
+// });
 
-export default function RootLayout({
-  children,
-  modal,
-}: Readonly<{
-  children: React.ReactNode;
-  modal: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body className={roboto.variable}>
-        <TanStackProvider>
-          <AuthProvider>
-            <Header />
+// export default function RootLayout({
+//   children,
+//   modal,
+// }: Readonly<{
+//   children: React.ReactNode;
+//   modal: React.ReactNode;
+// }>) {
+//   return (
+//     <html lang="en">
+//       <body className={roboto.variable}>
+//         <TanStackProvider>
+//           <AuthProvider>
+//             <Header />
 
-            <main>
-              {children}
-              {modal}
-            </main>
+//             <main>
+//               {children}
+//               {modal}
+//             </main>
 
-            <Footer />
-          </AuthProvider>
-        </TanStackProvider>
-      </body>
-    </html>
-  );
-}
+//             <Footer />
+//           </AuthProvider>
+//         </TanStackProvider>
+//       </body>
+//     </html>
+//   );
+// }

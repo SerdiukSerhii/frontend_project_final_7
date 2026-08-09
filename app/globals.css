@@ -1,10 +1,39 @@
+:root {
+  --green: #649179;
+  --black: #070721;
+  --light-green: #d1e0d8;
+  --red: #ad6a6c;
+  --purple: #7678ed;
+  --white: #f7fffb;
+  --green-darker: #374f42;
+  --gray: #595d62;
+  --light-gray: #9f9f9f;
+
+  --font-family: var(--font-manrope), sans-serif;
+  --second-family: var(--font-dm-sans), sans-serif;
+  --third-family: var(--font-noto-sans), sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
-  font-family: var(--font-roboto), sans-serif;
+  font-family: var(--font-family), sans-serif;
+  margin: 0;
+  background-color: #f7fffb;
+}
+
+.layout {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  margin: 0;
-  background-color: #f8f9fa;
 }
 
 main {
@@ -15,7 +44,7 @@ main {
   min-width: 320px;
   max-width: 375px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 16px;
 }
 
 @media screen and (min-width: 768px) {
@@ -28,6 +57,49 @@ main {
 @media screen and (min-width: 1440px) {
   .container {
     max-width: 1440px;
-    padding: 0 64px;
+    padding: 0 108px;
   }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  outline: none;
+}
+address {
+  font-style: normal;
+}
+ul,
+ol {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+a {
+  text-decoration: none;
+  color: currentColor;
+}
+
+input,
+textarea,
+select,
+button {
+  font: inherit;
 }

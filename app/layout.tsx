@@ -1,63 +1,71 @@
-// ПОТРІБНО ДОДАТИ <Toaster /> в LAYOUT, що спрацювали пуш-повідомлення (Оля Боржинська)
+import type { Metadata } from 'next';
+import { Manrope, DM_Sans, Noto_Sans } from 'next/font/google';
+import Header from '@/components/Header/Header';
+import Footer from '@/components/Footer/Footer';
+import TanStackProvider from '@/components/TanStackProvider/TanStackProvider';
+import AuthProvider from '@/components/AuthProvider/AuthProvider';
+import 'modern-normalize/modern-normalize.css';
+import './globals.css';
 
-// import type { Metadata } from 'next';
-// import { Roboto } from 'next/font/google';
-// import Header from '@/components/Header/Header';
-// import Footer from '@/components/Footer/Footer';
-// import TanStackProvider from '@/components/TanStackProvider/TanStackProvider';
-// import AuthProvider from '@/components/AuthProvider/AuthProvider';
-// import 'modern-normalize/modern-normalize.css';
-// import './globals.css';
+export const metadata: Metadata = {
+  title: 'Harmoniq',
+  description: 'Harmoniq — a simple and intuitive platform for reading articles.',
 
-// export const metadata: Metadata = {
-//   title: 'NoteHub',
-//   description: 'A simple note-taking app.',
+  openGraph: {
+    title: 'Harmoniq',
+    description: 'Harmoniq — a simple and intuitive platform for reading articles.',
 
-//   openGraph: {
-//     title: 'NoteHub',
-//     description: 'A simple note-taking app.',
+    images: [
+      {
+        url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Harmoniq app preview',
+      },
+    ],
+  },
+};
 
-//     images: [
-//       {
-//         url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
-//         width: 1200,
-//         height: 630,
-//         alt: 'NoteHub app preview',
-//       },
-//     ],
-//   },
-// };
+const manrope = Manrope({
+  variable: '--font-manrope',
+  subsets: ['latin', 'cyrillic'],
+});
 
-// const roboto = Roboto({
-//   subsets: ['latin'],
-//   weight: ['400', '700'],
-//   variable: '--font-roboto',
-//   display: 'swap',
-// });
+const dmSans = DM_Sans({
+  variable: '--font-dm-sans',
+  subsets: ['latin', 'latin-ext'],
+});
 
-// export default function RootLayout({
-//   children,
-//   modal,
-// }: Readonly<{
-//   children: React.ReactNode;
-//   modal: React.ReactNode;
-// }>) {
-//   return (
-//     <html lang="en">
-//       <body className={roboto.variable}>
-//         <TanStackProvider>
-//           <AuthProvider>
-//             <Header />
+const notoSans = Noto_Sans({
+  variable: '--font-noto-sans',
+  subsets: ['latin', 'cyrillic'],
+});
 
-//             <main>
-//               {children}
-//               {modal}
-//             </main>
+export default function RootLayout({
+  children,
+  modal,
+}: Readonly<{
+  children: React.ReactNode;
+  modal: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body className={`${manrope.variable} ${dmSans.variable} ${notoSans.variable}`}>
+        <TanStackProvider>
+          <AuthProvider>
+            <div className="layout">
+              <Header />
 
-//             <Footer />
-//           </AuthProvider>
-//         </TanStackProvider>
-//       </body>
-//     </html>
-//   );
-// }
+              <main>
+                {children}
+                {modal}
+              </main>
+
+              <Footer />
+            </div>
+          </AuthProvider>
+        </TanStackProvider>
+      </body>
+    </html>
+  );
+}

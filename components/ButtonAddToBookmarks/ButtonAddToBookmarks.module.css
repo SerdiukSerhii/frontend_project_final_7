@@ -1,0 +1,54 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid #d8e0da;
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: #6b8f76; 
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.button:hover {
+  border-color: #6b8f76;
+  color: #4b6b56;
+}
+
+.button:disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+
+.saved {
+  background-color: #6b8f76; 
+  border-color: #6b8f76;
+  color: #ffffff;
+}
+
+.saved:hover {
+  background-color: #557a61;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

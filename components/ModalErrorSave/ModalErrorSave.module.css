@@ -1,0 +1,60 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  max-width: 320px;
+}
+
+.title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #1f2d24; 
+}
+
+.text {
+  margin: 0;
+  font-size: 14px;
+  color: #4b5b50; 
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.loginBtn,
+.registerBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.loginBtn {
+  border: 1px solid #1f2d24;
+  color: #1f2d24;
+  background-color: transparent;
+}
+
+.loginBtn:hover {
+  background-color: #f1f4f2;
+}
+
+.registerBtn {
+  border: 1px solid transparent;
+  color: #ffffff;
+  background-color: #6b8f76; 
+}
+
+.registerBtn:hover {
+  background-color: #557a61;
+}

@@ -1,0 +1,90 @@
+.section {
+  padding: 36px 0;
+}
+
+.resultsCreators {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+@media screen and (min-width: 768px) {
+  .resultsCreators {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.titleCreators {
+  font-weight: 700;
+  font-size: 32px;
+  color: #000;
+}
+@media screen and (min-width: 768px) {
+  .titleCreators {
+    font-size: 40px;
+  }
+}
+
+.linkAllCreators {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: 12px;
+
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--green-darker);
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.arrowIcon {
+  width: 15px;
+  height: 15px;
+  display: block;
+}
+
+.authorsContainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin: 0 auto;
+}
+@media screen and (min-width: 768px) {
+  .authorsContainer {
+    max-width: 600px;
+    gap: 24px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .authorsContainer {
+    max-width: 100%;
+  }
+}
+.authorsContainer > li {
+  width: calc((100% - 1 * 16px) / 2);
+}
+@media screen and (min-width: 768px) {
+  .authorsContainer > li {
+    width: calc((100% - 2 * 24px) / 3);
+  }
+}
+@media screen and (min-width: 1440px) {
+  .authorsContainer > li {
+    width: calc((100% - 5 * 24px) / 6);
+  }
+}

@@ -1,5 +1,12 @@
+import PopularArticles from '@/components/PopularArticles/PopularArticles';
+
 const HomePage = () => {
-  return <h1>Harmoniq</h1>;
+  return (
+    <>
+      {/* Hero and About */}
+      <PopularArticles />
+    </>
+  );
 };
 
 export default HomePage;

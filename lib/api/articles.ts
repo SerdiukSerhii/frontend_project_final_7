@@ -1,6 +1,8 @@
 import { api } from './api';
-export const getArticles = async () => {
-  const { data } = await api.get('/articles');
+import type { GetArticlesParams, GetArticlesResponse } from '../../types/articles';
+
+export const getArticles = async (params: GetArticlesParams = {}): Promise<GetArticlesResponse> => {
+  const { data } = await api.get<GetArticlesResponse>('/articles', { params });
   return data;
 };
 

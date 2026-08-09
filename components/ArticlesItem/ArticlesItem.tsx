@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import css from './ArticlesItem.module.css';
 import type { Article } from '../../types/articles';
-// import ButtonAddToBookmarks from '../ButtonAddToBookmarks/ButtonAddToBookmarks';
+import ButtonAddToBookmarks from '../ButtonAddToBookmarks/ButtonAddToBookmarks';
 
 interface ArticlesItemProps {
   article: Article;

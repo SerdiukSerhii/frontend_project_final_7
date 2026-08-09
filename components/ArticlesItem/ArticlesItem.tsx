@@ -2,14 +2,19 @@ import Image from 'next/image';
 import Link from 'next/link';
 import css from './ArticlesItem.module.css';
 import type { Article } from '../../types/articles';
-// import ButtonAddToBookmarks from '../ButtonAddToBookmarks/ButtonAddToBookmarks';
+import ButtonAddToBookmarks from '../ButtonAddToBookmarks/ButtonAddToBookmarks';
 
 interface ArticlesItemProps {
   article: Article;
   isOwner?: boolean;
+  isAuthenticated?: boolean;
 }
 
-export default function ArticlesItem({ article, isOwner = false }: ArticlesItemProps) {
+export default function ArticlesItem({
+  article,
+  isOwner = false,
+  isAuthenticated = false,
+}: ArticlesItemProps) {
   const { _id, title, desc, img, ownerId } = article;
 
   const authorName = typeof ownerId === 'object' ? ownerId.name : 'Harmoniq Author';
@@ -69,7 +74,10 @@ export default function ArticlesItem({ article, isOwner = false }: ArticlesItemP
               </svg>
             </Link>
           ) : (
-            <ButtonAddToBookmarks articleId={_id} />
+            <ButtonAddToBookmarks
+              articleId={_id}
+              isAuthenticated={isAuthenticated}
+            />
           )}
         </div>
       </article>

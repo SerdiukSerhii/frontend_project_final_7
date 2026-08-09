@@ -1,5 +1,12 @@
+import LoginForm from '@/components/Form/LoginForm/LoginForm';
 import css from './login.module.css';
 
-export default function LoginPage() {
-  return <main className={css.page}>Login page</main>;
-}
+const LoginPage = () => {
+  return (
+    <main className={css.page}>
+      <LoginForm />
+    </main>
+  );
+};
+
+export default LoginPage;

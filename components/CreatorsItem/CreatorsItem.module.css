@@ -1,7 +1,6 @@
 .cardAuthors {
   width: 100%;
   max-width: 172px;
-  min-height: 221px;
   padding: 12px;
 
   display: flex;
@@ -13,14 +12,13 @@
 @media screen and (min-width: 768px) {
   .cardAuthors {
     max-width: 184px;
-    min-height: 233px;
   }
 }
 
 .imageCardAuthors,
 .avatarIconWrapper {
   position: relative;
-  width: 100%;
+  width: clamp(120px, 38vw, 148px);
   max-width: 148px;
   aspect-ratio: 1 / 1;
   border-radius: 256px;
@@ -35,6 +33,7 @@
 @media screen and (min-width: 768px) {
   .imageCardAuthors,
   .avatarIconWrapper {
+    width: 100%;
     max-width: 160px;
   }
 }
@@ -53,6 +52,7 @@
   font-family: var(--font-family);
   font-weight: 700;
   font-size: 24px;
+
   text-align: center;
   color: var(--black);
 }

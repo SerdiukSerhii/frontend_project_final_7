@@ -5,7 +5,7 @@ import css from './CreatorsItem.module.css';
 export interface Author {
   _id: string;
   name: string;
-  avatar?: string;
+  avatarUrl?: string;
 }
 
 interface CreatorsItemProps {
@@ -13,7 +13,9 @@ interface CreatorsItemProps {
 }
 
 export default function CreatorsItem({ author }: CreatorsItemProps) {
-  const { _id, name, avatar } = author;
+  const { _id, name, avatarUrl } = author;
+
+  const firstName = name ? name.split(' ')[0] : '';
 
   return (
     <li className={css.itemAuthors}>
@@ -21,10 +23,10 @@ export default function CreatorsItem({ author }: CreatorsItemProps) {
         href={`/authors/${_id}`}
         className={css.cardAuthors}
       >
-        {avatar ? (
+        {avatarUrl ? (
           <div className={css.imageCardAuthors}>
             <Image
-              src={avatar}
+              src={avatarUrl}
               alt={name}
               fill
               className={css.avatarAuthors}
@@ -54,7 +56,7 @@ export default function CreatorsItem({ author }: CreatorsItemProps) {
           </div>
         )}
 
-        <p className={css.nameAuthors}>{name}</p>
+        <p className={css.nameAuthors}>{firstName}</p>
       </Link>
     </li>
   );

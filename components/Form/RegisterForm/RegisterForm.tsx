@@ -1,8 +1,16 @@
 'use client';
 
+import * as Yup from 'yup';
 import { Field, Form, Formik, FormikHelpers } from 'formik';
 import Link from 'next/link';
 import { useId } from 'react';
+
+const RegisterFormSchema = Yup.object().shape({
+  username: Yup.string().required().min(2).max(32),
+  email: Yup.string().required().max(64),
+  password: Yup.string().required().min(8).max(64),
+  repeatPassword: Yup.string().required().min(8).max(64),
+});
 
 interface RegisterFormValues {
   username: string;
@@ -30,6 +38,7 @@ export default function RegisterForm() {
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
+        validationSchema={RegisterFormSchema}
       >
         <Form>
           <label htmlFor={`${fieldId}-name`}>Enter your name</label>

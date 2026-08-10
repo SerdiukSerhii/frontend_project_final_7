@@ -59,46 +59,13 @@
   transform: translate(2px, -2px);
 }
 
-/* 
-.list {
-  display: grid;
-  grid-template-columns: 1fr;
-  justify-items: center;
-  gap: 24px;
-}
 
-@media screen and (min-width: 768px) {
-  .list {
-    grid-template-columns: repeat(2, 1fr);
-    justify-items: stretch;
-  }
+.popularList {
+  width: 100%;
 }
 
 @media screen and (min-width: 1440px) {
-  .list {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .list>li:nth-child(4) {
-    display: none;
-  }
-}
-
-.empty {
-  font-size: 16px;
-  color: var(--gray);
-  text-align: center;
-} */
-
-
-/* или  */
-/* .popularList {
-  /* ничего для обычной сетки здесь не задаём */
-/* width: 100%; */
-/* } */
-
-/* @media screen and (min-width: 1440px) {
   .popularList :global(li:nth-child(4)) {
     display: none;
   }
-}  */
+}

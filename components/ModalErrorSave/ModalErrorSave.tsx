@@ -1,29 +1,83 @@
-import Link from 'next/link';
-import Modal from '@/components/Modal/Modal';
-import css from './ModalErrorSave.module.css';
+import css from './Modal.module.css';
+import { createPortal } from 'react-dom';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface ModalErrorSaveProps {
   onClose: () => void;
+  description?: string;
 }
 
-const ModalErrorSave = ({ onClose }: ModalErrorSaveProps) => {
-  return (
-    <Modal onClose={onClose}>
-      <div className={css.content}>
+export default function ModalErrorSave({ onClose, description }: ModalErrorSaveProps) {
+  const navigate = useNavigate();
+
+  const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (event.target === event.currentTarget) {
+      onClose();
+    }
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [onClose]);
+
+  const handleLogin = () => {
+    onClose();
+    navigate('/login');
+  };
+
+  const handleRegister = () => {
+    onClose();
+    navigate('/register');
+  };
+
+  return createPortal(
+    <div
+      className={css.backdrop}
+      onClick={handleBackdropClick}
+      role="dialog"
+      aria-modal="true"
+    >
+      <div className={css.modal}>
+        <button
+          className={css.closeBtn}
+          onClick={onClose}
+          aria-label="Close modal"
+        >
+          &times;
+        </button>
+
         <h2 className={css.title}>Error while saving</h2>
-        <p className={css.text}>To save this article, you need to authorize first</p>
+        <p className={css.description}> To save this article, you need to authorize first</p>
 
         <div className={css.actions}>
-          <Link href="/login" className={css.loginBtn} onClick={onClose}>
+          <button
+            className={css.loginBtn}
+            onClick={handleLogin}
+          >
             Login
-          </Link>
-          <Link href="/register" className={css.registerBtn} onClick={onClose}>
+          </button>
+          <button
+            className={css.registerBtn}
+            onClick={handleRegister}
+          >
             Register
-          </Link>
+          </button>
         </div>
       </div>
-    </Modal>
+    </div>,
+    document.body
   );
-};
-
-export default ModalErrorSave;
+}

@@ -41,23 +41,9 @@ const PopularArticles = async () => {
           </Link>
         </div>
 
-        {/* {articles.length > 0 ? (
-          <ul className={css.list}>
-            {articles.map(article => (
-              <ArticlesItem
-                key={article._id}
-                article={article}
-              />
-            ))}
-          </ul>
-        ) : (
-          <p className={css.empty}>No articles available.</p>
-        )} */}
-        <ArticlesList articles={articles} />
-        {/* или потом тамк */}
-        {/* <div className={css.popularList}>
+        <div className={css.popularList}>
           <ArticlesList articles={articles} />
-        </div> */}
+        </div>
       </div>
     </section>
   );

@@ -29,4 +29,5 @@ export interface GetArticlesResponse {
   totalPages: number;
   totalArticles: number;
   articlesQuery: Article[];
+  isSaved?: boolean;
 }

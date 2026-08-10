@@ -1,0 +1,117 @@
+.articlesList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+@media screen and (min-width: 768px) {
+  .articlesList {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .articlesList > li {
+    width: calc((100% - 1 * 24px) / 2);
+  }
+}
+@media screen and (min-width: 1440px) {
+  .articlesList > li {
+    width: calc((100% - 2 * 24px) / 3);
+  }
+}
+
+.alertCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 83px;
+  width: 100%;
+  max-width: 361px;
+  padding: 12px;
+  border-radius: 32px;
+  background-color: var(--light-green);
+  margin: 0 auto;
+}
+@media screen and (min-width: 768px) {
+  .alertCard {
+    max-width: 520px;
+    margin: 0;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .alertCard {
+    max-width: 497px;
+  }
+}
+
+.alertContentWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 16px;
+}
+
+.alertIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+}
+
+.icon {
+  width: 64px;
+  height: 64px;
+  display: block;
+}
+
+.alertTitle {
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--black);
+}
+
+.alertDescription {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--black);
+}
+
+.alertBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 38px;
+  padding: 8px;
+  border: 1px solid var(--green-darker);
+  border-radius: 64px;
+  background-color: transparent;
+
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--green-darker);
+  text-decoration: none;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.alertBtn:hover {
+  background-color: var(--green);
+  border-color: var(--green);
+  color: var(--white);
+}
+
+.alertBtn:active {
+  opacity: 0.7;
+}

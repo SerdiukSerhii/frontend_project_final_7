@@ -6,6 +6,7 @@ import TanStackProvider from '@/components/TanStackProvider/TanStackProvider';
 import AuthProvider from '@/components/AuthProvider/AuthProvider';
 import 'modern-normalize/modern-normalize.css';
 import './globals.css';
+import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
   title: 'Harmoniq',
@@ -59,6 +60,12 @@ export default function RootLayout({
               <main>
                 {children}
                 {modal}
+                <Toaster
+                  position="top-right"
+                  toastOptions={{
+                    duration: 3000,
+                  }}
+                />
               </main>
 
               <Footer />

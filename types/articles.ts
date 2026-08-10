@@ -5,14 +5,16 @@ export interface Author {
 }
 
 export interface Article {
-  _id: string;  
-  img: string;     
-  title: string;     
-  desc: string;         
-  article: string;      
-  rate: number;          
-  ownerId: string | Author; 
-  date: string;          
-  createdAt?: string;     
-  updatedAt?: string;   
+  _id: string;
+  img: string;
+  title: string;
+  desc: string;
+  article: string;
+  rate: number;
+  ownerId: string | Author;
+  date: string;
+  createdAt?: string;
+  updatedAt?: string;
+  isSaved?: boolean;
+  isOwner?: boolean;
 }

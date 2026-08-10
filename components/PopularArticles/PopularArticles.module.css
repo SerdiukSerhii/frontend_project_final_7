@@ -1,4 +1,4 @@
-.headingRow {
+.header {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -6,7 +6,7 @@
 }
 
 @media screen and (min-width: 768px) {
-  .headingRow {
+  .header {
     flex-direction: row;
     justify-content: space-between;
   }
@@ -59,6 +59,7 @@
   transform: translate(2px, -2px);
 }
 
+/* 
 .list {
   display: grid;
   grid-template-columns: 1fr;
@@ -87,4 +88,17 @@
   font-size: 16px;
   color: var(--gray);
   text-align: center;
-}
+} */
+
+
+/* или  */
+/* .popularList {
+  /* ничего для обычной сетки здесь не задаём */
+/* width: 100%; */
+/* } */
+
+/* @media screen and (min-width: 1440px) {
+  .popularList :global(li:nth-child(4)) {
+    display: none;
+  }
+}  */

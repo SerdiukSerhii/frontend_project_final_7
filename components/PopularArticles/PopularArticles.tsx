@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import ArticlesItem from '@/components/ArticlesItem/ArticlesItem';
+// import ArticlesItem from '@/components/ArticlesItem/ArticlesItem';
+import ArticlesList from '@/components/ArticlesList/ArticlesList';
 import { getArticles } from '@/lib/api/articles';
 import css from './PopularArticles.module.css';
 
@@ -21,7 +22,7 @@ const PopularArticles = async () => {
   return (
     <section id="popular-articles">
       <div className="container">
-        <div className={css.headingRow}>
+        <div className={css.header}>
           <h2 className={css.title}>Popular Articles</h2>
 
           <Link
@@ -40,7 +41,7 @@ const PopularArticles = async () => {
           </Link>
         </div>
 
-        {articles.length > 0 ? (
+        {/* {articles.length > 0 ? (
           <ul className={css.list}>
             {articles.map(article => (
               <ArticlesItem
@@ -51,7 +52,12 @@ const PopularArticles = async () => {
           </ul>
         ) : (
           <p className={css.empty}>No articles available.</p>
-        )}
+        )} */}
+        <ArticlesList articles={articles} />
+        {/* или потом тамк */}
+        {/* <div className={css.popularList}>
+          <ArticlesList articles={articles} />
+        </div> */}
       </div>
     </section>
   );

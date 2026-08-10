@@ -6,41 +6,9 @@ import css from './Creators.module.css';
 interface CreatorsProps {
   authors?: Author[];
 }
-const DEFAULT_AUTHORS: Author[] = [
-  {
-    _id: '6881563901add19ee16fcff2',
-    name: 'Анастасія Олійник',
-    avatarUrl: 'https://ftp.goit.study/img/harmoniq/users/6881563901add19ee16fcff2.webp',
-  },
-  {
-    _id: '6881563901add19ee16fcff3',
-    name: 'Назар Ткаченко',
-    avatarUrl: 'https://ftp.goit.study/img/harmoniq/users/6881563901add19ee16fcff3.webp',
-  },
-  {
-    _id: '6881563901add19ee16fcff4',
-    name: 'Єва Бондаренко',
-    avatarUrl: 'https://ftp.goit.study/img/harmoniq/users/6881563901add19ee16fcff4.webp',
-  },
-  {
-    _id: '6881563901add19ee16fcff5',
-    name: 'Дмитро Романенко',
-    avatarUrl: 'https://ftp.goit.study/img/harmoniq/users/6881563901add19ee16fcff5.webp',
-  },
-  {
-    _id: '6881563901add19ee16fcff6',
-    name: 'Олександра Бондаренко',
-    avatarUrl: 'https://ftp.goit.study/img/harmoniq/users/6881563901add19ee16fcff6.webp',
-  },
-  {
-    _id: '6881563901add19ee16fcff7',
-    name: 'Олександр Шевчук',
-    avatarUrl: 'https://ftp.goit.study/img/harmoniq/users/6881563901add19ee16fcff7.webp',
-  },
-];
+
 
 export default function Creators({ authors = [] }: CreatorsProps) {
-  const displayAuthors = authors.length > 0 ? authors : DEFAULT_AUTHORS;
 
   return (
     <section className={css.section}>
@@ -75,7 +43,7 @@ export default function Creators({ authors = [] }: CreatorsProps) {
         </div>
 
         <ul className={css.authorsContainer}>
-          {displayAuthors.slice(0, 6).map(author => (
+          {authors.slice(0, 6).map(author => (
             <CreatorsItem
               key={author._id}
               author={author}

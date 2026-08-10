@@ -1,3 +1,5 @@
+'use client';
+
 import {useState} from "react";
 import Image from "next/image";
 import css from './UserBar.module.css';
@@ -22,8 +24,24 @@ export default function UserBar({name, avatar}: UserBarProps) {
                 />
                 <p className={css.userBarName}>{name}</p>
 
+                <svg
+                    className={css.separator}
+                    width="1"
+                    height="39"
+                    aria-hidden="true"
+                >
+                    <use href="/icons/symbol-defs.svg#separator" />
+                </svg>
+
                 <button className={css.exitButton} type="button" onClick={() => setIsLogoutModalOpen(true)}>
-                    <svg xmlns="/components/UserBar/logoutBtn.svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={css.exitIcon}><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                    <svg
+                        className={css.logoutIcon}
+                        width="24"
+                        height="24"
+                        aria-hidden="true"
+                    >
+                        <use href="/icons/symbol-defs.svg#logout-btn" />
+                    </svg>
                 </button>
             </div>
             {isLogoutModalOpen && (

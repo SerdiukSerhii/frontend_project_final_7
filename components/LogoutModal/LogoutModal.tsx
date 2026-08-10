@@ -1,3 +1,6 @@
+"use client";
+
+
 import Modal from "../Modal/Modal";
 import css from "./LogoutModal.module.css";
 
@@ -7,7 +10,6 @@ interface LogoutModalProps {
 
 export default function LogoutModal({ onClose }: LogoutModalProps) {
     const handleLogout = () => {
-        // Implement your logout logic here
         console.log("User logged out");
     }
 
@@ -37,7 +39,7 @@ export default function LogoutModal({ onClose }: LogoutModalProps) {
                     </button>
                 </div>
             </div>
-            
+
         </Modal>
     )
 };

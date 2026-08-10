@@ -1,6 +1,10 @@
 "use client";
 
-
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
+// import { useAuthStore } from "@/lib/store/authStore";
+import { logout } from "@/lib/api/auth";
 import Modal from "../Modal/Modal";
 import css from "./LogoutModal.module.css";
 
@@ -9,9 +13,22 @@ interface LogoutModalProps {
 }
 
 export default function LogoutModal({ onClose }: LogoutModalProps) {
-    const handleLogout = () => {
-        console.log("User logged out");
-    }
+    
+    const router = useRouter();
+    // const clearUser = useAuthStore((state) => state.clearUser);
+    const mutation = useMutation({
+        mutationFn:logout,
+        onError: () => {
+            toast.error("Logout failed. Please try again.");
+        },
+        onSettled: () => {
+            // clearUser();
+            onClose();
+            router.push("/");
+        },
+    });
+
+    
 
 
     return (
@@ -25,7 +42,7 @@ export default function LogoutModal({ onClose }: LogoutModalProps) {
                     <button
                         type="button"
                         className={css.logoutButton}
-                        onClick={handleLogout}
+                        onClick={() => mutation.mutate()}
                     >
                         Log out
                     </button>

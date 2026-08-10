@@ -51,16 +51,14 @@ const Modal = ({ onClose, children }: ModalProps) => {
           onClick={onClose}
           aria-label="Close modal"
         >
-          <svg>
             <svg
               className={css.closeIcon}
-              width="24"
-              height="24"
+              width="20"
+              height="20"
               aria-hidden="true"
             >
               <use href="/icons/symbol-defs.svg#icon-close-small" />
             </svg>
-          </svg>
         </button>
         {children}
       </div>

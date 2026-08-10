@@ -17,7 +17,7 @@ export default function ArticlesItem({
 }: ArticlesItemProps) {
   const { _id, title, desc, img, ownerId } = article;
 
-  const authorName = typeof ownerId === 'object' ? ownerId.name : 'Harmoniq Author';
+  const authorName = typeof ownerId === 'object' ? ownerId.name : '';
 
   return (
     <li className={css.item}>
@@ -76,6 +76,7 @@ export default function ArticlesItem({
           ) : (
             <ButtonAddToBookmarks
               articleId={_id}
+              isSaved={article.isSaved}
               isAuthenticated={isAuthenticated}
             />
           )}

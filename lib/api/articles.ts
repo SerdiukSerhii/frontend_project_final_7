@@ -14,3 +14,10 @@ export const addArticleToSaved = async (articleId: string) => {
   const { data } = await api.post<AddToSavedResponse>(`/users/saved-articles/${articleId}`);
   return data;
 };
+
+export const removeArticleFromSaved = async (articleId: string) => {
+  const { data } = await api.delete<AddToSavedResponse>(
+    `/users/saved-articles/${articleId}`
+  );
+  return data;
+};

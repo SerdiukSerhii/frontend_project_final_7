@@ -27,9 +27,10 @@ export default function UserBar({name, avatar}: UserBarProps) {
                 </button>
             </div>
             {isLogoutModalOpen && (
-                <LogoutModal 
-                    onClose={() => setIsLogoutModalOpen(false)} 
-                /> 
+                <></>
+                // <LogoutModal 
+                //     onClose={() => setIsLogoutModalOpen(false)} 
+                // /> 
             )}
         </>
 

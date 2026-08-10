@@ -1,0 +1,65 @@
+.userBar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.userBarAvatar {
+  display: block;
+
+  width: 32px;
+  height: 32px;
+
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.userBarName {
+  
+  margin: 0;
+
+  font-family: var(--font-noto-sans);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: normal;
+
+  white-space: nowrap;
+  color: #374F42;
+
+}
+
+.separator {
+  display: block;
+
+  width: 1px;
+  height: 33px;
+
+  flex-shrink: 0;
+  fill: #374f42;
+}
+
+.exitButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.logoutIcon {
+    fill: none;
+  stroke: #374f42;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

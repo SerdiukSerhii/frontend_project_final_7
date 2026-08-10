@@ -1,0 +1,15 @@
+.page {
+  padding-top: 85px;
+}
+
+@media screen and (min-width: 768px) {
+  .page {
+    padding-top: 232px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .page {
+    padding-top: 172px;
+  }
+}

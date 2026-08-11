@@ -8,7 +8,6 @@
   gap: 26.5px;
   width: 100%;
   max-width: 361px;
-  /* min-width: 320px; */
   height: 492px;
   padding: 12px;
   border-radius: 32px;
@@ -44,6 +43,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  gap: 2px;
 }
 
 .author {
@@ -54,6 +54,7 @@
 
 .title {
   max-width: 264px;
+  width: 100%;
   font-weight: 700;
   font-size: 24px;
   color: var(--black);

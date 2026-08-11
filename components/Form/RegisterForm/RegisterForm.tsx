@@ -5,6 +5,10 @@ import { Form, Formik, FormikHelpers } from 'formik';
 import Link from 'next/link';
 import css from './RegisterForm.module.css';
 import FormField from '../FormField/FormField';
+import { useRouter } from 'next/navigation';
+import { register } from '@/lib/api/auth';
+import toast from 'react-hot-toast';
+import axios from 'axios';
 
 const RegisterFormSchema = Yup.object().shape({
   username: Yup.string()
@@ -37,11 +41,21 @@ const initialValues: RegisterFormValues = {
 };
 
 export default function RegisterForm() {
-  const handleSubmit = async (
-    values: RegisterFormValues,
-    actions: FormikHelpers<RegisterFormValues>
-  ) => {
-    actions.resetForm();
+  const router = useRouter();
+
+  const handleSubmit = async (values: RegisterFormValues) => {
+    try {
+      console.log(values);
+      await register(values);
+      router.push('/photo');
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const message = error.response?.data?.message ?? 'Registration failed. Please try again.';
+        toast.error(message);
+      } else {
+        toast.error('Something went wrong. Please try again.');
+      }
+    }
   };
   return (
     <>
@@ -58,7 +72,7 @@ export default function RegisterForm() {
               name="username"
               label="Enter your name"
               placeholder="Max"
-              autoComplete="username"
+              autoComplete="nickname"
             />
             <FormField
               name="email"
@@ -90,7 +104,7 @@ export default function RegisterForm() {
           </button>
 
           <span className={css.loginRedirect}>
-            Already have an account?{' '}
+            Already have an account?
             <Link
               className={css.loginLink}
               href="/login"

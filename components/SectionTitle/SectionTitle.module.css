@@ -1,7 +1,9 @@
 .title {
-    font-size: 28px;
+    margin: 0;
+
+    font-family: 'Manrope', sans-serif;
+    font-size: 32px;
     font-weight: 700;
-    line-height: 1.2;
-    color: #111111;
-    margin-bottom: 16px;
+    line-height: normal;
+    color: #070721;
 }

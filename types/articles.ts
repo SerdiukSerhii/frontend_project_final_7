@@ -18,3 +18,10 @@ export interface Article {
   isSaved?: boolean;
   isOwner?: boolean;
 }
+
+//додано для ArticlesPage
+export interface ArticlesResponse {
+  articles: Article[];
+  total: number;
+  totalPages: number;
+}

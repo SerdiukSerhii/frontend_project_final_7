@@ -1,6 +1,21 @@
 import { api } from './api';
-export const getArticles = async () => {
-  const { data } = await api.get('/articles');
+import { ArticlesResponse } from '@/types/articles';
+
+export interface GetArticlesParams {
+  page?: number;
+  //limit?: number;
+  filter?: 'All' | 'Popular';
+}
+
+export const getArticles = async (params?: GetArticlesParams): Promise<ArticlesResponse> => {
+  const { data } = await api.get<ArticlesResponse>('/articles', {
+    params: {
+      page: params?.page || 1,
+      //limit: params?.limit || 10,
+      //filter: params?.filter || 'All',
+      //type: params?.filter?.toLowerCase() || 'all',
+    },
+  });
   return data;
 };
 

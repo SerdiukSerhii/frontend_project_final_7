@@ -15,6 +15,8 @@ export interface Article {
   date: string;
   createdAt?: string;
   updatedAt?: string;
+  isSaved?: boolean;
+  isOwner?: boolean;
 }
 
 export interface GetArticlesParams {
@@ -28,6 +30,12 @@ export interface GetArticlesResponse {
   perPage: number;
   totalPages: number;
   totalArticles: number;
-  articlesQuery: Article[];
-  isSaved?: boolean;
+  articles: Article[];
+}
+
+//додано для ArticlesPage
+export interface ArticlesResponse {
+  articles: Article[];
+  total: number;
+  totalPages: number;
 }

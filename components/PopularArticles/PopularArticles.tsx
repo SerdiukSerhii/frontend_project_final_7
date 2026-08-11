@@ -1,5 +1,4 @@
 import Link from 'next/link';
-// import ArticlesItem from '@/components/ArticlesItem/ArticlesItem';
 import ArticlesList from '@/components/ArticlesList/ArticlesList';
 import { getArticles } from '@/lib/api/articles';
 import css from './PopularArticles.module.css';
@@ -7,14 +6,14 @@ import css from './PopularArticles.module.css';
 const POPULAR_ARTICLES_LIMIT = 4;
 
 const PopularArticles = async () => {
-  let articles: Awaited<ReturnType<typeof getArticles>>['articlesQuery'] = [];
+  let articles: Awaited<ReturnType<typeof getArticles>>['articles'] = [];
 
   try {
     const data = await getArticles({
       category: 'popular',
       perPage: POPULAR_ARTICLES_LIMIT,
     });
-    articles = data.articlesQuery;
+    articles = data.articles;
   } catch {
     articles = [];
   }

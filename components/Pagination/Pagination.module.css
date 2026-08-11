@@ -1,0 +1,50 @@
+.paginationContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 24px;
+    /* Gap 24px згідно з макетом Figma */
+    margin-bottom: 40px;
+}
+
+.loadMoreBtn {
+    width: 100%;
+    max-width: 361px;
+    /* Мобільна версія */
+    height: 57px;
+    /* Фіксована висота з Figma (Hug 57px) */
+    padding: 0 24px;
+    border-radius: 200px;
+    border: none;
+    background-color: var(--green, #5b8d76);
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s ease, background-color 0.2s ease;
+}
+
+.loadMoreBtn:hover {
+    opacity: 0.9;
+}
+
+.loadMoreBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Перелом 1: Планшет (Tablet min 768px) */
+@media screen and (min-width: 768px) {
+    .loadMoreBtn {
+        max-width: 340px;
+        /* Ширина за розміром картки на планшеті */
+    }
+}
+
+/* Перелом 2: Десктоп (Desktop min 1280px / 1440px) */
+@media screen and (min-width: 1280px) {
+    .loadMoreBtn {
+        max-width: 390px;
+        /* 390px згідно з останнім скріншотом Figma */
+    }
+}

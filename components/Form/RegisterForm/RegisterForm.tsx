@@ -1,11 +1,10 @@
 'use client';
 
 import * as Yup from 'yup';
-import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
+import { Form, Formik, FormikHelpers } from 'formik';
 import Link from 'next/link';
 import { useId } from 'react';
 import css from './RegisterForm.module.css';
-import { log } from 'console';
 import FormField from '../FormField/FormField';
 
 const RegisterFormSchema = Yup.object().shape({
@@ -65,19 +64,21 @@ export default function RegisterForm() {
             />
             <FormField
               name="email"
-              label="Enter your name"
+              label="Enter your email address"
               type="email"
               placeholder="email@gmail.com"
             />
             <FormField
               name="password"
-              label="Enter your email address"
+              label="Create a strong password"
               type="password"
+              placeholder="*********"
             />
             <FormField
               name="repeatPassword"
               label="Repeat your password"
               type="password"
+              placeholder="*********"
             />
           </div>
           <button

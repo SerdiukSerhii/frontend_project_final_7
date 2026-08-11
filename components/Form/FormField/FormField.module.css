@@ -16,7 +16,20 @@
   line-height: 1.55;
   color: var(--gray);
 }
+.field:focus {
+  border: 1.5px solid var(--light-gray);
+  box-shadow: 0 0 0 4px rgba(78, 70, 180, 0.2);
+  outline: none;
+}
 .fieldError {
   border-color: var(--red);
+  color: var(--red);
+}
+
+.fieldError::placeholder {
+  color: var(--red);
+}
+
+.error {
   color: var(--red);
 }

@@ -2,15 +2,12 @@
     display: flex;
     justify-content: center;
     width: 100%;
-
     margin: 24px auto 0;
 }
 
 .loadMoreBtn {
     width: 100%;
-    max-width: 361px;
     height: 57px;
-
     padding: 0 24px;
 
     border: none;
@@ -40,29 +37,10 @@
     cursor: not-allowed;
 }
 
-
-/* ========================================
-   TABLET — 768px+
-   ======================================== */
-
+/* TABLET & DESKTOP — Фіксована ширина 390px */
 @media screen and (min-width: 768px) {
     .loadMoreBtn {
         width: 390px;
-        max-width: 390px;
         height: 57px;
-    }
-}
-
-
-/* ========================================
-   DESKTOP — 1280px+
-   ======================================== */
-
-@media screen and (min-width: 1280px) {
-    .loadMoreBtn {
-        width: auto;
-        max-width: none;
-        height: auto;
-        padding: 12px 36px;
     }
 }

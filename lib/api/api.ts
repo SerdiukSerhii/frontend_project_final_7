@@ -3,7 +3,7 @@ import { ArticlesResponse } from '@/types/articles';
 
 export type ApiError = AxiosError<{ error: string }>;
 
-const baseURL = process.env.NEXT_PUBLIC_API_URL;
+const baseURL = process.env.NEXT_PUBLIC_API_URL || 'https://project-backend-final-7.onrender.com';
 
 export const api = axios.create({
   baseURL,
@@ -12,15 +12,15 @@ export const api = axios.create({
 
 // Функція для отримання статей
 export const fetchArticles = async (
-  page: number = 1,
-  filter: string = 'all',
-  limit: number = 10
+  page: number = 1
+  //filter: string = 'all',
+  //limit: number = 10
 ): Promise<ArticlesResponse> => {
   const response = await api.get<ArticlesResponse>('/articles', {
     params: {
       page,
-      limit,
-      filter,
+      //limit,
+      //filter,
     },
   });
 

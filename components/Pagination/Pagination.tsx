@@ -19,7 +19,7 @@ export default function Pagination({ hasMore, isLoading, onLoadMore }: Paginatio
         onClick={onLoadMore}
         disabled={isLoading}
       >
-        {isLoading ? 'Loading...' : 'LoadMore'}
+        {isLoading ? 'Loading...' : 'Load More'}
       </button>
     </div>
   );

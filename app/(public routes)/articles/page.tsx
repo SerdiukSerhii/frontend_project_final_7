@@ -15,20 +15,28 @@ export default function ArticlesPage() {
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useInfiniteQuery({
     queryKey: ['articles', filter],
-    queryFn: ({ pageParam = 1 }) => getArticles({ page: pageParam, limit: 12, filter }),
+    queryFn: ({ pageParam = 1 }) => getArticles({ page: pageParam }),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
-      if (allPages.length < lastPage.totalPages) {
+      // Якщо на останній завантаженій сторінці є ще дані
+      const totalPages = lastPage?.totalPages ?? Math.ceil((lastPage?.total ?? 0) / 12);
+      if (allPages.length < totalPages) {
         return allPages.length + 1;
       }
       return undefined;
     },
   });
 
-  const articles = data?.pages.flatMap(page => page?.articles ?? []).filter(Boolean) ?? [];
-  const totalCount = data?.pages[0]?.total ?? 0;
+  // Беремо статті останньої завантаженої сторінки
+  const currentPageIndex = (data?.pages.length ?? 1) - 1;
+  const articles = data?.pages[currentPageIndex]?.articles ?? [];
 
-  // Закриття дропдауна при кліку поза ним
+  const totalCount =
+    data?.pages[0]?.total ??
+    (data?.pages[0] as unknown as { totalItems?: number })?.totalItems ??
+    (data?.pages[0] as unknown as { totalArticles?: number })?.totalArticles ??
+    0;
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -62,10 +70,8 @@ export default function ArticlesPage() {
 
   return (
     <div className={css.container}>
-      {/* Заголовок */}
       <SectionTitle title="Articles" />
 
-      {/* Блок лічильника та селектора */}
       <div className={css.filterHeader}>
         <span className={css.countText}>{totalCount} articles</span>
 
@@ -119,11 +125,10 @@ export default function ArticlesPage() {
         </div>
       </div>
 
-      {/* Список статей або Порожній стан */}
       <ArticlesList articles={articles} />
 
-      {/* Рендеримо пагінацію тільки якщо є хоча б одна стаття */}
-      {articles.length > 0 && (
+      {/* Перевіряємо наявність кнопи за сукупною наявністю даних та наступної сторінки */}
+      {Boolean(hasNextPage) && (
         <Pagination
           hasMore={Boolean(hasNextPage)}
           isLoading={isFetchingNextPage}

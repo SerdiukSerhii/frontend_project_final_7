@@ -3,7 +3,7 @@ import { ArticlesResponse } from '@/types/articles';
 
 export interface GetArticlesParams {
   page?: number;
-  limit?: number;
+  //limit?: number;
   filter?: 'All' | 'Popular';
 }
 
@@ -11,8 +11,9 @@ export const getArticles = async (params?: GetArticlesParams): Promise<ArticlesR
   const { data } = await api.get<ArticlesResponse>('/articles', {
     params: {
       page: params?.page || 1,
-      limit: params?.limit || 10,
-      filter: params?.filter || 'All',
+      //limit: params?.limit || 10,
+      //filter: params?.filter || 'All',
+      //type: params?.filter?.toLowerCase() || 'all',
     },
   });
   return data;

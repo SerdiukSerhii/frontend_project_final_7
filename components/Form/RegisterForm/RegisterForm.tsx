@@ -3,7 +3,6 @@
 import * as Yup from 'yup';
 import { Form, Formik, FormikHelpers } from 'formik';
 import Link from 'next/link';
-import { useId } from 'react';
 import css from './RegisterForm.module.css';
 import FormField from '../FormField/FormField';
 
@@ -38,8 +37,6 @@ const initialValues: RegisterFormValues = {
 };
 
 export default function RegisterForm() {
-  const fieldId = useId();
-
   const handleSubmit = async (
     values: RegisterFormValues,
     actions: FormikHelpers<RegisterFormValues>
@@ -61,24 +58,28 @@ export default function RegisterForm() {
               name="username"
               label="Enter your name"
               placeholder="Max"
+              autoComplete="username"
             />
             <FormField
               name="email"
               label="Enter your email address"
               type="email"
               placeholder="email@gmail.com"
+              autoComplete="email"
             />
             <FormField
               name="password"
               label="Create a strong password"
               type="password"
               placeholder="*********"
+              autoComplete="new-password"
             />
             <FormField
               name="repeatPassword"
               label="Repeat your password"
               type="password"
               placeholder="*********"
+              autoComplete="new-password"
             />
           </div>
           <button

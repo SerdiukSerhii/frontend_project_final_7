@@ -33,3 +33,27 @@
 .error {
   color: var(--red);
 }
+
+.passwordWrapper {
+  position: relative;
+}
+
+.toggleBtn {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  color: var(--gray);
+}
+.toggleBtn svg {
+  stroke: var(--black);
+  fill: none;
+  width: 15px;
+  height: 14px;
+}

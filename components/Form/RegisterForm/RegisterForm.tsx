@@ -1,16 +1,28 @@
 'use client';
 
 import * as Yup from 'yup';
-import { Field, Form, Formik, FormikHelpers } from 'formik';
+import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
 import Link from 'next/link';
 import { useId } from 'react';
 import css from './RegisterForm.module.css';
+import { log } from 'console';
+import FormField from '../FormField/FormField';
 
 const RegisterFormSchema = Yup.object().shape({
-  username: Yup.string().required().min(2).max(32),
-  email: Yup.string().required().max(64),
-  password: Yup.string().required().min(8).max(64),
-  repeatPassword: Yup.string().required().min(8).max(64),
+  username: Yup.string()
+    .required('Name is required')
+    .min(2, 'must be at least 2 characters long')
+    .max(32, 'Username is too long'),
+  email: Yup.string().required('Email is required').max(64, 'Email is too long'),
+  password: Yup.string()
+    .required()
+    .min(8, 'Password must be at least 8 characters long')
+    .max(64, 'Password is too long'),
+  repeatPassword: Yup.string()
+    .required()
+    .min(8, 'Password must be at least 8 characters long')
+    .max(64, 'Password is too long')
+    .oneOf([Yup.ref('password')], 'Passwords do not match'),
 });
 
 interface RegisterFormValues {
@@ -29,7 +41,10 @@ const initialValues: RegisterFormValues = {
 export default function RegisterForm() {
   const fieldId = useId();
 
-  const handleSubmit = (values: RegisterFormValues, actions: FormikHelpers<RegisterFormValues>) => {
+  const handleSubmit = async (
+    values: RegisterFormValues,
+    actions: FormikHelpers<RegisterFormValues>
+  ) => {
     actions.resetForm();
   };
   return (
@@ -43,44 +58,27 @@ export default function RegisterForm() {
           <h1 className={css.title}>Register</h1>
           <p className={css.subtitle}>Join our community of mindfulness and wellbeing!</p>
           <div className={css.fieldsGroup}>
-            <div className={css.fieldLable}>
-              <label htmlFor={`${fieldId}-name`}>Enter your name</label>
-              <Field
-                className={css.field}
-                id={`${fieldId}-name`}
-                type="text"
-                name="username"
-                placeholder="Max"
-              />
-            </div>
-            <div className={css.fieldLable}>
-              <label htmlFor={`${fieldId}-email`}>Enter your name</label>
-              <Field
-                className={css.field}
-                id={`${fieldId}-email`}
-                type="email"
-                name="email"
-                placeholder="email@gmail.com"
-              />
-            </div>
-            <div className={css.fieldLable}>
-              <label htmlFor={`${fieldId}-password`}>Enter your email address</label>
-              <Field
-                className={css.field}
-                id={`${fieldId}-password`}
-                type="password"
-                name="password"
-              />
-            </div>
-            <div className={css.fieldLable}>
-              <label htmlFor={`${fieldId}-repeatPassword`}>Repeat your password</label>
-              <Field
-                className={css.field}
-                id={`${fieldId}-repeatPassword`}
-                type="password"
-                name="repeatPassword"
-              />
-            </div>
+            <FormField
+              name="username"
+              label="Enter your name"
+              placeholder="Max"
+            />
+            <FormField
+              name="email"
+              label="Enter your name"
+              type="email"
+              placeholder="email@gmail.com"
+            />
+            <FormField
+              name="password"
+              label="Enter your email address"
+              type="password"
+            />
+            <FormField
+              name="repeatPassword"
+              label="Repeat your password"
+              type="password"
+            />
           </div>
           <button
             className={css.btn}

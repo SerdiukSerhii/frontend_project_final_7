@@ -40,6 +40,13 @@
   font-weight: 700;
   font-size: 16px;
   color: var(--green-darker);
+
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.linkAllCreators:hover,
+.linkAllCreators:focus-visible {
+  color: var(--green);
 }
 
 .iconWrapper {
@@ -54,6 +61,11 @@
   width: 15px;
   height: 15px;
   display: block;
+  transition: transform 0.2s ease;
+}
+.linkAllCreators:hover .arrowIcon,
+.linkAllCreators:focus-visible .arrowIcon {
+  transform: translate(2px, -2px);
 }
 
 .authorsContainer {

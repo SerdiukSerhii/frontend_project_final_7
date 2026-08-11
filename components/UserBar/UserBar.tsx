@@ -3,7 +3,7 @@
 import {useState} from "react";
 import Image from "next/image";
 import css from './UserBar.module.css';
-
+import LogoutModal from "../LogoutModal/LogoutModal";
 
  type UserBarProps = {
         name: string;
@@ -45,10 +45,9 @@ export default function UserBar({name, avatar}: UserBarProps) {
                 </button>
             </div>
             {isLogoutModalOpen && (
-                <></>
-                // <LogoutModal 
-                //     onClose={() => setIsLogoutModalOpen(false)} 
-                // /> 
+                <LogoutModal 
+                    onClose={() => setIsLogoutModalOpen(false)} 
+                /> 
             )}
         </>
 

@@ -20,3 +20,7 @@ export async function login(userData: LoginRequest): Promise<User> {
   const { data } = await api.post<User>(`/auth/login`, userData);
   return data;
 }
+
+export async function logout(): Promise<void> {
+  await api.post(`/auth/logout`);
+}

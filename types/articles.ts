@@ -19,6 +19,20 @@ export interface Article {
   isOwner?: boolean;
 }
 
+export interface GetArticlesParams {
+  page?: number;
+  perPage?: number;
+  category?: 'general' | 'popular';
+}
+
+export interface GetArticlesResponse {
+  page: number;
+  perPage: number;
+  totalPages: number;
+  totalArticles: number;
+  articles: Article[];
+}
+
 //додано для ArticlesPage
 export interface ArticlesResponse {
   articles: Article[];

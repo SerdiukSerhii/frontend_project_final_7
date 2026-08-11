@@ -1,0 +1,39 @@
+.container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 20px 16px;
+}
+
+.filterHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Розкидає текст і селект по краях */
+    width: 100%;
+    margin-top: 16px;
+    margin-bottom: 24px;
+}
+
+.countText {
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--black, #111111);
+}
+
+.filterSelect {
+    display: flex;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--gray, #e0e0e0);
+    background: transparent;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Приховуємо випадаючий список на планшеті (від 768px до 1279px) згідно з Figma */
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+    .filterSelect {
+        display: none;
+    }
+}

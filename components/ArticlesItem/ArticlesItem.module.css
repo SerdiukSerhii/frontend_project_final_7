@@ -47,7 +47,7 @@
 }
 
 .author {
-  font-weight: 700;
+  font-weight: 600;
   font-size: 16px;
   color: var(--black);
 }
@@ -102,6 +102,20 @@
   font-size: 16px;
   color: var(--green-darker);
   cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    opacity 0.2s ease;
+}
+.learnMoreLink:hover {
+  background-color: var(--green);
+  border-color: var(--green);
+  color: var(--white);
+}
+.learnMoreLink:active {
+  opacity: 0.5;
 }
 
 .actionBtn {
@@ -113,11 +127,28 @@
   padding: 8px;
   border-radius: 64px;
   border: 1px solid var(--green-darker);
+  flex-shrink: 0;
   cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    opacity 0.2s ease;
+}
+.actionBtn:hover {
+  background-color: var(--green);
+  border-color: var(--green);
+}
+.actionBtn:hover .icon path {
+  stroke: var(--white);
+}
+.actionBtn:active {
+  opacity: 0.5;
 }
 
 .icon {
-  width: 24px;
-  height: 24px;
+  width: 15px;
+  height: 15px;
   display: block;
 }

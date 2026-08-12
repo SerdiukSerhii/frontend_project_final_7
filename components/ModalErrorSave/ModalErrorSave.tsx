@@ -18,10 +18,18 @@ const ModalErrorSave = ({
         <p className={css.text}>{description}</p>
 
         <div className={css.actions}>
-          <Link href="/login" className={css.loginBtn} onClick={onClose}>
+          <Link
+            href="/login"
+            className={css.loginBtn}
+            onClick={onClose}
+          >
             Login
           </Link>
-          <Link href="/register" className={css.registerBtn} onClick={onClose}>
+          <Link
+            href="/register"
+            className={css.registerBtn}
+            onClick={onClose}
+          >
             Register
           </Link>
         </div>

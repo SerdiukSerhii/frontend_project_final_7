@@ -1,6 +1,17 @@
 import { api } from './api';
-export const getArticles = async () => {
-  const { data } = await api.get('/articles');
+import type { GetArticlesParams, ArticlesResponse } from '@/types/articles';
+
+export const getArticles = async (params?: GetArticlesParams): Promise<ArticlesResponse> => {
+  const { data } = await api.get<ArticlesResponse>('/articles', {
+    params: {
+      page: params?.page || 1,
+      perPage: params?.perPage,
+      category: params?.category,
+      //limit: params?.limit || 10,
+      //filter: params?.filter || 'All',
+      //type: params?.filter?.toLowerCase() || 'all',
+    },
+  });
   return data;
 };
 
@@ -16,8 +27,6 @@ export const addArticleToSaved = async (articleId: string) => {
 };
 
 export const removeArticleFromSaved = async (articleId: string) => {
-  const { data } = await api.delete<AddToSavedResponse>(
-    `/users/saved-articles/${articleId}`
-  );
+  const { data } = await api.delete<AddToSavedResponse>(`/users/saved-articles/${articleId}`);
   return data;
 };

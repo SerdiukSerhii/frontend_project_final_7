@@ -2,11 +2,10 @@ body {
   font-family: Manrope, sans-serif;
 }
 
-
 .footer {
   width: 100%;
   background-color: #dae5df;
-  padding: 24px 20px;
+  padding: 24px 0;
   box-sizing: border-box;
 }
 
@@ -55,7 +54,7 @@ body {
 .link {
   font-size: 20px;
   font-weight: 700;
-  color: #374F42;
+  color: #374f42;
   text-decoration: none;
   transition: opacity 0.2s ease;
   margin-bottom: 40px;

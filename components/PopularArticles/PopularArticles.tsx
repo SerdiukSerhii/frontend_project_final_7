@@ -19,7 +19,10 @@ const PopularArticles = async () => {
   }
 
   return (
-    <section id="popular-articles">
+    <section
+      id="popular-articles"
+      className={css.popularArticles}
+    >
       <div className="container">
         <div className={css.header}>
           <h2 className={css.title}>Popular Articles</h2>

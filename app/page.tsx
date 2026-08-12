@@ -1,9 +1,10 @@
 import AboutUs from '@/components/About/AboutUs';
+import Hero from '@/components/Hero/Hero';
 
 const HomePage = () => {
   return (
     <>
-      <h1>Harmoniq</h1>
+      <Hero />
       <AboutUs />
     </>
   );

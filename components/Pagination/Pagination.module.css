@@ -2,11 +2,13 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    margin: 24px auto 0;
+    margin: 40px auto 0; /* Змінено з 24px на 40px для кращого відступу від картки */
+
 }
 
 .loadMoreBtn {
     width: 100%;
+    max-width: 340px; /* Додано: обмежує ширину на мобілці (як у Figma 340px) */
     height: 57px;
     padding: 0 24px;
 
@@ -41,6 +43,7 @@
 @media screen and (min-width: 768px) {
     .loadMoreBtn {
         width: 390px;
+        max-width: none; /* Додано: скидає мобільне обмеження 340px */
         height: 57px;
     }
 }

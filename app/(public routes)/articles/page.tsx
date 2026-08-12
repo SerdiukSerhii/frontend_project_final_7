@@ -127,7 +127,7 @@ export default function ArticlesPage() {
 
       <ArticlesList articles={articles} />
 
-      {/* Перевіряємо наявність кнопи за сукупною наявністю даних та наступної сторінки */}
+      {/* Перевіряємо наявність кнопки за сукупною наявністю даних та наступної сторінки */}
       {Boolean(hasNextPage) && (
         <Pagination
           hasMore={Boolean(hasNextPage)}

@@ -22,7 +22,7 @@ export default function AuthorsItem({ author }: AuthorsItemProps) {
               src={avatarUrl}
               alt={name}
               fill
-              sizes="(min-width: 1440px) 200px, (min-width: 768px) 180px, 160px"
+              sizes="(min-width: 768px) 262px, 148px"
               className={css.image}
             />
           )}

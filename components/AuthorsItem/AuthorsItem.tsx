@@ -11,21 +11,25 @@ export default function AuthorsItem({ author }: AuthorsItemProps) {
   const { _id, name, avatarUrl } = author;
 
   return (
-    <Link
-      href={`/authors/${_id}`}
-      className={css.card}
-    >
-      {avatarUrl ? (
-        <Image
-          src={avatarUrl}
-          alt={name}
-          width={148}
-          height={148}
-          className={css.avatar}
-        />
-      ) : null}
+    <li className={css.item}>
+      <Link
+        href={`/authors/${_id}`}
+        className={css.card}
+      >
+        <div className={css.imageWrapper}>
+          {avatarUrl && (
+            <Image
+              src={avatarUrl}
+              alt={name}
+              fill
+              sizes="(min-width: 1440px) 200px, (min-width: 768px) 180px, 160px"
+              className={css.image}
+            />
+          )}
+        </div>
 
-      <p className={css.name}>{name}</p>
-    </Link>
+        <p className={css.name}>{name}</p>
+      </Link>
+    </li>
   );
 }

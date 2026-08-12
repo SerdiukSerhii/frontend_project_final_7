@@ -1,27 +1,39 @@
 'use client';
 
-import {useState} from "react";
-import Image from "next/image";
+import { useState } from 'react';
+import Image from 'next/image';
+
+import LogoutModal from '../LogoutModal/LogoutModal';
+
 import css from './UserBar.module.css';
-import LogoutModal from "../LogoutModal/LogoutModal";
 
-type UserBarProps = {
-        name: string;
-        avatar: string;
-    }
+interface UserBarProps {
+    name: string;
+    avatar: string;
+}
 
-export default function UserBar({name, avatar}: UserBarProps) {
+const UserBar = ({ name, avatar }: UserBarProps) => {
     const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
-    return(
+
+    const openLogoutModal = () => {
+        setIsLogoutModalOpen(true);
+    };
+
+    const closeLogoutModal = () => {
+        setIsLogoutModalOpen(false);
+    };
+
+    return (
         <>
             <div className={css.userBar}>
-                <Image 
-                    src={avatar} 
-                    alt="User Avatar" 
-                    className={css.userBarAvatar} 
+                <Image
+                    src={avatar}
+                    alt={`${name}'s avatar`}
+                    className={css.userBarAvatar}
                     width={40}
                     height={40}
                 />
+
                 <p className={css.userBarName}>{name}</p>
 
                 <svg
@@ -30,26 +42,31 @@ export default function UserBar({name, avatar}: UserBarProps) {
                     height="39"
                     aria-hidden="true"
                 >
-                    <use href="/icons/symbol-defs.svg#separator" />
+                <use href="/icons/symbol-defs.svg#separator" />
                 </svg>
 
-                <button className={css.exitButton} type="button" aria-label="Log out" onClick={() => setIsLogoutModalOpen(true)}>
-                    <svg
-                        className={css.logoutIcon}
-                        width="24"
-                        height="24"
-                        aria-hidden="true"
-                    >
-                        <use href="/icons/symbol-defs.svg#logout-btn" />
-                    </svg>
+                <button
+                    className={css.exitButton}
+                    type="button"
+                    aria-label="Log out"
+                    onClick={openLogoutModal}
+                >
+                <svg
+                    className={css.logoutIcon}
+                    width="24"
+                    height="24"
+                    aria-hidden="true"
+                >
+                    <use href="/icons/symbol-defs.svg#logout-btn" />
+                </svg>
                 </button>
             </div>
+
             {isLogoutModalOpen && (
-                <LogoutModal 
-                    onClose={() => setIsLogoutModalOpen(false)} 
-                /> 
+                <LogoutModal onClose={closeLogoutModal} />
             )}
         </>
-
-    )
-}
+    );
+};
+    
+export default UserBar;

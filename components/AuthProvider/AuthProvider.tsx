@@ -1,43 +1,33 @@
 'use client';
 
-import { useEffect } from 'react';
-import axios from 'axios';
-import { refreshSession } from '@/lib/api/auth';
+import { useEffect, type ReactNode } from 'react';
+
 import { useAuthStore } from '@/lib/store/authStore';
 
-type Props = {
-  children: React.ReactNode;
-};
+interface AuthProviderProps {
+  children: ReactNode;
+}
 
 let initializationPromise: Promise<void> | null = null;
 
-const initializeAuth = () => {
+const initializeAuthProvider = (): Promise<void> => {
   if (!initializationPromise) {
     initializationPromise = (async () => {
-      await useAuthStore.persist.rehydrate();
-
-      const { user, clearUser, setAuthReady } = useAuthStore.getState();
-
-      if (user) {
-        try {
-          await refreshSession();
-        } catch (error) {
-          if (axios.isAxiosError(error) && error.response?.status === 401) {
-            clearUser();
-          }
-        }
+      try {
+        await useAuthStore.persist.rehydrate();
+        await useAuthStore.getState().initializeAuth();
+      } catch {
+        useAuthStore.getState().clearUser();
       }
-
-      setAuthReady(true);
     })();
   }
 
   return initializationPromise;
 };
 
-const AuthProvider = ({ children }: Props) => {
+const AuthProvider = ({ children }: AuthProviderProps) => {
   useEffect(() => {
-    void initializeAuth();
+    void initializeAuthProvider();
   }, []);
 
   return children;

@@ -1,32 +1,43 @@
-"use client";
+'use client';
 
-import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
-import { toast } from "react-hot-toast";
-import { useAuthStore } from "@/lib/store/authStore";
-import { logout } from "@/lib/api/auth";
-import Modal from "../Modal/Modal";
-import css from "./LogoutModal.module.css";
+import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-hot-toast';
+
+import { logout } from '@/lib/api/auth';
+import { useAuthStore } from '@/lib/store/authStore';
+
+import Modal from '../Modal/Modal';
+import css from './LogoutModal.module.css';
 
 interface LogoutModalProps {
     onClose: () => void;
 }
 
-export default function LogoutModal({ onClose }: LogoutModalProps) {
-    
+const LogoutModal = ({ onClose }: LogoutModalProps) => {
     const router = useRouter();
-    const clearUser = useAuthStore((state) => state.clearUser);
-    const mutation = useMutation({
-        mutationFn:logout,
+    const clearUser = useAuthStore(state => state.clearUser);
+
+    const logoutMutation = useMutation({
+        mutationFn: logout,
+
         onError: () => {
-            toast.error("Logout failed. Please try again.");
+            toast.error(
+                'Server logout failed, but you were logged out on this device.',
+            );
         },
+            
         onSettled: () => {
             clearUser();
             onClose();
-            router.push("/");
+            router.replace('/');
         },
     });
+
+    const handleLogout = () => {
+        logoutMutation.mutate();
+    };
+
     return (
         <Modal onClose={onClose}>
             <div className={css.logoutModal}>
@@ -35,24 +46,29 @@ export default function LogoutModal({ onClose }: LogoutModalProps) {
                 <p className={css.text}>We will miss you!</p>
 
                 <div className={css.actions}>
-                    <button
-                        type="button"
-                        className={css.logoutButton}
-                        onClick={() => mutation.mutate()}
-                    >
-                        Log out
-                    </button>
+                <button
+                    type="button"
+                    className={css.logoutButton}
+                    onClick={handleLogout}
+                    disabled={logoutMutation.isPending}
+                >
+                    {logoutMutation.isPending
+                    ? 'Logging out...'
+                    : 'Log out'}
+                </button>
 
-                    <button
-                        type="button"
-                        className={css.cancelButton}
-                        onClick={onClose}
-                    >
-                        Cancel
-                    </button>
+                <button
+                    type="button"
+                    className={css.cancelButton}
+                    onClick={onClose}
+                    disabled={logoutMutation.isPending}
+                >
+                    Cancel
+                </button>
                 </div>
             </div>
-
         </Modal>
-    )
+    );
 };
+
+export default LogoutModal;

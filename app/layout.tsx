@@ -1,12 +1,19 @@
 import type { Metadata } from 'next';
-import { Manrope, DM_Sans, Noto_Sans } from 'next/font/google';
-import Header from '@/components/Header/Header';
-import Footer from '@/components/Footer/Footer';
-import TanStackProvider from '@/components/TanStackProvider/TanStackProvider';
+import type { ReactNode } from 'react';
+import {
+  Manrope,
+  DM_Sans,
+  Noto_Sans,
+} from 'next/font/google';
+import { Toaster } from 'react-hot-toast';
+
 import AuthProvider from '@/components/AuthProvider/AuthProvider';
+import Footer from '@/components/Footer/Footer';
+import Header from '@/components/Header/Header';
+import TanStackProvider from '@/components/TanStackProvider/TanStackProvider';
+
 import 'modern-normalize/modern-normalize.css';
 import './globals.css';
-import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
   title: 'Harmoniq',
@@ -15,7 +22,6 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Harmoniq',
     description: 'Harmoniq — a simple and intuitive platform for reading articles.',
-
     images: [
       {
         url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
@@ -42,16 +48,20 @@ const notoSans = Noto_Sans({
   subsets: ['latin', 'cyrillic'],
 });
 
-export default function RootLayout({
+interface RootLayoutProps {
+  children: ReactNode;
+  modal: ReactNode;
+}
+
+const RootLayout = ({
   children,
   modal,
-}: Readonly<{
-  children: React.ReactNode;
-  modal: React.ReactNode;
-}>) {
+}: Readonly<RootLayoutProps>) => {
   return (
     <html lang="en">
-      <body className={`${manrope.variable} ${dmSans.variable} ${notoSans.variable}`}>
+      <body
+        className={`${manrope.variable} ${dmSans.variable} ${notoSans.variable}`}
+      >
         <TanStackProvider>
           <AuthProvider>
             <div className="layout">
@@ -60,19 +70,22 @@ export default function RootLayout({
               <main>
                 {children}
                 {modal}
-                <Toaster
-                  position="top-right"
-                  toastOptions={{
-                    duration: 3000,
-                  }}
-                />
               </main>
 
               <Footer />
             </div>
+
+            <Toaster
+              position="top-right"
+              toastOptions={{
+                duration: 3000,
+              }}
+            />
           </AuthProvider>
         </TanStackProvider>
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

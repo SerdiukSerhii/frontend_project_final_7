@@ -21,7 +21,9 @@ const Header = () => {
   const isAuthPage =
     pathname === '/login' || pathname === '/register';
 
-  const isAuthenticated = Boolean(user);
+  // const isAuthenticated = Boolean(user);
+
+  const isAuthenticated = isAuthReady && Boolean(user);
 
   const isActivePath = (href: string) => {
     if (href === '/') {

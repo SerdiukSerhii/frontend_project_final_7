@@ -1,21 +1,30 @@
 'use client';
 
-import * as Yup from 'yup';
-import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik';
-import Link from 'next/link';
-import css from './LoginForm.module.css';
-import { toast } from 'react-hot-toast';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { login } from '@/lib/api/auth';
 import axios from 'axios';
+import * as Yup from 'yup';
+import {
+  ErrorMessage,
+  Field,
+  Form,
+  Formik,
+  type FormikHelpers,
+} from 'formik';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-hot-toast';
+
+import { login } from '@/lib/api/auth';
 import { useAuthStore } from '@/lib/store/authStore';
+
+import css from './LoginForm.module.css';
 
 const LoginSchema = Yup.object({
   email: Yup.string()
     .required('Email is required')
     .max(64, 'Email must be at most 64 characters')
     .email('Invalid email'),
+
   password: Yup.string()
     .required('Password is required')
     .min(8, 'Password must be at least 8 characters')
@@ -34,17 +43,22 @@ const initialValues: LoginFormValues = {
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+
   const router = useRouter();
   const setUser = useAuthStore(state => state.setUser);
 
-  const handleSubmit = async (values: LoginFormValues, actions: FormikHelpers<LoginFormValues>) => {
+  const handleSubmit = async (
+    values: LoginFormValues,
+    actions: FormikHelpers<LoginFormValues>,
+  ) => {
     try {
       const user = await login(values);
 
       setUser(user);
       toast.success(`Welcome back, ${user.name}!`);
       actions.resetForm();
-      router.push('/profile');
+
+      router.replace('/profile');
     } catch (error) {
       if (axios.isAxiosError(error)) {
         switch (error.response?.status) {
@@ -68,7 +82,7 @@ const LoginForm = () => {
             toast.error('Something went wrong. Please try again.');
         }
       } else {
-        toast.error('Something went wrong...');
+        toast.error('Something went wrong. Please try again.');
       }
     }
   };
@@ -76,12 +90,13 @@ const LoginForm = () => {
   return (
     <div className={css['form-container']}>
       <h1 className={css['login-title']}>Login</h1>
+
       <Formik
         initialValues={initialValues}
         validationSchema={LoginSchema}
         onSubmit={handleSubmit}
       >
-        {({ errors, touched }) => (
+        {({ errors, touched, isSubmitting }) => (
           <Form>
             <div className={css['email-field-container']}>
               <label
@@ -95,7 +110,12 @@ const LoginForm = () => {
                 id="email"
                 name="email"
                 type="email"
-                className={`${css.field} ${touched.email && errors.email ? css['error-field'] : ''}`}
+                autoComplete="email"
+                className={`${css.field} ${
+                  touched.email && errors.email
+                    ? css['error-field']
+                    : ''
+                }`}
                 placeholder="email@gmail.com"
               />
 
@@ -119,7 +139,12 @@ const LoginForm = () => {
                   id="password"
                   name="password"
                   type={showPassword ? 'text' : 'password'}
-                  className={`${css.field} ${touched.password && errors.password ? css.error : ''}`}
+                  autoComplete="current-password"
+                  className={`${css.field} ${
+                    touched.password && errors.password
+                      ? css['error-field']
+                      : ''
+                  }`}
                   placeholder="*********"
                 />
 
@@ -127,10 +152,21 @@ const LoginForm = () => {
                   type="button"
                   className={css['password-toggle']}
                   onClick={() => setShowPassword(prev => !prev)}
+                  aria-label={
+                    showPassword ? 'Hide password' : 'Show password'
+                  }
+                  aria-pressed={showPassword}
                 >
-                  <svg className={css['password-svg']}>
+                  <svg
+                    className={css['password-svg']}
+                    aria-hidden="true"
+                  >
                     <use
-                      href={`/icons/symbol-defs.svg#${showPassword ? 'icon-eye' : 'icon-eye-crossed'}`}
+                      href={`/icons/symbol-defs.svg#${
+                        showPassword
+                          ? 'icon-eye'
+                          : 'icon-eye-crossed'
+                      }`}
                     />
                   </svg>
                 </button>
@@ -146,9 +182,11 @@ const LoginForm = () => {
             <button
               type="submit"
               className={css['btn-login-form']}
+              disabled={isSubmitting}
             >
-              Login
+              {isSubmitting ? 'Logging in...' : 'Login'}
             </button>
+
             <p className={css['login-form-text']}>
               Don&apos;t have an account?{' '}
               <Link

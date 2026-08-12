@@ -1,0 +1,269 @@
+/* =========================
+Mobile: від 320px
+   ========================= */
+
+.header {
+    position: relative;
+    z-index: 20;
+
+    width: 100%;
+
+    background-color: #dae5df;
+}
+
+.headerContainer {
+    display: flex;
+    align-items: center;
+
+    min-height: 64px;
+}
+
+.logo {
+    display: inline-flex;
+    flex-shrink: 0;
+
+    cursor: pointer;
+}
+
+.logoImage {
+    display: block;
+    width: 113px;
+    height: auto;
+}
+
+.desktopNavigation,
+.desktopActions,
+.tabletAction {
+    display: none;
+}
+
+.menuButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 32px;
+    height: 32px;
+    margin-left: auto;
+    padding: 0;
+
+    color: var(--green-darker);
+    background-color: transparent;
+    border: none;
+
+    cursor: pointer;
+
+    transition:
+        color 250ms ease,
+        opacity 250ms ease;
+}
+
+.menuIcon {
+    width: 24px;
+    height: 24px;
+
+    fill: none;
+    stroke: currentColor;
+}
+
+.mobileMenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    display: block;
+
+    width: 100%;
+    min-height: 340px;
+
+    background-color: #dae5df;
+    box-shadow: 0 8px 16px rgb(7 7 33 / 12%);
+}
+
+.mobileNavigation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+
+    padding-top: 24px;
+    padding-bottom: 32px;
+}
+
+.navLink,
+.loginLink,
+.primaryLink,
+.mobileNavLink,
+.mobileLoginLink,
+.mobileJoinLink {
+    font-family: var(--third-family);
+    font-weight: 600;
+    line-height: 1.5;
+
+    cursor: pointer;
+
+    transition:
+        color 250ms ease,
+        background-color 250ms ease,
+        opacity 250ms ease;
+}
+
+.mobileNavLink,
+.mobileLoginLink {
+    font-size: 12px;
+    color: var(--green-darker);
+}
+
+.mobileCreateLink,
+.mobileJoinLink,
+.primaryLink {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 40px;
+    padding: 8px 16px;
+
+    color: var(--white);
+    white-space: nowrap;
+
+    background-color: var(--green);
+    border-radius: 24px;
+}
+
+.activeNavLink {
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+    text-decoration-color: currentColor;
+}
+
+.mobileUserBar {
+    display: flex;
+    justify-content: center;
+
+    margin-top: 4px;
+}
+
+.mobileGuestActions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.authPlaceholder {
+    width: 120px;
+    height: 40px;
+}
+
+/* Hover лише на пристроях, які його підтримують */
+@media (hover: hover) {
+    .menuButton:hover {
+        color: var(--green);
+    }
+
+    .navLink:hover,
+    .loginLink:hover,
+    .mobileNavLink:hover,
+    .mobileLoginLink:hover {
+        color: var(--green);
+    }
+
+    .primaryLink:hover,
+    .mobileCreateLink:hover,
+    .mobileJoinLink:hover {
+        background-color: var(--green-darker);
+    }
+}
+
+.logo:focus-visible,
+.menuButton:focus-visible,
+.navLink:focus-visible,
+.loginLink:focus-visible,
+.primaryLink:focus-visible,
+.mobileNavLink:focus-visible,
+.mobileLoginLink:focus-visible,
+.mobileJoinLink:focus-visible {
+    outline: 2px solid var(--green);
+    outline-offset: 3px;
+}
+
+/* =========================
+Tablet: від 768px
+   ========================= */
+
+@media screen and (min-width: 768px) {
+    .headerContainer {
+        min-height: 72px;
+    }
+
+    .tabletAction {
+        display: flex;
+
+        margin-left: auto;
+    }
+
+    .menuButton {
+        margin-left: 24px;
+    }
+
+    .mobileMenu {
+        min-height: 240px;
+    }
+
+    .logoImage {
+        width: 149px;
+        height: auto;
+    }
+
+    .mobileNavigation .mobileCreateLink {
+        display: none;
+    }
+
+    .mobileGuestActions {
+        flex-direction: row;
+    }
+
+    .authPlaceholder {
+        width: 176px;
+    }
+
+    .mobileNavigation .mobileCreateLink,
+    .mobileNavigation .mobileJoinLink {
+        display: none;
+    }
+}
+
+/* =========================
+Desktop: від 1440px
+   ========================= */
+
+@media screen and (min-width: 1440px) {
+    .desktopNavigation {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+
+        margin-left: auto;
+    }
+
+    .desktopActions {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+
+        margin-left: 32px;
+    }
+
+    .navLink,
+    .loginLink {
+        color: var(--green-darker);
+    }
+
+    .tabletAction,
+    .menuButton,
+    .mobileMenu {
+        display: none;
+    }
+}

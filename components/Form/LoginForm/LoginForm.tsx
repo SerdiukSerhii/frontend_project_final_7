@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { login } from '@/lib/api/auth';
 import axios from 'axios';
+import { useAuthStore } from '@/lib/store/authStore';
 
 const LoginSchema = Yup.object({
   email: Yup.string()
@@ -34,12 +35,14 @@ const initialValues: LoginFormValues = {
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
+  const setUser = useAuthStore(state => state.setUser);
 
   const handleSubmit = async (values: LoginFormValues, actions: FormikHelpers<LoginFormValues>) => {
     try {
       const user = await login(values);
-      toast.success(`Welcome back, ${user.username}!`);
-      //потрібно додати користувача у глобальний стан
+
+      setUser(user);
+      toast.success(`Welcome back, ${user.name}!`);
       actions.resetForm();
       router.push('/profile');
     } catch (error) {

@@ -5,7 +5,7 @@ import Image from "next/image";
 import css from './UserBar.module.css';
 import LogoutModal from "../LogoutModal/LogoutModal";
 
- type UserBarProps = {
+type UserBarProps = {
         name: string;
         avatar: string;
     }
@@ -33,7 +33,7 @@ export default function UserBar({name, avatar}: UserBarProps) {
                     <use href="/icons/symbol-defs.svg#separator" />
                 </svg>
 
-                <button className={css.exitButton} type="button" onClick={() => setIsLogoutModalOpen(true)}>
+                <button className={css.exitButton} type="button" aria-label="Log out" onClick={() => setIsLogoutModalOpen(true)}>
                     <svg
                         className={css.logoutIcon}
                         width="24"

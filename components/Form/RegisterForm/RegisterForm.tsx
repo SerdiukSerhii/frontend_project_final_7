@@ -1,7 +1,7 @@
 'use client';
 
 import * as Yup from 'yup';
-import { Form, Formik, FormikHelpers } from 'formik';
+import { Form, Formik } from 'formik';
 import Link from 'next/link';
 import css from './RegisterForm.module.css';
 import FormField from '../FormField/FormField';
@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import { register } from '@/lib/api/auth';
 import toast from 'react-hot-toast';
 import axios from 'axios';
+import { useAuthStore } from '@/lib/store/authStore';
 
 const RegisterFormSchema = Yup.object().shape({
   username: Yup.string()
@@ -42,15 +43,24 @@ const initialValues: RegisterFormValues = {
 
 export default function RegisterForm() {
   const router = useRouter();
+  const setUser = useAuthStore(state => state.setUser);
 
   const handleSubmit = async (values: RegisterFormValues) => {
     try {
-      console.log(values);
-      await register(values);
+      const user = await register({
+        name: values.username,
+        email: values.email,
+        password: values.password,
+      });
+
+      setUser(user);
       router.push('/photo');
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        const message = error.response?.data?.message ?? 'Registration failed. Please try again.';
+        const message =
+          error.response?.data?.message ??
+          'Registration failed. Please try again.';
+
         toast.error(message);
       } else {
         toast.error('Something went wrong. Please try again.');

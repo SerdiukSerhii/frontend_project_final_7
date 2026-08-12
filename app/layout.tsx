@@ -1,10 +1,6 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
-import {
-  Manrope,
-  DM_Sans,
-  Noto_Sans,
-} from 'next/font/google';
+import { Manrope, DM_Sans, Noto_Sans } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
 
 import AuthProvider from '@/components/AuthProvider/AuthProvider';
@@ -50,27 +46,18 @@ const notoSans = Noto_Sans({
 
 interface RootLayoutProps {
   children: ReactNode;
-  modal: ReactNode;
 }
 
-const RootLayout = ({
-  children,
-  modal,
-}: Readonly<RootLayoutProps>) => {
+const RootLayout = ({ children }: Readonly<RootLayoutProps>) => {
   return (
     <html lang="en">
-      <body
-        className={`${manrope.variable} ${dmSans.variable} ${notoSans.variable}`}
-      >
+      <body className={`${manrope.variable} ${dmSans.variable} ${notoSans.variable}`}>
         <TanStackProvider>
           <AuthProvider>
             <div className="layout">
               <Header />
 
-              <main>
-                {children}
-                {modal}
-              </main>
+              <main>{children}</main>
 
               <Footer />
             </div>

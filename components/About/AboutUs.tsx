@@ -18,7 +18,7 @@ export default function AboutUs() {
 
           <div className={styles.lotosFlower}>
             <Image
-              src="/images/blooming-lotus.webp"
+              src="/img/blooming-lotus.webp"
               alt="Blooming Lotus"
               fill
               className={styles.aboutUsImage}
@@ -29,7 +29,7 @@ export default function AboutUs() {
         <div className={styles.bottomContainer}>
           <div className={styles.friendsHugging}>
             <Image
-              src="/images/friends-hugging-in-the-field.webp"
+              src="/img/friend-hugging-in-the-field.webp"
               alt="Friends Hugging in the Field"
               fill
               className={styles.aboutUsImage}
@@ -38,7 +38,7 @@ export default function AboutUs() {
 
           <div className={styles.meditatingPerson}>
             <Image
-              src="/images/meditating-person.webp"
+              src="/img/meditating-person.webp"
               alt="Meditation"
               fill
               className={styles.aboutUsImage}

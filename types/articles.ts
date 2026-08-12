@@ -32,10 +32,3 @@ export interface GetArticlesResponse {
   totalArticles: number;
   articles: Article[];
 }
-
-//додано для ArticlesPage
-export interface ArticlesResponse {
-  articles: Article[];
-  total: number;
-  totalPages: number;
-}

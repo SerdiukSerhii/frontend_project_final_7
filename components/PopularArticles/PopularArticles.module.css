@@ -1,3 +1,7 @@
+.popularArticles {
+  padding: 36px 0;
+}
+
 .header {
   display: flex;
   flex-direction: column;
@@ -16,7 +20,6 @@
   font-weight: 700;
   font-size: 32px;
   color: #000;
-  ;
 }
 
 @media screen and (min-width: 1440px) {
@@ -58,7 +61,6 @@
 .link:focus-visible .arrow {
   transform: translate(2px, -2px);
 }
-
 
 .popularList {
   width: 100%;

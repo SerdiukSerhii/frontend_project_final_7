@@ -15,6 +15,10 @@
   border-radius: 24px;
 }
 
+.topContainer {
+  margin-bottom: 24px;
+}
+
 .aboutUsTitle {
   color: #070721;
   font-weight: 700;
@@ -56,7 +60,6 @@
 /* ======================================================== */
 @media (min-width: 768px) and (max-width: 1439px) {
   .aboutUs {
-    /* Жестко фиксируем ширину всего блока под сетку, чтобы края совпадали */
     width: 696px;
     max-width: 696px;
     margin: 0 auto;
@@ -68,7 +71,7 @@
 
   .topContainer {
     display: grid;
-    grid-template-columns: 400px 249px;
+    grid-template-columns: minmax(0, 1fr) 249px;
     gap: 16px;
     width: 100%;
     box-sizing: border-box;
@@ -138,7 +141,6 @@
   .friendsHugging .aboutUsImage {
     width: 100%;
     height: 100%;
-    /* Меняем height: auto на 100%, чтобы картинка заполнила блок */
     object-fit: cover;
   }
 
@@ -165,7 +167,6 @@
   .topContainer {
     width: 100%;
     height: 326px;
-
     display: grid;
     grid-template-columns: 496fr 704fr;
     gap: 24px;
@@ -202,25 +203,17 @@
     box-sizing: border-box;
   }
 
-  /* Нижний ряд */
-
   .bottomContainer {
     width: 100%;
     height: 398px;
-    /* Фиксируем высоту нижнего ряда из макета */
-
     display: grid;
-    /* ИСПРАВЛЕНИЕ 1: Переводим пропорции 808px и 392px в гибкие фракции */
     grid-template-columns: 808fr 392fr;
     gap: 24px;
-    /* Делаем отступ 24px, чтобы он совпадал с верхним рядом */
 
     box-sizing: border-box;
   }
 
   .friendsHugging {
-    /* ИСПРАВЛЕНИЕ 2: Полностью УДАЛЯЕМ жесткую строку width: 808px; */
-    /* Теперь за ширину отвечает исключительно пропорция из grid-template-columns */
     height: 100%;
     border-radius: 32px;
     overflow: hidden;

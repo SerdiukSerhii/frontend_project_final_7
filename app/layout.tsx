@@ -14,13 +14,16 @@ import './globals.css';
 export const metadata: Metadata = {
   title: 'Harmoniq',
   description: 'Harmoniq — a simple and intuitive platform for reading articles.',
+  icons: {
+    icon: '/favicon.svg',
+  },
 
   openGraph: {
     title: 'Harmoniq',
     description: 'Harmoniq — a simple and intuitive platform for reading articles.',
     images: [
       {
-        url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+        url: '/harmoniq-og.WebP',
         width: 1200,
         height: 630,
         alt: 'Harmoniq app preview',

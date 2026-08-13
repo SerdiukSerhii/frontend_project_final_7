@@ -63,7 +63,7 @@ export default function AuthorsPage() {
       <p style={{ textAlign: 'center', margin: '20px 0' }}>Loaded authors: {allAuthors.length}</p>
 
       {/* Б. Список, який рендерить картки авторів 
-      <AuthorsList authors={allAuthors} /> */}
+      <AuthorsList authors={allAuthors} />*/}
 
       {/* В. Кнопка "Load More", яка з'являється тільки за наявності нових даних */}
       {Boolean(hasNextPage) && (

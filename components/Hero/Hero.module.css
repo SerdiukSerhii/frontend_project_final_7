@@ -1,0 +1,195 @@
+/* ==========================================================
+   1. MOBILE (320px - 767px) — Mobile First according to Figma
+   ========================================================== */
+.heroSection {
+  padding: 16px 0;
+}
+
+.heroContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.imageWrapper {
+  width: 100%;
+  height: 280px;
+
+  background-image: url('/hero-bg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  border-radius: 32px;
+}
+
+.textContent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-family), sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--green-darker);
+}
+
+.harmony {
+  font-family: 'Merienda', cursive, sans-serif;
+  font-weight: 400;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 24px;
+  margin-top: 30px;
+  width: 100%;
+}
+
+.btnPrimary,
+.btnSecondary {
+  width: 100%;
+  height: 57px;
+  padding: 16px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 64px;
+
+  font-family: var(--font-family), sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+
+  text-decoration: none;
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.btnPrimary {
+  background-color: var(--green);
+  color: var(--white);
+  border: 1px solid var(--green);
+}
+
+.btnSecondary {
+  background-color: transparent;
+  color: var(--green-darker);
+  border: 1px solid var(--green-darker);
+}
+
+.btnPrimary:hover {
+  background-color: #557d68;
+  border-color: #557d68;
+}
+
+.btnSecondary:hover {
+  background-color: var(--green-darker);
+  color: var(--white);
+}
+
+.btnPrimary:focus-visible,
+.btnSecondary:focus-visible {
+  outline: 2px solid var(--green-darker);
+  outline-offset: 3px;
+}
+
+/* ==========================================================
+   2. TABLET (768px - 1439px)
+   ========================================================== */
+@media screen and (min-width: 768px) {
+  .heroSection {
+    padding: 16px 0;
+  }
+
+  .heroContainer {
+    max-width: 704px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+
+  .textContent {
+    order: 1;
+    flex: 0 0 320px;
+  }
+
+  .imageWrapper {
+    order: 2;
+    flex: 0 0 320px;
+    height: 280px;
+  }
+
+  .title {
+    font-size: 40px;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    margin-top: 16px;
+  }
+
+  .btnPrimary,
+  .btnSecondary {
+    width: 249px;
+  }
+}
+
+/* ==========================================================
+   3. DESKTOP (1440px+)
+   ========================================================== */
+@media screen and (min-width: 1440px) {
+  .heroSection {
+    padding-top: 48px;
+    padding-bottom: 0;
+  }
+
+  .heroContainer {
+    max-width: 1224px;
+    gap: 26px;
+  }
+
+  .textContent {
+    flex: 0 0 599px;
+  }
+
+  .imageWrapper {
+    flex: 0 0 599px;
+    height: 389px;
+  }
+
+  .title {
+    font-size: 92px;
+    font-weight: 800;
+  }
+
+  .actions {
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+    margin-top: 56px;
+  }
+
+  .btnPrimary,
+  .btnSecondary {
+    width: 184px;
+  }
+}

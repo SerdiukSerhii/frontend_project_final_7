@@ -1,29 +1,42 @@
 'use client';
 
-import * as Yup from 'yup';
-import { Form, Formik, FormikHelpers } from 'formik';
-import Link from 'next/link';
-import css from './RegisterForm.module.css';
-import FormField from '../FormField/FormField';
-import { useRouter } from 'next/navigation';
-import { register } from '@/lib/api/auth';
-import toast from 'react-hot-toast';
 import axios from 'axios';
+import * as Yup from 'yup';
+import {
+  Form,
+  Formik,
+  type FormikHelpers,
+} from 'formik';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
-const RegisterFormSchema = Yup.object().shape({
+import { register } from '@/lib/api/auth';
+import { useAuthStore } from '@/lib/store/authStore';
+
+import FormField from '../FormField/FormField';
+import css from './RegisterForm.module.css';
+
+const RegisterFormSchema = Yup.object({
   username: Yup.string()
+    .trim()
     .required('Name is required')
-    .min(2, 'must be at least 2 characters long')
-    .max(32, 'Username is too long'),
-  email: Yup.string().required('Email is required').max(64, 'Email is too long'),
+    .min(2, 'Name must be at least 2 characters long')
+    .max(32, 'Name must be at most 32 characters long'),
+
+  email: Yup.string()
+    .trim()
+    .required('Email is required')
+    .email('Invalid email address')
+    .max(64, 'Email must be at most 64 characters long'),
+
   password: Yup.string()
-    .required()
+    .required('Password is required')
     .min(8, 'Password must be at least 8 characters long')
-    .max(64, 'Password is too long'),
+    .max(64, 'Password must be at most 64 characters long'),
+
   repeatPassword: Yup.string()
-    .required()
-    .min(8, 'Password must be at least 8 characters long')
-    .max(64, 'Password is too long')
+    .required('Please repeat your password')
     .oneOf([Yup.ref('password')], 'Passwords do not match'),
 });
 
@@ -33,6 +46,7 @@ interface RegisterFormValues {
   password: string;
   repeatPassword: string;
 }
+
 const initialValues: RegisterFormValues = {
   username: '',
   email: '',
@@ -40,40 +54,89 @@ const initialValues: RegisterFormValues = {
   repeatPassword: '',
 };
 
-export default function RegisterForm() {
+const RegisterForm = () => {
   const router = useRouter();
+  const setUser = useAuthStore(state => state.setUser);
 
-  const handleSubmit = async (values: RegisterFormValues) => {
+  const handleSubmit = async (
+    values: RegisterFormValues,
+    actions: FormikHelpers<RegisterFormValues>,
+  ) => {
     try {
-      console.log(values);
-      await register(values);
-      router.push('/photo');
+      const user = await register({
+        name: values.username.trim(),
+        email: values.email.trim(),
+        password: values.password,
+      });
+
+      setUser(user);
+      toast.success(`Welcome, ${user.name}!`);
+
+      actions.resetForm();
+      router.replace('/photo');
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        const message = error.response?.data?.message ?? 'Registration failed. Please try again.';
-        toast.error(message);
+        const responseData = error.response?.data as
+          | { message?: string }
+          | undefined;
+
+        switch (error.response?.status) {
+          case 400:
+            toast.error(
+              responseData?.message ??
+                'Please check the entered information.',
+            );
+            break;
+
+          case 409:
+            toast.error(
+              responseData?.message ??
+                'A user with this email already exists.',
+            );
+            break;
+
+          case 500:
+            toast.error(
+              'Server error. Please try again later.',
+            );
+            break;
+
+          default:
+            toast.error(
+              responseData?.message ??
+                'Registration failed. Please try again.',
+            );
+        }
       } else {
-        toast.error('Something went wrong. Please try again.');
+        toast.error(
+          'Something went wrong. Please try again.',
+        );
       }
     }
   };
+
   return (
-    <>
-      <Formik
-        initialValues={initialValues}
-        onSubmit={handleSubmit}
-        validationSchema={RegisterFormSchema}
-      >
+    <Formik
+      initialValues={initialValues}
+      validationSchema={RegisterFormSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ isSubmitting }) => (
         <Form className={css.form}>
           <h1 className={css.title}>Register</h1>
-          <p className={css.subtitle}>Join our community of mindfulness and wellbeing!</p>
+
+          <p className={css.subtitle}>
+            Join our community of mindfulness and wellbeing!
+          </p>
+
           <div className={css.fieldsGroup}>
             <FormField
               name="username"
               label="Enter your name"
               placeholder="Max"
-              autoComplete="nickname"
+              autoComplete="name"
             />
+
             <FormField
               name="email"
               label="Enter your email address"
@@ -81,6 +144,7 @@ export default function RegisterForm() {
               placeholder="email@gmail.com"
               autoComplete="email"
             />
+
             <FormField
               name="password"
               label="Create a strong password"
@@ -88,6 +152,7 @@ export default function RegisterForm() {
               placeholder="*********"
               autoComplete="new-password"
             />
+
             <FormField
               name="repeatPassword"
               label="Repeat your password"
@@ -96,15 +161,19 @@ export default function RegisterForm() {
               autoComplete="new-password"
             />
           </div>
+
           <button
             className={css.btn}
             type="submit"
+            disabled={isSubmitting}
           >
-            Create account
+            {isSubmitting
+              ? 'Creating account...'
+              : 'Create account'}
           </button>
 
           <span className={css.loginRedirect}>
-            Already have an account?
+            Already have an account?{' '}
             <Link
               className={css.loginLink}
               href="/login"
@@ -113,7 +182,9 @@ export default function RegisterForm() {
             </Link>
           </span>
         </Form>
-      </Formik>
-    </>
+      )}
+    </Formik>
   );
-}
+};
+
+export default RegisterForm;

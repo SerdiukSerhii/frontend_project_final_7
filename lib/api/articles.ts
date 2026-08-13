@@ -1,17 +1,15 @@
 import { api } from './api';
-import type { GetArticlesParams, ArticlesResponse } from '@/types/articles';
+import type { GetArticlesParams, GetArticlesResponse } from '@/types/articles';
 
-export const getArticles = async (params?: GetArticlesParams): Promise<ArticlesResponse> => {
-  const { data } = await api.get<ArticlesResponse>('/articles', {
+export const getArticles = async (params?: GetArticlesParams): Promise<GetArticlesResponse> => {
+  const { data } = await api.get<GetArticlesResponse>('/articles', {
     params: {
       page: params?.page || 1,
       perPage: params?.perPage,
       category: params?.category,
-      //limit: params?.limit || 10,
-      //filter: params?.filter || 'All',
-      //type: params?.filter?.toLowerCase() || 'all',
     },
   });
+
   return data;
 };
 

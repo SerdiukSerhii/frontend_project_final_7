@@ -1,26 +1,25 @@
-import axios, { AxiosError } from 'axios';
-import { ArticlesResponse } from '@/types/articles';
+import axios, { type AxiosError } from 'axios';
 
-export type ApiError = AxiosError<{ error: string }>;
+import type { GetArticlesResponse } from '@/types/articles';
 
-const baseURL = process.env.NEXT_PUBLIC_API_URL || 'https://project-backend-final-7.onrender.com';
+interface ApiErrorResponse {
+  error?: string;
+  message?: string;
+}
+
+export type ApiError = AxiosError<ApiErrorResponse>;
+
+const baseURL = process.env.NEXT_PUBLIC_API_URL ?? 'https://project-backend-final-7.onrender.com';
 
 export const api = axios.create({
   baseURL,
   withCredentials: true,
 });
 
-// Функція для отримання статей
-export const fetchArticles = async (
-  page: number = 1
-  //filter: string = 'all',
-  //limit: number = 10
-): Promise<ArticlesResponse> => {
-  const response = await api.get<ArticlesResponse>('/articles', {
+export const fetchArticles = async (page: number = 1): Promise<GetArticlesResponse> => {
+  const response = await api.get<GetArticlesResponse>('/articles', {
     params: {
       page,
-      //limit,
-      //filter,
     },
   });
 

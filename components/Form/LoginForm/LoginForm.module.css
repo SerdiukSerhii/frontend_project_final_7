@@ -116,6 +116,10 @@
   margin-bottom: 20px;
 }
 
+.btn-login-form:disabled {
+  opacity: 0.3;
+}
+
 .login-form-text {
   font-family: 'Manrope', sans-serif;
   font-weight: 400;

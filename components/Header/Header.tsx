@@ -18,9 +18,6 @@ const Header = () => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const isAuthPage =
-    pathname === '/login' || pathname === '/register';
-
   // const isAuthenticated = Boolean(user);
 
   const isAuthenticated = isAuthReady && Boolean(user);
@@ -69,163 +66,184 @@ const Header = () => {
           />
         </Link>
 
-        {!isAuthPage && (
-          <>
-            {/* Desktop navigation */}
-            <nav
-              className={css.desktopNavigation}
-              aria-label="Main navigation"
+        <>
+          {/* Desktop navigation */}
+          <nav
+            className={css.desktopNavigation}
+            aria-label="Main navigation"
+          >
+            <Link
+              href="/"
+              className={getNavLinkClassName(
+                '/',
+                css.navLink
+              )}
+              aria-current={
+                isActivePath('/') ? 'page' : undefined
+              }
             >
+              Home
+            </Link>
+
+            <Link
+              href="/articles"
+              className={getNavLinkClassName(
+                '/articles',
+                css.navLink
+              )}
+              aria-current={
+                isActivePath('/articles') ? 'page' : undefined
+              }
+            >
+              Articles
+            </Link>
+
+            <Link
+              href="/authors"
+              className={getNavLinkClassName(
+                '/authors',
+                css.navLink
+              )}
+              aria-current={
+                isActivePath('/authors') ? 'page' : undefined
+              }
+            >
+              Creators
+            </Link>
+
+            {isAuthenticated && (
               <Link
-                href="/"
+                href="/profile"
                 className={getNavLinkClassName(
-                  '/',
+                  '/profile',
                   css.navLink
                 )}
                 aria-current={
-                  isActivePath('/') ? 'page' : undefined
+                  isActivePath('/profile') ? 'page' : undefined
                 }
               >
-                Home
+                My Profile
               </Link>
+            )}
+          </nav>
 
-              <Link
-                href="/articles"
-                className={getNavLinkClassName(
-                  '/articles',
-                  css.navLink
-                )}
-                aria-current={
-                  isActivePath('/articles') ? 'page' : undefined
-                }
-              >
-                Articles
-              </Link>
-
-              <Link
-                href="/authors"
-                className={getNavLinkClassName(
-                  '/authors',
-                  css.navLink
-                )}
-                aria-current={
-                  isActivePath('/authors') ? 'page' : undefined
-                }
-              >
-                Creators
-              </Link>
-
-              {isAuthenticated && (
+          {/* Desktop actions */}
+          <div className={css.desktopActions}>
+            {!isAuthReady ? (
+              <div
+                className={css.authPlaceholder}
+                aria-hidden="true"
+              />
+            ) : isAuthenticated && user ? (
+              <>
                 <Link
-                  href="/profile"
-                  className={getNavLinkClassName(
-                    '/profile',
-                    css.navLink
-                  )}
-                  aria-current={
-                    isActivePath('/profile') ? 'page' : undefined
-                  }
+                  href="/articles/new"
+                  className={css.primaryLink}
                 >
-                  My Profile
+                  Create an article
+                </Link>
+
+                <UserBar
+                  name={user.name}
+                  avatar={user.avatarUrl}
+                />
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className={css.loginLink}
+                >
+                  Log in
+                </Link>
+
+                <Link
+                  href="/register"
+                  className={css.primaryLink}
+                >
+                  Join now
+                </Link>
+              </>
+            )}
+          </div>
+
+          {/* Tablet contextual action */}
+          {isAuthReady && (
+            <div className={css.tabletAction}>
+              {isAuthenticated ? (
+                <Link
+                  href="/articles/new"
+                  className={css.primaryLink}
+                  onClick={closeMenu}
+                >
+                  Create an article
+                </Link>
+              ) : (
+                <Link
+                  href="/register"
+                  className={css.primaryLink}
+                  onClick={closeMenu}
+                >
+                  Join now
                 </Link>
               )}
-            </nav>
+            </div>
+          )}
 
-            {/* Desktop actions */}
-            <div className={css.desktopActions}>
-              {!isAuthReady ? (
-                <div
-                  className={css.authPlaceholder}
-                  aria-hidden="true"
-                />
-              ) : isAuthenticated && user ? (
+          {/* Mobile and tablet menu button */}
+          <button
+            className={css.menuButton}
+            type="button"
+            aria-label={
+              isMenuOpen ? 'Close menu' : 'Open menu'
+            }
+            aria-expanded={isMenuOpen}
+            aria-controls="header-mobile-menu"
+            onClick={toggleMenu}
+          >
+            {/* <svg
+              className={`${css.menuIcon} ${
+                isMenuOpen ? css.closeIcon : ''
+                }`
+              }
+              width="24"
+              height="24"
+              aria-hidden="true"
+            >
+              <use
+                href={
+                  isMenuOpen
+                    ? '/icons/symbol-defs.svg#icon-close'
+                    : '/icons/symbol-defs.svg#icon-burger-menu'
+                }
+              />
+            </svg> */}
+            <svg
+              className={css.menuIcon}
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              {isMenuOpen ? (
                 <>
-                  <Link
-                    href="/articles/new"
-                    className={css.primaryLink}
-                  >
-                    Create an article
-                  </Link>
-
-                  <UserBar
-                    name={user.name}
-                    avatar={user.avatarUrl}
-                  />
+                  <path d="M5 5L19 19" />
+                  <path d="M19 5L5 19" />
                 </>
               ) : (
                 <>
-                  <Link
-                    href="/login"
-                    className={css.loginLink}
-                  >
-                    Log in
-                  </Link>
-
-                  <Link
-                    href="/register"
-                    className={css.primaryLink}
-                  >
-                    Join now
-                  </Link>
+                  <path d="M3 6H21" />
+                  <path d="M3 12H21" />
+                  <path d="M3 18H21" />
                 </>
               )}
-            </div>
-
-            {/* Tablet contextual action */}
-            {isAuthReady && (
-              <div className={css.tabletAction}>
-                {isAuthenticated ? (
-                  <Link
-                    href="/articles/new"
-                    className={css.primaryLink}
-                    onClick={closeMenu}
-                  >
-                    Create an article
-                  </Link>
-                ) : (
-                  <Link
-                    href="/register"
-                    className={css.primaryLink}
-                    onClick={closeMenu}
-                  >
-                    Join now
-                  </Link>
-                )}
-              </div>
-            )}
-
-            {/* Mobile and tablet menu button */}
-            <button
-              className={css.menuButton}
-              type="button"
-              aria-label={
-                isMenuOpen ? 'Close menu' : 'Open menu'
-              }
-              aria-expanded={isMenuOpen}
-              aria-controls="header-mobile-menu"
-              onClick={toggleMenu}
-            >
-              <svg
-                className={css.menuIcon}
-                width="24"
-                height="24"
-                aria-hidden="true"
-              >
-                <use
-                  href={
-                    isMenuOpen
-                      ? '/icons/symbol-defs.svg#icon-close'
-                      : '/icons/symbol-defs.svg#icon-burger-menu'
-                  }
-                />
-              </svg>
-            </button>
-          </>
-        )}
+            </svg>
+          </button>
+        </>
       </div>
 
       {/* Mobile and tablet navigation */}
-      {!isAuthPage && isMenuOpen && (
+      {isMenuOpen && (
         <div
           id="header-mobile-menu"
           className={css.mobileMenu}

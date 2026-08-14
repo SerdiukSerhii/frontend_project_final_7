@@ -64,6 +64,14 @@ Mobile: від 320px
 
     fill: none;
     stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.closeIcon {
+    width: 18px;
+    height: 18px;
 }
 
 .mobileMenu {
@@ -80,14 +88,14 @@ Mobile: від 320px
     box-shadow: 0 8px 16px rgb(7 7 33 / 12%);
 }
 
-.mobileNavigation {
+.mobileMenu .mobileNavigation {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 24px;
+    gap: 32px;
 
     padding-top: 24px;
-    padding-bottom: 32px;
+    padding-bottom: 24px;
 }
 
 .navLink,

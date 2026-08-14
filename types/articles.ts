@@ -16,4 +16,19 @@ export interface Article {
   createdAt?: string;
   updatedAt?: string;
   isSaved?: boolean;
+  isOwner?: boolean;
+}
+
+export interface GetArticlesParams {
+  page?: number;
+  perPage?: number;
+  category?: 'general' | 'popular';
+}
+
+export interface GetArticlesResponse {
+  page: number;
+  perPage: number;
+  totalPages: number;
+  totalArticles: number;
+  articles: Article[];
 }

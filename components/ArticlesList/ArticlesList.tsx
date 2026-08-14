@@ -61,13 +61,17 @@ export default function ArticlesList({
 
   return (
     <ul className={css.articlesList}>
-      {articles.map(article => (
-        <ArticlesItem
-          key={article._id}
-          article={article}
-          isOwner={isOwner || article.isOwner}
-        />
-      ))}
+      {articles.map(article => {
+        if (!article) return null;
+
+        return (
+          <ArticlesItem
+            key={article._id}
+            article={article}
+            isOwner={Boolean(isOwner || article?.isOwner)}
+          />
+        );
+      })}
     </ul>
   );
 }

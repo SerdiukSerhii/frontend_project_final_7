@@ -1,15 +1,18 @@
 .page {
   padding-top: 85px;
+  padding-bottom: 85px;
 }
 
 @media screen and (min-width: 768px) {
   .page {
     padding-top: 232px;
+    padding-bottom: 231px;
   }
 }
 
 @media screen and (min-width: 1440px) {
   .page {
     padding-top: 172px;
+    padding-bottom: 152px;
   }
 }

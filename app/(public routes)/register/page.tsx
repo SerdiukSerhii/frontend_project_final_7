@@ -1,9 +1,9 @@
 import RegisterForm from '@/components/Form/RegisterForm/RegisterForm';
-
+import css from './RegisterPage.module.css';
 export default function RegisterPage() {
   return (
-    <main>
+    <div className={css.page}>
       <RegisterForm />
-    </main>
+    </div>
   );
 }

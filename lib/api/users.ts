@@ -16,3 +16,7 @@ export async function updateUserAvatar(file: File): Promise<UpdateAvatarResponse
 
   return data;
 }
+export async function getUserById(userId: string) {
+  const { data } = await api.get(`/users/${userId}`);
+  return data;
+}

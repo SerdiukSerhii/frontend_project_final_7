@@ -28,12 +28,10 @@ api.interceptors.response.use(
 
     const isLocalApi = config?.baseURL === localApiUrl;
 
-    const isNetworkError = error.code === 'ERR_NETWORK' || error.code === 'ECONNREFUSED';
+    const isNetworkError =
+      error.code === 'ERR_NETWORK' || error.code === 'ECONNREFUSED' || error.code === 'ETIMEDOUT';
 
     if (config && isLocalApi && isNetworkError && !config._usedRenderFallback) {
-      config._usedRenderFallback = true;
-      config.baseURL = renderApiUrl;
-
       config._usedRenderFallback = true;
       config.baseURL = renderApiUrl;
 

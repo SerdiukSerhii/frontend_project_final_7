@@ -1,0 +1,138 @@
+.wrapper {
+    overflow: hidden;
+    background-color: var(--white);
+    border: 1px solid var(--light-gray);
+    border-radius: 8px;
+}
+
+.error {
+    border-color: #d32f2f;
+}
+
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 6px;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.toolbarButton {
+    min-width: 32px;
+    min-height: 32px;
+    padding: 4px 8px;
+
+    color: var(--green-darker);
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+
+    cursor: pointer;
+}
+
+.toolbarButton:hover,
+.toolbarButton:focus-visible,
+.active {
+    background-color: #dae5df;
+    border-color: var(--green);
+}
+
+.toolbarButton:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+}
+
+.editor {
+    min-height: 240px;
+    padding: 12px;
+    color: var(--black);
+    outline: none;
+}
+
+.editor h2 {
+    margin-bottom: 12px;
+    font-size: 24px;
+}
+
+/* .editor p.is-editor-empty:first-child::before {
+    float: left;
+    height: 0;
+    color: var(--gray);
+    content: attr(data-placeholder);
+    pointer-events: none;
+} */
+
+.editor :global(p.is-editor-empty:first-child)::before {
+    float: left;
+    height: 0;
+    color: var(--gray);
+    content: attr(data-placeholder);
+    pointer-events: none;
+}
+
+.editor p:not(:last-child),
+.editor ul:not(:last-child),
+.editor ol:not(:last-child),
+.editor blockquote:not(:last-child) {
+    margin-bottom: 12px;
+}
+
+.editor ul,
+.editor ol {
+    margin: 0 0 12px;
+    padding-left: 24px;
+    list-style-position: outside;
+}
+
+.editor ul {
+    list-style-type: disc;
+}
+
+.editor ol {
+    list-style-type: decimal;
+}
+
+.editor li {
+    display: list-item;
+}
+
+.editor li p {
+    margin: 0;
+}
+
+.editor ul ul {
+    list-style-type: circle;
+}
+
+.editor ul ul ul {
+    list-style-type: square;
+}
+
+.editor blockquote {
+    padding-left: 12px;
+    border-left: 3px solid var(--green);
+}
+
+.loading {
+    min-height: 280px;
+    background-color: #dae5df;
+    border-radius: 8px;
+}
+
+@media screen and (min-width: 375px) {
+    .editor {
+        min-height: 280px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .editor {
+        min-height: 360px;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .editor {
+        min-height: 390px;
+    }
+}

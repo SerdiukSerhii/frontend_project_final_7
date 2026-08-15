@@ -5,9 +5,15 @@ interface PaginationProps {
   hasMore: boolean;
   isLoading: boolean;
   onLoadMore: () => void;
+  children?: React.ReactNode;
 }
 
-export default function Pagination({ hasMore, isLoading, onLoadMore }: PaginationProps) {
+export default function Pagination({
+  hasMore,
+  isLoading,
+  onLoadMore,
+  children = 'Load More',
+}: PaginationProps) {
   // Якщо статей більше немає в БД — кнопка зникає
   if (!hasMore) return null;
 
@@ -19,7 +25,7 @@ export default function Pagination({ hasMore, isLoading, onLoadMore }: Paginatio
         onClick={onLoadMore}
         disabled={isLoading}
       >
-        {isLoading ? 'Loading...' : 'Load More'}
+        {isLoading ? 'Loading...' : children}
       </button>
     </div>
   );

@@ -92,6 +92,7 @@ export const createArticle = async (payload: CreateArticlePayload) => {
 
   return data;
 };
+
 export const getUserArticles = async (
   userId: string,
   page = 1,

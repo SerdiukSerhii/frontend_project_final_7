@@ -9,6 +9,7 @@ interface AuthorsItemProps {
 
 export default function AuthorsItem({ author }: AuthorsItemProps) {
   const { _id, name, avatarUrl } = author;
+  const firstName = name.trim().split(/\s+/)[0];
 
   return (
     <li className={css.item}>
@@ -28,7 +29,7 @@ export default function AuthorsItem({ author }: AuthorsItemProps) {
           )}
         </div>
 
-        <p className={css.name}>{name}</p>
+        <p className={css.name}>{firstName}</p>
       </Link>
     </li>
   );

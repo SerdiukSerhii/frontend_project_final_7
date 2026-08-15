@@ -1,10 +1,11 @@
+import { Author } from '@/types/articles';
 import { api } from './api';
 
-export interface Author {
-  id: string;
-  name: string;
-  avatar?: string;
-}
+// export interface Author {
+//   id: string;
+//   name: string;
+//   avatar?: string;
+// }
 
 export interface GetAuthorsResponse {
   authors: Author[];
@@ -14,7 +15,7 @@ export interface GetAuthorsResponse {
 }
 
 export async function getAuthors(page = 1, limit = 20): Promise<GetAuthorsResponse> {
-  const { data } = await api.get<GetAuthorsResponse>('/users', {
+  const { data } = await api.get<GetAuthorsResponse>('/authors', {
     params: { page, limit },
   });
   return data;

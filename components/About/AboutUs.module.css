@@ -60,8 +60,8 @@
 /* ======================================================== */
 @media (min-width: 768px) and (max-width: 1439px) {
   .aboutUs {
-    width: 696px;
-    max-width: 696px;
+    width: 100%;
+    max-width: 768px;
     margin: 0 auto;
     gap: 16px;
     display: flex;
@@ -100,9 +100,7 @@
 
   .aboutUsDescription {
     margin: 32px 0 0;
-
     max-width: none;
-
     font-size: 16px;
     line-height: 155%;
     font-weight: 400;

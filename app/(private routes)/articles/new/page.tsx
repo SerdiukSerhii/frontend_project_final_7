@@ -22,7 +22,7 @@ const NewArticlePage = () => {
   }
 
   return (
-    <div className={css.container}>
+    <div className={css.container}> 
       <h1 className={css.title}>Create an article</h1>
       <AddArticleForm />
     </div>

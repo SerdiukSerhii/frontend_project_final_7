@@ -1,5 +1,11 @@
 import { api } from './api';
-import type { GetArticlesParams, GetArticlesResponse } from '@/types/articles';
+import type {
+  Article,
+  GetArticlesParams,
+  GetArticlesResponse,
+  GetSavedArticlesResponse,
+  GetUserArticlesResponse,
+} from '@/types/articles';
 
 export const getArticles = async (params?: GetArticlesParams): Promise<GetArticlesResponse> => {
   const { data } = await api.get<GetArticlesResponse>('/articles', {
@@ -11,6 +17,39 @@ export const getArticles = async (params?: GetArticlesParams): Promise<GetArticl
   });
 
   return data;
+};
+
+export const fetchArticles = async (page: number = 1): Promise<GetArticlesResponse> => {
+  const response = await api.get<GetArticlesResponse>('/articles', {
+    params: {
+      page,
+    },
+  });
+
+  return response.data;
+};
+
+interface GetArticleByIdResponse {
+  status: number;
+  message: string;
+  data: Article;
+}
+
+export const getArticleById = async (articleId: string): Promise<Article> => {
+  const { data } = await api.get<GetArticleByIdResponse>(`/articles/${articleId}`);
+  return data.data;
+};
+
+export const getRelatedArticles = async (
+  currentArticleId: string,
+  count = 3
+): Promise<Article[]> => {
+  const { articles } = await getArticles({ perPage: 20 });
+
+  const pool = articles.filter(article => article._id !== currentArticleId);
+  const shuffled = [...pool].sort(() => Math.random() - 0.5);
+
+  return shuffled.slice(0, count);
 };
 
 interface AddToSavedResponse {
@@ -52,4 +91,21 @@ export const createArticle = async (payload: CreateArticlePayload) => {
   });
 
   return data;
+};
+
+export const getUserArticles = async (
+  userId: string,
+  page = 1,
+  limit = 12
+): Promise<GetUserArticlesResponse> => {
+  const { data } = await api.get<GetUserArticlesResponse>(`/articles/user/${userId}`, {
+    params: { page, limit },
+  });
+  return data;
+};
+
+export const getSavedArticles = async (): Promise<Article[]> => {
+  const { data: response } = await api.get<GetSavedArticlesResponse>('/users/saved-articles');
+
+  return response.data ?? [];
 };

@@ -10,7 +10,8 @@ export default function Footer() {
           <div className={styles.logoContainer}>
             <Link
               href="/"
-              aria-label="Harmoniq home">
+              aria-label="Harmoniq home"
+            >
               <Image
                 src="/logo.svg"
                 alt="Harmoniq Logo"
@@ -34,7 +35,7 @@ export default function Footer() {
               Articles
             </Link>
             <Link
-              href="/account"
+              href="/profile"
               className={styles.link}
             >
               Account

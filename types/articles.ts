@@ -32,3 +32,25 @@ export interface GetArticlesResponse {
   totalArticles: number;
   articles: Article[];
 }
+
+export interface GetSavedArticlesResponse {
+  status: string;
+  code: number;
+  data: Article[];
+}
+
+export interface UserArticlesData {
+  articles: Article[];
+  page: number;
+  limit: number;
+  totalItems: number;
+  totalPages: number;
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+}
+
+export interface GetUserArticlesResponse {
+  status: number;
+  message: string;
+  data: UserArticlesData;
+}

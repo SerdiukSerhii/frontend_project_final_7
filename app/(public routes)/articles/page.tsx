@@ -64,82 +64,86 @@ export default function ArticlesPage() {
 
   if (isLoading) {
     return (
-      <div className={css.container}>
-        <SectionTitle title="Articles" />
+      <section className={css.articles}>
+        <div className="container">
+          <SectionTitle title="Articles" />
 
-        <p style={{ textAlign: 'center', margin: '40px 0' }}>Loading articles...</p>
-      </div>
+          <p style={{ textAlign: 'center', margin: '40px 0' }}>Loading articles...</p>
+        </div>
+      </section>
     );
   }
 
   return (
-    <div className={css.container}>
-      <SectionTitle title="Articles" />
+    <section className={css.articles}>
+      <div className="container">
+        <SectionTitle title="Articles" />
 
-      <div className={css.filterHeader}>
-        <span className={css.countText}>{totalCount} articles</span>
+        <div className={css.filterHeader}>
+          <span className={css.countText}>{totalCount} articles</span>
 
-        <div
-          className={css.filterWrapper}
-          ref={dropdownRef}
-        >
-          <button
-            type="button"
-            className={css.selectButton}
-            onClick={() => setIsOpen(prev => !prev)}
-            aria-expanded={isOpen}
+          <div
+            className={css.filterWrapper}
+            ref={dropdownRef}
           >
-            <span>{filter}</span>
-
-            <svg
-              className={`${css.chevronIcon} ${isOpen ? css.open : ''}`}
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#595D62"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+            <button
+              type="button"
+              className={css.selectButton}
+              onClick={() => setIsOpen(prev => !prev)}
+              aria-expanded={isOpen}
             >
-              <polyline points="6 9 12 15 18 9" />
-            </svg>
-          </button>
+              <span>{filter}</span>
 
-          {isOpen && (
-            <ul
-              className={css.dropdownList}
-              role="listbox"
-            >
-              <li
-                role="option"
-                aria-selected={filter === 'All'}
-                className={`${css.dropdownItem} ${filter === 'All' ? css.active : ''}`}
-                onClick={() => handleFilterSelect('All')}
+              <svg
+                className={`${css.chevronIcon} ${isOpen ? css.open : ''}`}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#595D62"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
-                All
-              </li>
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </button>
 
-              <li
-                role="option"
-                aria-selected={filter === 'Popular'}
-                className={`${css.dropdownItem} ${filter === 'Popular' ? css.active : ''}`}
-                onClick={() => handleFilterSelect('Popular')}
+            {isOpen && (
+              <ul
+                className={css.dropdownList}
+                role="listbox"
               >
-                Popular
-              </li>
-            </ul>
-          )}
+                <li
+                  role="option"
+                  aria-selected={filter === 'All'}
+                  className={`${css.dropdownItem} ${filter === 'All' ? css.active : ''}`}
+                  onClick={() => handleFilterSelect('All')}
+                >
+                  All
+                </li>
+
+                <li
+                  role="option"
+                  aria-selected={filter === 'Popular'}
+                  className={`${css.dropdownItem} ${filter === 'Popular' ? css.active : ''}`}
+                  onClick={() => handleFilterSelect('Popular')}
+                >
+                  Popular
+                </li>
+              </ul>
+            )}
+          </div>
         </div>
+
+        <ArticlesList articles={articles} />
+
+        {hasNextPage && (
+          <Pagination
+            hasMore={hasNextPage}
+            isLoading={isFetchingNextPage}
+            onLoadMore={() => fetchNextPage()}
+          />
+        )}
       </div>
-
-      <ArticlesList articles={articles} />
-
-      {hasNextPage && (
-        <Pagination
-          hasMore={hasNextPage}
-          isLoading={isFetchingNextPage}
-          onLoadMore={() => fetchNextPage()}
-        />
-      )}
-    </div>
+    </section>
   );
 }

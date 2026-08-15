@@ -37,10 +37,8 @@ export default function ArticlesPage() {
     },
   });
 
-  // Беремо статті останньої завантаженої сторінки
-  const currentPageIndex = (data?.pages.length ?? 1) - 1;
-
-  const articles = data?.pages[currentPageIndex]?.articles ?? [];
+  //Збираємо статті в один масив
+  const articles = data?.pages.flatMap(page => page.articles) ?? [];
 
   // Загальна кількість статей приходить з бекенду як totalArticles
   const totalCount = data?.pages[0]?.totalArticles ?? 0;
@@ -62,17 +60,6 @@ export default function ArticlesPage() {
   const handleFilterSelect = (value: 'All' | 'Popular') => {
     setFilter(value);
     setIsOpen(false);
-  };
-
-  const handleLoadMore = async () => {
-    const result = await fetchNextPage();
-
-    if (result.isSuccess) {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      });
-    }
   };
 
   if (isLoading) {
@@ -150,7 +137,7 @@ export default function ArticlesPage() {
         <Pagination
           hasMore={hasNextPage}
           isLoading={isFetchingNextPage}
-          onLoadMore={handleLoadMore}
+          onLoadMore={() => fetchNextPage()}
         />
       )}
     </div>

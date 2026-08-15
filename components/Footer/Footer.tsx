@@ -1,8 +1,13 @@
+'use client';
+
 import styles from './Footer.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useAuthStore } from '@/lib/store/authStore';
 
 export default function Footer() {
+  const user = useAuthStore(state => state.user);
+
   return (
     <footer className={styles.footer}>
       <div className="container">
@@ -21,12 +26,11 @@ export default function Footer() {
               />
             </Link>
           </div>
-          {/* Копирайт */}
+
           <p className={styles.copyright}>
             © {new Date().getFullYear()} Harmoniq. All rights reserved.
           </p>
 
-          {/* Блок навигации */}
           <nav className={styles.nav}>
             <Link
               href="/articles"
@@ -34,8 +38,9 @@ export default function Footer() {
             >
               Articles
             </Link>
+
             <Link
-              href="/profile"
+              href={user ? '/profile' : '/login'}
               className={styles.link}
             >
               Account

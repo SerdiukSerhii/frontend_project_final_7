@@ -19,6 +19,16 @@ export const getArticles = async (params?: GetArticlesParams): Promise<GetArticl
   return data;
 };
 
+export const fetchArticles = async (page: number = 1): Promise<GetArticlesResponse> => {
+  const response = await api.get<GetArticlesResponse>('/articles', {
+    params: {
+      page,
+    },
+  });
+
+  return response.data;
+};
+
 interface GetArticleByIdResponse {
   status: number;
   message: string;

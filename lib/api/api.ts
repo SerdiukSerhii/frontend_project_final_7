@@ -1,7 +1,5 @@
 import axios, { type AxiosError } from 'axios';
 
-import type { GetArticlesResponse } from '@/types/articles';
-
 interface ApiErrorResponse {
   error?: string;
   message?: string;
@@ -9,19 +7,12 @@ interface ApiErrorResponse {
 
 export type ApiError = AxiosError<ApiErrorResponse>;
 
-const baseURL = process.env.NEXT_PUBLIC_API_URL ?? 'https://project-backend-final-7.onrender.com';
+const baseURL =
+  process.env.NEXT_PUBLIC_API_TARGET === 'render'
+    ? process.env.NEXT_PUBLIC_RENDER_API_URL
+    : process.env.NEXT_PUBLIC_LOCAL_API_URL;
 
 export const api = axios.create({
   baseURL,
   withCredentials: true,
 });
-
-export const fetchArticles = async (page: number = 1): Promise<GetArticlesResponse> => {
-  const response = await api.get<GetArticlesResponse>('/articles', {
-    params: {
-      page,
-    },
-  });
-
-  return response.data;
-};

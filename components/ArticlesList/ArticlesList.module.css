@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   gap: 24px;
+  width: 100%;
 }
 @media screen and (min-width: 768px) {
   .articlesList {
@@ -12,15 +13,20 @@
     align-items: center;
   }
 }
+.articlesList > li {
+  width: 100%;
+}
 
 @media screen and (min-width: 768px) {
   .articlesList > li {
     width: calc((100% - 1 * 24px) / 2);
+    max-width: 340px;
   }
 }
 @media screen and (min-width: 1440px) {
   .articlesList > li {
     width: calc((100% - 2 * 24px) / 3);
+    max-width: 392px;
   }
 }
 

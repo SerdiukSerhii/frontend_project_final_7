@@ -15,7 +15,8 @@ export default function ArticlesItem({
 }: ArticlesItemProps) {
   const { _id, title, desc, img, ownerId } = article;
 
-  const authorName = typeof ownerId === 'object' ? ownerId.name : '';
+  const authorName =
+    typeof ownerId === 'object' && ownerId !== null ? ownerId.name : 'Harmoniq Author';
 
   return (
     <li className={css.item}>

@@ -1,6 +1,15 @@
 import { api } from './api';
-export const getArticles = async () => {
-  const { data } = await api.get('/articles');
+import type { GetArticlesParams, GetArticlesResponse } from '@/types/articles';
+
+export const getArticles = async (params?: GetArticlesParams): Promise<GetArticlesResponse> => {
+  const { data } = await api.get<GetArticlesResponse>('/articles', {
+    params: {
+      page: params?.page || 1,
+      perPage: params?.perPage,
+      category: params?.category,
+    },
+  });
+
   return data;
 };
 
@@ -16,9 +25,7 @@ export const addArticleToSaved = async (articleId: string) => {
 };
 
 export const removeArticleFromSaved = async (articleId: string) => {
-  const { data } = await api.delete<AddToSavedResponse>(
-    `/users/saved-articles/${articleId}`
-  );
+  const { data } = await api.delete<AddToSavedResponse>(`/users/saved-articles/${articleId}`);
   return data;
 };
 

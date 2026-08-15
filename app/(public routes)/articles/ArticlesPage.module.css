@@ -1,0 +1,207 @@
+.container {
+    width: 100%;
+    max-width: 1225px;
+    margin: 0 auto;
+    padding: 16px 16px 48px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================
+   Page title
+   ========================= */
+
+.container> :first-child {
+    margin-bottom: 16px;
+}
+
+/* =========================
+   Count + Filter
+   ========================= */
+
+.filterHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+    margin-bottom: 16px;
+}
+
+.countText {
+    font-family: 'Manrope', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 25px;
+    letter-spacing: 0;
+    color: #070721;
+}
+
+/* =========================
+   Filter
+   ========================= */
+
+.filterWrapper {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.selectButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+
+    width: 169px;
+    height: 33px;
+    padding: 6px 12px;
+    box-sizing: border-box;
+
+    background-color: #f7fffb;
+    border: 1px solid #d1e0d8;
+    border-radius: 8px;
+
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+    color: #595D62;
+
+    cursor: pointer;
+    outline: none;
+}
+
+.selectButton:focus-visible {
+    border-color: #000000;
+}
+
+/* Chevron */
+
+.chevronIcon {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+
+    transition: transform 0.2s ease;
+}
+
+.chevronIcon.open {
+    transform: rotate(180deg);
+}
+
+/* =========================
+   Dropdown
+   ========================= */
+
+.dropdownList {
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 0;
+
+    width: 304px;
+    height: 98px;
+    padding: 8px;
+    margin: 0;
+    box-sizing: border-box;
+
+    list-style: none;
+
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 12px;
+
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+
+    z-index: 10;
+}
+
+.dropdownItem {
+    padding: 8px 12px;
+
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+    color: #070721;
+
+    border-radius: 8px;
+    cursor: pointer;
+
+    transition: background-color 0.15s ease;
+}
+
+.dropdownItem:hover {
+    background-color: #e8f3ee;
+}
+
+.dropdownItem.active {
+    background-color: #d1e0d8;
+    color: #070721;
+}
+
+/* =========================
+   Empty State
+   ========================= */
+
+.emptyState {
+    width: 100%;
+    min-height: 419px;
+    padding: 16px;
+    box-sizing: border-box;
+
+    background-color: #d1e0d8;
+    border-radius: 16px;
+}
+
+
+/* ========================================
+   TABLET — 768px+
+   ======================================== */
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+    .container {
+        max-width: 736px;
+        padding: 48px 20px;
+    }
+
+    .container> :first-child {
+        margin-bottom: 16px;
+    }
+
+    .filterWrapper {
+        display: none;
+    }
+    
+    .filterHeader {
+        margin-bottom: 16px;
+    }
+
+    .emptyState {
+        width: 100%;
+        min-height: 419px;
+        padding: 32px;
+    }
+}
+
+
+/* ========================================
+   DESKTOP — 1280px+
+   ======================================== */
+
+@media screen and (min-width: 1280px) {
+    .container {
+        max-width: 1225px;
+        padding: 48px 20px;
+    }
+
+    .filterHeader {
+        margin-bottom: 24px;
+    }
+
+    .emptyState {
+        width: 100%;
+        min-height: 419px;
+        padding: 32px;
+    }
+}

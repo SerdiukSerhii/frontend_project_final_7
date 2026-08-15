@@ -110,7 +110,7 @@ Backend реалізований як RESTful API на базі Node.js та Exp
 |   <img src="https://github.com/Alinavinnik.png" width="50" height="50">   | [Аліна Лужняк](https://github.com/Alinavinnik)        | Fullstack Developer |
 |   <img src="https://github.com/alrozental.png" width="50" height="50">    | [Аліна Розенталь](https://github.com/alrozental)      | Fullstack Developer |
 |     <img src="https://github.com/amlnkk.png" width="50" height="50">      | [Аліна Мельник](https://github.com/amlnkk)            | Fullstack Developer |
-|    <img src="https://github.com/Karina-Ll.png" width="50" height="50">    | [Каріна Любенська](https://github.com/Karina-Ll)      | Fullstack Developer |
+|    <img src="https://github.com/Karina-Ll.png" width="50" height="50">    | [Каріна Лубенська](https://github.com/Karina-Ll)      | Fullstack Developer |
 |    <img src="https://github.com/Mary1-com.png" width="50" height="50">    | [Марина Віннікова](https://github.com/Mary1-com)      | Fullstack Developer |
 |  <img src="https://github.com/Orest-Stetsyk.png" width="50" height="50">  | [Орест Стецик](https://github.com/Orest-Stetsyk)      | Fullstack Developer |
 |   <img src="https://github.com/svetlanagim.png" width="50" height="50">   | [Світлана Гіміш](https://github.com/svetlanagim)      | Fullstack Developer |
@@ -118,7 +118,7 @@ Backend реалізований як RESTful API на базі Node.js та Exp
 |  <img src="https://github.com/Yuliia-sketch.png" width="50" height="50">  | [Юлія Карнаух](https://github.com/Yuliia-sketch)      | Fullstack Developer |
 |  <img src="https://github.com/YuriiOlesich.png" width="50" height="50">   | [Юрій Олесіч](https://github.com/YuriiOlesich)        | Fullstack Developer |
 |     <img src="https://github.com/WKGHSN.png" width="50" height="50">      | [Наталія Коростельова](https://github.com/WKGHSN)     | **Team Lead QA**    |
-|    <img src="https://github.com/Uliana-87.png" width="50" height="50">    | [Гвозд Уляна](https://github.com/Uliana-87)           | QA                  |
+|    <img src="https://github.com/Uliana-87.png" width="50" height="50">    | [Уляна Гвозд](https://github.com/Uliana-87)           | QA                  |
 | <img src="https://github.com/bohdanvykhrenko.png" width="50" height="50"> | [Богдан Вихренко](https://github.com/bohdanvykhrenko) | QA                  |
 
 ---

@@ -1,0 +1,17 @@
+import { Author } from '@/types/articles';
+import { api } from './api';
+
+
+export interface GetAuthorsResponse {
+  authors: Author[];
+  page: number;
+  totalPages: number;
+  total?: number;
+}
+
+export async function getAuthors(page = 1, limit = 20): Promise<GetAuthorsResponse> {
+  const { data } = await api.get<GetAuthorsResponse>('/authors', {
+    params: { page, limit },
+  });
+  return data;
+}

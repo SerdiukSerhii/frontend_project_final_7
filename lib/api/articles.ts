@@ -19,6 +19,29 @@ export const getArticles = async (params?: GetArticlesParams): Promise<GetArticl
   return data;
 };
 
+interface GetArticleByIdResponse {
+  status: number;
+  message: string;
+  data: Article;
+}
+
+export const getArticleById = async (articleId: string): Promise<Article> => {
+  const { data } = await api.get<GetArticleByIdResponse>(`/articles/${articleId}`);
+  return data.data;
+};
+
+export const getRelatedArticles = async (
+  currentArticleId: string,
+  count = 3
+): Promise<Article[]> => {
+  const { articles } = await getArticles({ perPage: 20 });
+
+  const pool = articles.filter(article => article._id !== currentArticleId);
+  const shuffled = [...pool].sort(() => Math.random() - 0.5);
+
+  return shuffled.slice(0, count);
+};
+
 interface AddToSavedResponse {
   status: number;
   message: string;

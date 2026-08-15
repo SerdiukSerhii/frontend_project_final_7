@@ -33,11 +33,26 @@ export interface GetArticlesResponse {
   articles: Article[];
 }
 
-//додано для ArticlesPage
-export interface ArticlesResponse {
+export interface GetSavedArticlesResponse {
+  status: string;
+  code: number;
+  data: Article[];
+}
+
+export interface UserArticlesData {
   articles: Article[];
-  total: number;
+  page: number;
+  limit: number;
+  totalItems: number;
   totalPages: number;
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+}
+
+export interface GetUserArticlesResponse {
+  status: number;
+  message: string;
+  data: UserArticlesData;
 }
 export interface ArticlesByUserResponse {
   data: {

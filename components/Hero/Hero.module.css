@@ -6,10 +6,6 @@
 }
 
 .heroContainer {
-  /* width: 100%;
-  max-width: 361px;
-  margin: 0 auto; */
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -118,8 +114,7 @@
    ========================================================== */
 @media screen and (min-width: 768px) {
   .heroSection {
-    padding-top: 22px;
-    padding-bottom: 22px;
+    padding: 16px 0;
   }
 
   .heroContainer {

@@ -1,10 +1,6 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
-import {
-  Manrope,
-  DM_Sans,
-  Noto_Sans,
-} from 'next/font/google';
+import { Manrope, DM_Sans, Noto_Sans } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
 
 import AuthProvider from '@/components/AuthProvider/AuthProvider';
@@ -18,13 +14,16 @@ import './globals.css';
 export const metadata: Metadata = {
   title: 'Harmoniq',
   description: 'Harmoniq — a simple and intuitive platform for reading articles.',
+  icons: {
+    icon: '/favicon.svg',
+  },
 
   openGraph: {
     title: 'Harmoniq',
     description: 'Harmoniq — a simple and intuitive platform for reading articles.',
     images: [
       {
-        url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+        url: '/harmoniq-og.WebP',
         width: 1200,
         height: 630,
         alt: 'Harmoniq app preview',
@@ -50,27 +49,18 @@ const notoSans = Noto_Sans({
 
 interface RootLayoutProps {
   children: ReactNode;
-  modal: ReactNode;
 }
 
-const RootLayout = ({
-  children,
-  modal,
-}: Readonly<RootLayoutProps>) => {
+const RootLayout = ({ children }: Readonly<RootLayoutProps>) => {
   return (
     <html lang="en">
-      <body
-        className={`${manrope.variable} ${dmSans.variable} ${notoSans.variable}`}
-      >
+      <body className={`${manrope.variable} ${dmSans.variable} ${notoSans.variable}`}>
         <TanStackProvider>
           <AuthProvider>
             <div className="layout">
               <Header />
 
-              <main>
-                {children}
-                {modal}
-              </main>
+              <main>{children}</main>
 
               <Footer />
             </div>

@@ -8,16 +8,23 @@ export default function Footer() {
       <div className="container">
         <div className={styles.container}>
           <div className={styles.logoContainer}>
-            <Image
-              src="/logo.svg"
-              alt="Harmoniq Logo"
-              width={165}
-              height={46}
-              priority
-            />
+            <Link
+              href="/"
+              aria-label="Harmoniq home"
+            >
+              <Image
+                src="/logo.svg"
+                alt="Harmoniq Logo"
+                width={165}
+                height={46}
+                priority
+              />
+            </Link>
           </div>
           {/* Копирайт */}
-          <p className={styles.copyright}>© 2025 Harmoniq. All rights reserved.</p>
+          <p className={styles.copyright}>
+            © {new Date().getFullYear()} Harmoniq. All rights reserved.
+          </p>
 
           {/* Блок навигации */}
           <nav className={styles.nav}>
@@ -28,7 +35,7 @@ export default function Footer() {
               Articles
             </Link>
             <Link
-              href="/account"
+              href="/profile"
               className={styles.link}
             >
               Account

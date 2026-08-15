@@ -1,6 +1,4 @@
-import axios, { type AxiosError } from 'axios';
-
-import type { ArticlesResponse } from '@/types/articles';
+import axios, { type AxiosError, type InternalAxiosRequestConfig } from 'axios';
 
 interface ApiErrorResponse {
   error?: string;
@@ -9,24 +7,39 @@ interface ApiErrorResponse {
 
 export type ApiError = AxiosError<ApiErrorResponse>;
 
-const baseURL =
-  process.env.NEXT_PUBLIC_API_URL ??
-  'https://project-backend-final-7.onrender.com';
+const localApiUrl = process.env.NEXT_PUBLIC_LOCAL_API_URL;
+const renderApiUrl = process.env.NEXT_PUBLIC_RENDER_API_URL;
+
+const baseURL = process.env.NODE_ENV === 'production' ? renderApiUrl : localApiUrl;
 
 export const api = axios.create({
   baseURL,
   withCredentials: true,
 });
 
-// Функція для отримання статей
-export const fetchArticles = async (
-  page: number = 1,
-): Promise<ArticlesResponse> => {
-  const response = await api.get<ArticlesResponse>('/articles', {
-    params: {
-      page,
-    },
-  });
-
-  return response.data;
+type RetryConfig = InternalAxiosRequestConfig & {
+  _usedRenderFallback?: boolean;
 };
+
+api.interceptors.response.use(
+  response => response,
+  async error => {
+    const config = error.config as RetryConfig | undefined;
+
+    const isLocalApi = config?.baseURL === localApiUrl;
+
+    const isNetworkError = error.code === 'ERR_NETWORK' || error.code === 'ECONNREFUSED';
+
+    if (config && isLocalApi && isNetworkError && !config._usedRenderFallback) {
+      config._usedRenderFallback = true;
+      config.baseURL = renderApiUrl;
+
+      config._usedRenderFallback = true;
+      config.baseURL = renderApiUrl;
+
+      return api(config);
+    }
+
+    return Promise.reject(error);
+  }
+);

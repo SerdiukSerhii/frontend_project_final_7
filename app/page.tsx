@@ -1,21 +1,3 @@
-// import Hero from '@/components/Hero/Hero';
-// import AboutUs from '@/components/About/AboutUs';
-// import PopularArticles from '@/components/PopularArticles/PopularArticles';
-// import Creators from '@/components/Creators/Creators';
-
-// const HomePage = () => {
-//   return (
-//     <>
-//       <Hero />
-//       <AboutUs />
-//       <PopularArticles />
-//       <Creators />
-//     </>
-//   );
-// };
-
-// export default HomePage;
-
 import Hero from '@/components/Hero/Hero';
 import AboutUs from '@/components/About/AboutUs';
 import PopularArticles from '@/components/PopularArticles/PopularArticles';

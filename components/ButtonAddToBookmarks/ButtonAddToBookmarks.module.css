@@ -5,17 +5,18 @@
   width: 40px;
   height: 40px;
   padding: 0;
-  border: 1px solid #d8e0da;
+  border: 1px solid var(--light-green);
   border-radius: 50%;
-  background-color: #ffffff;
-  color: #6b8f76; 
+  background-color: var(--white);
+  color: var(--green);
   cursor: pointer;
+  flex-shrink: 0;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .button:hover {
-  border-color: #6b8f76;
-  color: #4b6b56;
+  border-color: var(--green);
+  color: var(--green-darker);
 }
 
 .button:disabled {
@@ -24,18 +25,26 @@
 }
 
 .saved {
-  background-color: #6b8f76; 
-  border-color: #6b8f76;
-  color: #ffffff;
+  background-color: var(--green);
+  border-color: var(--green);
+  color: var(--white);
 }
 
 .saved:hover {
-  background-color: #557a61;
+  background-color: var(--green-darker);
 }
 
 .icon {
   width: 20px;
   height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  transition: fill 0.2s ease;
+}
+
+.saved .icon {
+  fill: currentColor;
 }
 
 .spinner {

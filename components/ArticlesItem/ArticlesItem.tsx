@@ -7,13 +7,11 @@ import ButtonAddToBookmarks from '../ButtonAddToBookmarks/ButtonAddToBookmarks';
 interface ArticlesItemProps {
   article: Article;
   isOwner?: boolean;
-  isAuthenticated?: boolean;
 }
 
 export default function ArticlesItem({
   article,
   isOwner = false,
-  isAuthenticated = false,
 }: ArticlesItemProps) {
   const { _id, title, desc, img, ownerId } = article;
 
@@ -77,7 +75,6 @@ export default function ArticlesItem({
             <ButtonAddToBookmarks
               articleId={_id}
               isSaved={article.isSaved}
-              isAuthenticated={isAuthenticated}
             />
           )}
         </div>

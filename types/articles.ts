@@ -39,3 +39,13 @@ export interface ArticlesResponse {
   total: number;
   totalPages: number;
 }
+export interface ArticlesByUserResponse {
+  data: {
+    articles: Article[];
+    totalPages: number;
+    totalItems: number;
+    page: number;
+    perPage: number;
+    hasNextPage: boolean;
+  };
+}

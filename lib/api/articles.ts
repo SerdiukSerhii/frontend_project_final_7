@@ -1,5 +1,5 @@
 import { api } from './api';
-import type { GetArticlesParams, GetArticlesResponse } from '@/types/articles';
+import type { GetArticlesParams, GetArticlesResponse, ArticlesByUserResponse} from '@/types/articles';
 
 export const getArticles = async (params?: GetArticlesParams): Promise<GetArticlesResponse> => {
   const { data } = await api.get<GetArticlesResponse>('/articles', {
@@ -26,5 +26,21 @@ export const addArticleToSaved = async (articleId: string) => {
 
 export const removeArticleFromSaved = async (articleId: string) => {
   const { data } = await api.delete<AddToSavedResponse>(`/users/saved-articles/${articleId}`);
+  return data;
+};
+export const getArticlesByUser = async (
+  userId: string,
+  params?: GetArticlesParams
+): Promise<ArticlesByUserResponse> => {
+  const { data } = await api.get<ArticlesByUserResponse>(
+    `/articles/user/${userId}`,
+    {
+      params: {
+        page: params?.page || 1,
+        perPage: params?.perPage,
+      },
+    }
+  );
+
   return data;
 };

@@ -2,7 +2,7 @@
 
 import { useInfiniteQuery } from '@tanstack/react-query';
 import SectionTitle from '@/components/SectionTitle/SectionTitle';
-//import AuthorsList from '@/components/AuthorsList/AuthorsList';
+import AuthorsList from '@/components/AuthorsList/AuthorsList';
 import Pagination from '@/components/Pagination/Pagination';
 import { getAuthors } from '@/lib/api/authors';
 
@@ -62,8 +62,8 @@ export default function AuthorsPage() {
       {/* Тимчасово */}
       <p style={{ textAlign: 'center', margin: '20px 0' }}>Loaded authors: {allAuthors.length}</p>
 
-      {/* Б. Список, який рендерить картки авторів 
-      <AuthorsList authors={allAuthors} />*/}
+      {/* Б. Список, який рендерить картки авторів  */}
+      <AuthorsList authors={allAuthors} />
 
       {/* В. Кнопка "Load More", яка з'являється тільки за наявності нових даних */}
       {Boolean(hasNextPage) && (

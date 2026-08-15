@@ -1,6 +1,7 @@
 import { Author } from '@/types/articles';
 import { api } from './api';
 
+
 export interface GetAuthorsResponse {
   authors: Author[];
   page: number;

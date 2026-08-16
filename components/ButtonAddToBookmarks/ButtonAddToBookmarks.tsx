@@ -5,20 +5,17 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { addArticleToSaved, removeArticleFromSaved } from '@/lib/api/articles';
 import type { ApiError } from '@/lib/api/api';
+import { useAuthStore } from '@/lib/store/authStore';
 import ModalErrorSave from '@/components/ModalErrorSave/ModalErrorSave';
 import css from './ButtonAddToBookmarks.module.css';
 
 interface ButtonAddToBookmarksProps {
   articleId: string;
   isSaved?: boolean;
-  isAuthenticated: boolean;
 }
 
-const ButtonAddToBookmarks = ({
-  articleId,
-  isSaved = false,
-  isAuthenticated,
-}: ButtonAddToBookmarksProps) => {
+const ButtonAddToBookmarks = ({ articleId, isSaved = false }: ButtonAddToBookmarksProps) => {
+  const user = useAuthStore(state => state.user);
   const [saved, setSaved] = useState(isSaved);
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
   const queryClient = useQueryClient();
@@ -50,7 +47,7 @@ const ButtonAddToBookmarks = ({
   const isPending = isAdding || isRemoving;
 
   const handleClick = () => {
-    if (!isAuthenticated) {
+    if (!user) {
       setIsErrorModalOpen(true);
       return;
     }

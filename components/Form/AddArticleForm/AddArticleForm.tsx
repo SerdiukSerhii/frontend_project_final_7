@@ -223,6 +223,5 @@ const AddArticleForm = () => {
             }}
         </Formik>
     );
-};
 
 export default AddArticleForm;

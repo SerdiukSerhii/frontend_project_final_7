@@ -8,23 +8,17 @@ interface AuthjorsListProps {
 
 export default function AuthorsList({ authors }: AuthjorsListProps) {
   if (authors.length === 0) {
-    return (
-      <section>
-        <p className={css.empty}>No authors found.</p>
-      </section>
-    );
+    return <p className={css.empty}>No authors found.</p>;
   }
 
   return (
-    <section>
-      <ul className={css.authorList}>
-        {authors.map(author => (
-          <AuthorsItem
-            key={author._id}
-            author={author}
-          />
-        ))}
-      </ul>
-    </section>
+    <ul className={css.authorList}>
+      {authors.map(author => (
+        <AuthorsItem
+          key={author._id}
+          author={author}
+        />
+      ))}
+    </ul>
   );
 }

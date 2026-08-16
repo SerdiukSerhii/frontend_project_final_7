@@ -54,3 +54,13 @@ export interface GetUserArticlesResponse {
   message: string;
   data: UserArticlesData;
 }
+export interface ArticlesByUserResponse {
+  data: {
+    articles: Article[];
+    totalPages: number;
+    totalItems: number;
+    page: number;
+    perPage: number;
+    hasNextPage: boolean;
+  };
+}

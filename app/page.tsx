@@ -3,6 +3,16 @@ import AboutUs from '@/components/About/AboutUs';
 import PopularArticles from '@/components/PopularArticles/PopularArticles';
 import Creators from '@/components/Creators/Creators';
 import { getArticles } from '@/lib/api/articles';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Home',
+  description: 'Find your harmony in community with Harmoniq.',
+  openGraph: {
+    title: 'Harmoniq',
+    description: 'Find your harmony in community.',
+  },
+};
 
 const HomePage = async () => {
   const { articles } = await getArticles({

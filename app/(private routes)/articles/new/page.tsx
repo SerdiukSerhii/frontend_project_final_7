@@ -13,7 +13,7 @@ const NewArticlePage = () => {
       <AddArticleForm />
     </section>
   );
-
+}:
 
 
 

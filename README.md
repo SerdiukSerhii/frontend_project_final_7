@@ -1,7 +1,7 @@
 # 🧘 Harmoniq — Твій простір. Твої люди. Твоя гармонія.
 
 <p align="center">
-  <img src="src/public/img/hero-section-preview.png" alt="Harmoniq Preview" width="100%">
+  <img src="public/img/hero-section-preview.png" alt="Harmoniq Preview" width="100%">
 </p>
 
 ---
@@ -65,7 +65,7 @@
 
 ## 🔙 Backend
 
-Backend реалізований як RESTful API на базі Node.js та Express.js.
+[Backend](https://github.com/SerdiukSerhii/project-backend-final-7) реалізований як RESTful API на базі Node.js та Express.js.
 
 **Основний функціонал:**
 
@@ -79,7 +79,8 @@ Backend реалізований як RESTful API на базі Node.js та Exp
 - завантаження зображень;
 - валідація даних через Joi;
 - централізована обробка HTTP-помилок;
-- документація API через Swagger / OpenAPI.
+- документація API через [Swagger / OpenAPI
+](https://fs-125-7-back.onrender.com/api-docs).
 
 Дані зберігаються в MongoDB, а взаємодія з базою реалізована через Mongoose.
 
@@ -104,7 +105,7 @@ Backend реалізований як RESTful API на базі Node.js та Exp
 
 |                                  Аватар                                   | Учасник команди                                       | Роль                |
 | :-----------------------------------------------------------------------: | :---------------------------------------------------- | :------------------ |
-|  <img src="https://github.com/SerdiukSerhii.png" width="50" height="50">  | [Сергій Сердюк](https://github.com/SerdiukSerhii)     | **Team Lead**       |
+|  <img src="https://github.com/SerdiukSerhii.png" width="50" height="50">  | [Сергій Сердюк](https://github.com/SerdiukSerhii)     | **Team Lead Fullstack**       |
 | <img src="https://github.com/OlhaBorzhynska.png" width="50" height="50">  | [Ольга Боржинська](https://github.com/OlhaBorzhynska) | **Scrum Master**    |
 |   <img src="https://github.com/YuliaKozak.png" width="50" height="50">    | [Юлія Козак](https://github.com/YuliaKozak)           | Fullstack Developer |
 |   <img src="https://github.com/Alinavinnik.png" width="50" height="50">   | [Аліна Лужняк](https://github.com/Alinavinnik)        | Fullstack Developer |
@@ -143,4 +144,4 @@ npm install
 npm run dev
 ```
 
-**✨ Harmoniq — Find your harmony in community ✨**
+## ✨ Harmoniq — Find your harmony in community ✨

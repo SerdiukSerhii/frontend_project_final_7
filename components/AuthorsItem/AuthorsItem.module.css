@@ -9,7 +9,6 @@
   flex-direction: column;
   align-items: center;
   gap: 16px;
-  padding: 12px;
   color: inherit;
   text-decoration: none;
   cursor: pointer;
@@ -60,7 +59,7 @@
     font-size: 24px;
   }
 }
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 768px) {
   .item {
     max-width: 286px;
     flex: 0 0 calc((100% - 24px) / 2);

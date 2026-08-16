@@ -72,15 +72,12 @@ export const getArticlesByUser = async (
   userId: string,
   params?: GetArticlesParams
 ): Promise<ArticlesByUserResponse> => {
-  const { data } = await api.get<ArticlesByUserResponse>(
-    `/articles/user/${userId}`,
-    {
-      params: {
-        page: params?.page || 1,
-        perPage: params?.perPage,
-      },
-    }
-  );
+  const { data } = await api.get<ArticlesByUserResponse>(`/articles/user/${userId}`, {
+    params: {
+      page: params?.page || 1,
+      perPage: params?.perPage,
+    },
+  });
 
   return data;
 };

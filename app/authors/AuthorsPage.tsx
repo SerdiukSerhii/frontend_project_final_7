@@ -5,6 +5,7 @@ import SectionTitle from '@/components/SectionTitle/SectionTitle';
 import AuthorsList from '@/components/AuthorsList/AuthorsList';
 import Pagination from '@/components/Pagination/Pagination';
 import { getAuthors } from '@/lib/api/authors';
+import Loader from '@/components/Loader/Loader';
 
 export default function AuthorsPage() {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading, isError } =
@@ -18,54 +19,49 @@ export default function AuthorsPage() {
         }
         return undefined;
       },
+      gcTime: 0,
     });
 
   const allAuthors = data?.pages.flatMap(page => page.authors) ?? [];
 
-  const handleLoadMore = async () => {
-    const result = await fetchNextPage();
-
-    if (result.isSuccess) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
-
   if (isLoading) {
     return (
-      <div style={{ padding: '20px' }}>
-        <SectionTitle title="Authors" />
-        <p style={{ textAlign: 'center', margin: '40px 0' }}>Loading authors...</p>
-      </div>
+      <section style={{ padding: '48px 0' }}>
+        <div className="container">
+          <Loader />
+        </div>
+      </section>
     );
   }
 
   if (isError) {
     return (
-      <div style={{ padding: '20px' }}>
-        <SectionTitle title="Authors" />
-        <p style={{ textAlign: 'center', margin: '40px 0', color: 'red' }}>
-          Failed to load authors.
-        </p>
-      </div>
+      <section style={{ padding: '48px 0' }}>
+        <div className="container">
+          <SectionTitle title="Authors" />
+          <p style={{ textAlign: 'center', margin: '40px 0', color: 'red' }}>
+            Failed to load authors.
+          </p>
+        </div>
+      </section>
     );
   }
 
   return (
-    <div style={{ padding: '20px' }}>
-      <SectionTitle title="Authors" />
+    <section style={{ padding: '48px 0' }}>
+      <div className="container">
+        <SectionTitle title="Authors" />
 
-      {/* Тимчасово */}
-      <p style={{ textAlign: 'center', margin: '20px 0' }}>Loaded authors: {allAuthors.length}</p>
+        <AuthorsList authors={allAuthors} />
 
-      <AuthorsList authors={allAuthors} />
-
-      {Boolean(hasNextPage) && (
-        <Pagination
-          hasMore={Boolean(hasNextPage)}
-          isLoading={isFetchingNextPage}
-          onLoadMore={handleLoadMore}
-        />
-      )}
-    </div>
+        {Boolean(hasNextPage) && (
+          <Pagination
+            hasMore={Boolean(hasNextPage)}
+            isLoading={isFetchingNextPage}
+            onLoadMore={() => fetchNextPage()}
+          />
+        )}
+      </div>
+    </section>
   );
 }

@@ -9,6 +9,7 @@ import Pagination from '@/components/Pagination/Pagination';
 import { getArticles } from '@/lib/api/articles';
 
 import css from './ArticlesPage.module.css';
+import Loader from '@/components/Loader/Loader';
 
 export default function ArticlesPage() {
   const [filter, setFilter] = useState<'All' | 'Popular'>('All');
@@ -35,6 +36,7 @@ export default function ArticlesPage() {
 
       return undefined;
     },
+    gcTime: 0,
   });
 
   const articles = data?.pages.flatMap(page => page.articles) ?? [];
@@ -64,9 +66,7 @@ export default function ArticlesPage() {
     return (
       <section className={css.articles}>
         <div className="container">
-          <SectionTitle title="Articles" />
-
-          <p style={{ textAlign: 'center', margin: '40px 0' }}>Loading articles...</p>
+          <Loader />
         </div>
       </section>
     );

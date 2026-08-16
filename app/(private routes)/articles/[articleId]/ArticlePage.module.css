@@ -1,8 +1,5 @@
-.container {
-  width: 100%;
-  max-width: 1225px;
-  margin: 0 auto;
-  padding: 0 16px 48px;
+.article-container {
+  padding-bottom: 48px;
   display: flex;
   flex-direction: column;
 }
@@ -159,7 +156,9 @@
   border-radius: 64px;
   border: 1px solid var(--green-darker);
   cursor: pointer;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .relatedBtn:hover {
@@ -196,7 +195,9 @@
   font-size: 18px;
   font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.2s ease, opacity 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    opacity 0.2s ease;
 }
 
 .saveIcon {
@@ -221,8 +222,8 @@
 }
 
 @media screen and (min-width: 768px) {
-  .container {
-    padding: 0 32px 64px;
+  .article-container {
+    padding-bottom: 32px;
   }
 
   .content {

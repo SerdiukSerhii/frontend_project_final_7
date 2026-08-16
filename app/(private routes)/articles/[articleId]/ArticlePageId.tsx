@@ -111,109 +111,111 @@ const ArticlePage = () => {
   const descriptionParagraphs = article.article.split('\n').filter(Boolean);
 
   return (
-    <div className={css.container}>
-      <h1 className={css.title}>{article.title}</h1>
+    <section className="container">
+      <div className={css['article-container']}>
+        <h1 className={css.title}>{article.title}</h1>
 
-      <div className={css.imageWrapper}>
-        <Image
-          src={article.img}
-          alt={article.title}
-          fill
-          priority
-          className={css.image}
-        />
-      </div>
-
-      <div className={css.layout}>
-        <div className={css.content}>
-          {descriptionParagraphs.map((paragraph, index) => (
-            <p
-              key={index}
-              className={css.paragraph}
-            >
-              {paragraph}
-            </p>
-          ))}
+        <div className={css.imageWrapper}>
+          <Image
+            src={article.img}
+            alt={article.title}
+            fill
+            priority
+            className={css.image}
+          />
         </div>
 
-        <aside className={css.sidebar}>
-          <h2 className={css.sidebarTitle}>You can also interested</h2>
-
-          <p className={css.meta}>
-            <span className={css.metaLabel}>Author:</span>{' '}
-            {authorId ? (
-              <Link
-                href={`/authors/${authorId}`}
-                className={css.authorLink}
+        <div className={css.layout}>
+          <div className={css.content}>
+            {descriptionParagraphs.map((paragraph, index) => (
+              <p
+                key={index}
+                className={css.paragraph}
               >
-                {authorName}
-              </Link>
-            ) : (
-              authorName
-            )}
-          </p>
+                {paragraph}
+              </p>
+            ))}
+          </div>
 
-          <p className={css.meta}>
-            <span className={css.metaLabel}>Publication date:</span> {formatDate(article.date)}
-          </p>
+          <aside className={css.sidebar}>
+            <h2 className={css.sidebarTitle}>You can also interested</h2>
 
-          {relatedArticles.length > 0 && (
-            <ul className={css.relatedList}>
-              {relatedArticles.map(related => {
-                const relatedAuthor =
-                  typeof related.ownerId === 'object' ? related.ownerId.name : 'Harmoniq Author';
-
-                return (
-                  <li
-                    key={related._id}
-                    className={css.relatedItem}
-                  >
-                    <p className={css.relatedTitle}>{related.title}</p>
-                    <p className={css.relatedAuthor}>{relatedAuthor}</p>
-
-                    <Link
-                      href={`/articles/${related._id}`}
-                      className={css.relatedBtn}
-                      aria-label={`Read ${related.title}`}
-                    >
-                      <svg
-                        className={css.relatedIcon}
-                        aria-hidden="true"
-                      >
-                        <use href="/icons/symbol-defs.svg#icon-top-right" />
-                      </svg>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          )}
-
-          <button
-            type="button"
-            className={`${css.saveBtn} ${isSaved ? css.saveBtnActive : ''}`}
-            onClick={handleSaveClick}
-            disabled={isSaving}
-          >
-            {isSaving ? (
-              'Saving...'
-            ) : (
-              <>
-                {isSaved ? 'Saved' : 'Save'}
-                <svg
-                  className={css.saveIcon}
-                  aria-hidden="true"
+            <p className={css.meta}>
+              <span className={css.metaLabel}>Author:</span>{' '}
+              {authorId ? (
+                <Link
+                  href={`/authors/${authorId}`}
+                  className={css.authorLink}
                 >
-                  <use href="/icons/symbol-defs.svg#icon-save-bookmark" />
-                </svg>
-              </>
-            )}
-          </button>
-        </aside>
-      </div>
+                  {authorName}
+                </Link>
+              ) : (
+                authorName
+              )}
+            </p>
 
-      {isErrorModalOpen && <ModalErrorSave onClose={() => setIsErrorModalOpen(false)} />}
-    </div>
+            <p className={css.meta}>
+              <span className={css.metaLabel}>Publication date:</span> {formatDate(article.date)}
+            </p>
+
+            {relatedArticles.length > 0 && (
+              <ul className={css.relatedList}>
+                {relatedArticles.map(related => {
+                  const relatedAuthor =
+                    typeof related.ownerId === 'object' ? related.ownerId.name : 'Harmoniq Author';
+
+                  return (
+                    <li
+                      key={related._id}
+                      className={css.relatedItem}
+                    >
+                      <p className={css.relatedTitle}>{related.title}</p>
+                      <p className={css.relatedAuthor}>{relatedAuthor}</p>
+
+                      <Link
+                        href={`/articles/${related._id}`}
+                        className={css.relatedBtn}
+                        aria-label={`Read ${related.title}`}
+                      >
+                        <svg
+                          className={css.relatedIcon}
+                          aria-hidden="true"
+                        >
+                          <use href="/icons/symbol-defs.svg#icon-top-right" />
+                        </svg>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+
+            <button
+              type="button"
+              className={`${css.saveBtn} ${isSaved ? css.saveBtnActive : ''}`}
+              onClick={handleSaveClick}
+              disabled={isSaving}
+            >
+              {isSaving ? (
+                'Saving...'
+              ) : (
+                <>
+                  {isSaved ? 'Saved' : 'Save'}
+                  <svg
+                    className={css.saveIcon}
+                    aria-hidden="true"
+                  >
+                    <use href="/icons/symbol-defs.svg#icon-save-bookmark" />
+                  </svg>
+                </>
+              )}
+            </button>
+          </aside>
+        </div>
+
+        {isErrorModalOpen && <ModalErrorSave onClose={() => setIsErrorModalOpen(false)} />}
+      </div>
+    </section>
   );
 };
 

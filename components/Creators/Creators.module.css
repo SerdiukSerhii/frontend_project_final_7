@@ -1,3 +1,7 @@
+.section {
+  padding-bottom: 72px;
+}
+
 .resultsCreators {
   display: flex;
   flex-direction: column;

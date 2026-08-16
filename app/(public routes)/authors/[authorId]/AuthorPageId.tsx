@@ -8,7 +8,7 @@ import Pagination from '@/components/Pagination/Pagination';
 import Loader from '@/components/Loader/Loader';
 import { getArticlesByUser } from '@/lib/api/articles';
 import { getUserById } from '@/lib/api/users';
-import css from '../../(public routes)/articles/ArticlesPage.module.css';
+import css from '../../articles/ArticlesPage.module.css';
 import type { Author } from '@/types/articles';
 
 interface PageProps {

@@ -1,51 +1,245 @@
+.page {
+    padding-top: 16px;
+}
+
 .form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  max-width: 640px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    color: var(--black);
 }
 
-.uploadBtn {
-  align-self: flex-start;
-  padding: 10px 20px;
-  border-radius: 999px;
-  border: 1px solid var(--light-green);
-  background-color: var(--white);
-  color: var(--green);
-  cursor: pointer;
+.heading {
+    display: flex;
+    flex-direction: column;
 }
 
-.uploadBtn:hover {
-  border-color: var(--green);
+.title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.2;
 }
 
-.fileInput {
-  display: none;
+.fields {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+        'image'
+        'title'
+        'editor'
+        'submit';
+    gap: 12px;
+    width: 100%;
+}
+
+.titleField {
+    grid-area: title;
+    min-width: 0;
+}
+
+.fieldGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.imageGroup {
+    grid-area: image;
+}
+
+.editorGroup {
+    grid-area: editor;
+}
+
+.label {
+    font-size: 12px;
+    text-align: left;
+}
+
+.imageField {
+    overflow: hidden;
+    width: 100%;
+    height: 180px;
+    background-color: #b7b7b7;
+    border: 1px solid var(--light-gray);
+    border-radius: 8px;
+}
+
+.fieldError {
+    border-color: var(--red);
+}
+
+.selectImageButton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+    color: var(--black);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.cameraIcon {
+    width: 56px;
+    height: 48px;
+    fill: none;
+    stroke: currentColor;
+}
+
+.previewWrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 
 .preview {
-  width: 160px;
-  height: 160px;
-  object-fit: cover;
-  border-radius: 12px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.submitBtn {
-  align-self: flex-start;
-  padding: 12px 32px;
-  border-radius: 999px;
-  border: none;
-  background-color: var(--green);
-  color: var(--white);
-  cursor: pointer;
-  font-weight: 600;
+.removeImageButton {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    color: var(--black);
+    background-color: var(--white);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
-.submitBtn:hover {
-  background-color: var(--green-darker);
+.removeImageButton svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: currentColor;
 }
 
-.submitBtn:disabled {
-  opacity: 0.7;
-  cursor: default;
+.fileInput {
+    display: none;
 }
+
+.changeImageButton {
+    align-self: flex-start;
+    padding: 4px 0;
+    color: var(--green-darker);
+    font-weight: 700;
+    text-decoration: underline;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.error {
+    color: var(--red);
+    font-size: 12px;
+}
+
+.submitButton {
+    grid-area: submit;
+    width: 100%;
+    min-height: 40px;
+    padding: 8px 24px;
+    color: var(--white);
+    background-color: var(--green);
+    border: none;
+    border-radius: 64px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.submitButton:hover:not(:disabled),
+.submitButton:focus-visible:not(:disabled) {
+    background-color: var(--green-darker);
+}
+
+.submitButton:disabled {
+    cursor: not-allowed;
+    opacity: 0.3;
+}
+
+/* Adaptive mobile layout from 375px */
+@media screen and (min-width: 375px) {
+    .page {
+        padding-top: 20px;
+    }
+
+    .form {
+        gap: 20px;
+    }
+
+    .fields {
+        gap: 20px;
+    }
+
+    .imageField {
+        height: 190px;
+    }
+}
+
+/* Tablet */
+@media screen and (min-width: 768px) {
+    .page {
+        padding-top: 24px;
+    }
+
+    .form {
+        gap: 24px;
+    }
+    
+    .title {
+        font-size: 32px;
+    }
+
+    .fields {
+        grid-template-columns:
+            minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-areas:
+            'image title'
+            'editor editor'
+            'submit submit';
+        column-gap: 24px;
+        row-gap: 16px;
+        align-items: start;
+    }
+
+    .imageField {
+        height: 218px;
+    }
+}
+
+/* Desktop */
+@media screen and (min-width: 1440px) {
+    .page {
+        padding-top: 32px;
+    }
+
+    .fields {
+        grid-template-columns:
+            minmax(0, 2fr) minmax(320px, 1fr);
+        grid-template-areas:
+            'title image'
+            'editor image'
+            'submit .';
+        gap: 24px;
+    }
+
+    .imageField {
+        height: 280px;
+    }

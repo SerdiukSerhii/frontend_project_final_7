@@ -66,16 +66,7 @@ export const getRelatedArticles = async (
   return shuffled.slice(0, count);
 };
 
-export const createArticle = async (
-  formData: FormData,
-): Promise<Article> => {
-  const { data } = await api.post<CreateArticleResponse>(
-    '/articles',
-    formData,
-  );
 
-  return data.data;
-};
 
 interface AddToSavedResponse {
   status: number;

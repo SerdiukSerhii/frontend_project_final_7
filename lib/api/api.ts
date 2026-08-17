@@ -7,7 +7,7 @@ interface ApiErrorResponse {
 
 export type ApiError = AxiosError<ApiErrorResponse>;
 
-const baseURL = process.env.NEXT_PUBLIC_API_URL + '/api';
+const baseURL = process.env.NEXT_PUBLIC_FRONT_API_URL + '/api';
 
 export const nextServer = axios.create({
   baseURL: baseURL,

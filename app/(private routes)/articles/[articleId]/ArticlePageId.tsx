@@ -1,29 +1,27 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { useRef, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import toast from 'react-hot-toast';
-import DOMPurify from 'isomorphic-dompurify';
 
-import {
-  getArticleById,
-  getRelatedArticles,
-  addArticleToSaved,
-  removeArticleFromSaved,
-} from '@/lib/api/articles';
+import { getArticleById, getRelatedArticles } from '@/lib/api/articles';
+
 import { getCurrentUser } from '@/lib/api/auth';
 import { useAuthStore } from '@/lib/store/authStore';
+
 import Loader from '@/components/Loader/Loader';
-import ModalErrorSave from '@/components/ModalErrorSave/ModalErrorSave';
-import type { ApiError } from '@/lib/api/api';
+import ButtonAddToBookmarks from '@/components/ButtonAddToBookmarks/ButtonAddToBookmarks';
+
 import css from './ArticlePage.module.css';
 
 const formatDate = (dateStr: string) => {
   const date = new Date(dateStr);
-  if (Number.isNaN(date.getTime())) return dateStr;
+
+  if (Number.isNaN(date.getTime())) {
+    return dateStr;
+  }
 
   return date.toLocaleDateString('en-GB', {
     day: '2-digit',
@@ -32,32 +30,13 @@ const formatDate = (dateStr: string) => {
   });
 };
 
-const richTextPattern = /<(?:p|h2|ul|ol|blockquote)\b[^>]*>/i;
-
-const sanitizeArticleHtml = (content: string) =>
-  DOMPurify.sanitize(content, {
-    ALLOWED_TAGS: [
-      'p',
-      'br',
-      'h2',
-      'strong',
-      'em',
-      'ul',
-      'ol',
-      'li',
-      'blockquote',
-    ],
-    ALLOWED_ATTR: [],
-  });
-
 const ArticlePageId = () => {
   const { articleId } = useParams<{ articleId: string }>();
+
   const user = useAuthStore(state => state.user);
   const setUser = useAuthStore(state => state.setUser);
-  const isAuthenticated = Boolean(user);
 
-  const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
-  const isRequestInFlight = useRef(false);
+  const isAuthenticated = Boolean(user);
 
   useQuery({
     queryKey: ['currentUser'],
@@ -86,60 +65,6 @@ const ArticlePageId = () => {
     enabled: Boolean(articleId),
   });
 
-  const isSaved = Boolean(article && user?.savedArticles?.includes(article._id));
-
-  const handleSaveError = (error: ApiError) => {
-    const message = error.response?.data?.error ?? 'Something went wrong. Please try again.';
-    toast.error(message);
-  };
-
-  const { mutate: addMutate, isPending: isAdding } = useMutation({
-    mutationFn: () => addArticleToSaved(articleId),
-    onSuccess: response => {
-      if (user) {
-        setUser({ ...user, savedArticles: response.data });
-      }
-      toast.success('Article added to saved list');
-    },
-    onError: handleSaveError,
-    onSettled: () => {
-      isRequestInFlight.current = false;
-    },
-  });
-
-  const { mutate: removeMutate, isPending: isRemoving } = useMutation({
-    mutationFn: () => removeArticleFromSaved(articleId),
-    onSuccess: response => {
-      if (user) {
-        setUser({ ...user, savedArticles: response.data });
-      }
-      toast.success('Article removed from saved list');
-    },
-    onError: handleSaveError,
-    onSettled: () => {
-      isRequestInFlight.current = false;
-    },
-  });
-
-  const isSaving = isAdding || isRemoving;
-
-  const handleSaveClick = () => {
-    if (!isAuthenticated) {
-      setIsErrorModalOpen(true);
-      return;
-    }
-
-    if (isSaving || isRequestInFlight.current) return;
-
-    isRequestInFlight.current = true;
-
-    if (isSaved) {
-      removeMutate();
-    } else {
-      addMutate();
-    }
-  };
-
   if (isLoading) {
     return <Loader />;
   }
@@ -149,20 +74,11 @@ const ArticlePageId = () => {
   }
 
   const author = typeof article.ownerId === 'object' ? article.ownerId : null;
+
   const authorName = author?.name ?? 'Harmoniq Author';
   const authorId = author?._id;
 
-  const isRichTextArticle = richTextPattern.test(article.article);
-
-  const sanitizedArticleHtml = isRichTextArticle
-    ? sanitizeArticleHtml(article.article)
-    : '';
-
-  const descriptionParagraphs = isRichTextArticle
-    ? []
-    : article.article
-        .split('\n')
-        .filter(paragraph => paragraph.trim());
+  const descriptionParagraphs = article.article.split('\n').filter(Boolean);
 
   return (
     <section className="container">
@@ -181,21 +97,14 @@ const ArticlePageId = () => {
 
         <div className={css.layout}>
           <div className={css.content}>
-            {isRichTextArticle ? (
-              <div
-                className={css.richText}
-                dangerouslySetInnerHTML={{ __html: sanitizedArticleHtml }}
-              />
-            ) : (
-              descriptionParagraphs.map((paragraph, index) => (
-                <p
-                  key={index}
-                  className={css.paragraph}
-                >
-                  {paragraph}
-                </p>
-              ))
-            )}
+            {descriptionParagraphs.map((paragraph, index) => (
+              <p
+                key={index}
+                className={css.paragraph}
+              >
+                {paragraph}
+              </p>
+            ))}
           </div>
 
           <aside className={css.sidebar}>
@@ -231,6 +140,7 @@ const ArticlePageId = () => {
                       className={css.relatedItem}
                     >
                       <p className={css.relatedTitle}>{related.title}</p>
+
                       <p className={css.relatedAuthor}>{relatedAuthor}</p>
 
                       <Link
@@ -251,30 +161,13 @@ const ArticlePageId = () => {
               </ul>
             )}
 
-            <button
-              type="button"
-              className={`${css.saveBtn} ${isSaved ? css.saveBtnActive : ''}`}
-              onClick={handleSaveClick}
-              disabled={isSaving}
-            >
-              {isSaving ? (
-                'Saving...'
-              ) : (
-                <>
-                  {isSaved ? 'Saved' : 'Save'}
-                  <svg
-                    className={css.saveIcon}
-                    aria-hidden="true"
-                  >
-                    <use href="/icons/symbol-defs.svg#icon-save-bookmark" />
-                  </svg>
-                </>
-              )}
-            </button>
+            <ButtonAddToBookmarks
+              articleId={articleId}
+              className={css.saveBtn}
+              showText={true}
+            />
           </aside>
         </div>
-
-        {isErrorModalOpen && <ModalErrorSave onClose={() => setIsErrorModalOpen(false)} />}
       </div>
     </section>
   );

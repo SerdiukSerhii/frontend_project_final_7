@@ -1,46 +1,69 @@
 'use client';
 
 import { useState } from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
-import { addArticleToSaved, removeArticleFromSaved } from '@/lib/api/articles';
+
+import { addArticleToSaved, removeArticleFromSaved, getSavedArticles } from '@/lib/api/articles';
+
 import type { ApiError } from '@/lib/api/api';
 import { useAuthStore } from '@/lib/store/authStore';
 import ModalErrorSave from '@/components/ModalErrorSave/ModalErrorSave';
+
 import css from './ButtonAddToBookmarks.module.css';
 
 interface ButtonAddToBookmarksProps {
   articleId: string;
-  isSaved?: boolean;
 }
 
-const ButtonAddToBookmarks = ({ articleId, isSaved = false }: ButtonAddToBookmarksProps) => {
+const ButtonAddToBookmarks = ({ articleId }: ButtonAddToBookmarksProps) => {
   const user = useAuthStore(state => state.user);
-  const [saved, setSaved] = useState(isSaved);
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
+
   const queryClient = useQueryClient();
+
+  const { data: savedArticles = [] } = useQuery({
+    queryKey: ['savedArticles'],
+    queryFn: getSavedArticles,
+    enabled: Boolean(user),
+  });
+
+  const saved = savedArticles.some(article => article._id === articleId);
 
   const handleError = (error: ApiError) => {
     const message =
-      error.response?.data?.error ?? 'Something went wrong. Please try again.';
+      error.response?.data?.error ??
+      error.response?.data?.message ??
+      'Something went wrong. Please try again.';
+
     toast.error(message);
   };
 
   const { mutate: addMutate, isPending: isAdding } = useMutation({
     mutationFn: () => addArticleToSaved(articleId),
+
     onSuccess: () => {
-      setSaved(true);
-      queryClient.invalidateQueries({ queryKey: ['savedArticles'] });
+      queryClient.invalidateQueries({
+        queryKey: ['savedArticles'],
+      });
+
+      toast.success('Article saved');
     },
+
     onError: handleError,
   });
 
   const { mutate: removeMutate, isPending: isRemoving } = useMutation({
     mutationFn: () => removeArticleFromSaved(articleId),
+
     onSuccess: () => {
-      setSaved(false);
-      queryClient.invalidateQueries({ queryKey: ['savedArticles'] });
+      queryClient.invalidateQueries({
+        queryKey: ['savedArticles'],
+      });
+
+      toast.success('Article removed');
     },
+
     onError: handleError,
   });
 
@@ -54,7 +77,11 @@ const ButtonAddToBookmarks = ({ articleId, isSaved = false }: ButtonAddToBookmar
 
     if (isPending) return;
 
-    saved ? removeMutate() : addMutate();
+    if (saved) {
+      removeMutate();
+    } else {
+      addMutate();
+    }
   };
 
   return (
@@ -68,17 +95,21 @@ const ButtonAddToBookmarks = ({ articleId, isSaved = false }: ButtonAddToBookmar
         aria-label={saved ? 'Remove article from bookmarks' : 'Add article to bookmarks'}
       >
         {isPending ? (
-          <span className={css.spinner} aria-hidden="true" />
+          <span
+            className={css.spinner}
+            aria-hidden="true"
+          />
         ) : (
-          <svg className={css.icon} aria-hidden="true">
+          <svg
+            className={css.icon}
+            aria-hidden="true"
+          >
             <use href="/icons/symbol-defs.svg#icon-bookmark" />
           </svg>
         )}
       </button>
 
-      {isErrorModalOpen && (
-        <ModalErrorSave onClose={() => setIsErrorModalOpen(false)} />
-      )}
+      {isErrorModalOpen && <ModalErrorSave onClose={() => setIsErrorModalOpen(false)} />}
     </>
   );
 };

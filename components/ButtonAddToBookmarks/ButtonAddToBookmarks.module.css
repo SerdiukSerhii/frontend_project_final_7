@@ -5,13 +5,16 @@
   width: 40px;
   height: 40px;
   padding: 0;
-  border: 1px solid var(--light-green);
-  border-radius: 50%;
-  background-color: var(--white);
+  border: 1px solid var(--green-darker);
+  border-radius: 64px;
+  background-color: transparent;
   color: var(--green);
   cursor: pointer;
   flex-shrink: 0;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .button:hover {
@@ -27,7 +30,6 @@
 .saved {
   background-color: var(--green);
   border-color: var(--green);
-  color: var(--white);
 }
 
 .saved:hover {
@@ -44,9 +46,11 @@
 }
 
 .saved .icon {
-  fill: currentColor;
+  stroke: var(--white);
 }
-
+.saved .icon:hover {
+  stroke: var(--white);
+}
 .spinner {
   width: 16px;
   height: 16px;

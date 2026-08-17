@@ -1,4 +1,5 @@
 .article-container {
+  padding-top: 48px;
   padding-bottom: 48px;
   display: flex;
   flex-direction: column;
@@ -9,7 +10,7 @@
   font-weight: 700;
   font-size: 40px;
   color: #070721;
-  margin-top: 48px;
+  margin-top: 0;
   margin-bottom: 32px;
 }
 

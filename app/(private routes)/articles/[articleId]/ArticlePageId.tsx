@@ -1,8 +1,8 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useQuery, useMutation } from '@tanstack/react-query';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
@@ -13,6 +13,7 @@ import {
   addArticleToSaved,
   removeArticleFromSaved,
 } from '@/lib/api/articles';
+import { getCurrentUser } from '@/lib/api/auth';
 import { useAuthStore } from '@/lib/store/authStore';
 import Loader from '@/components/Loader/Loader';
 import ModalErrorSave from '@/components/ModalErrorSave/ModalErrorSave';
@@ -30,13 +31,25 @@ const formatDate = (dateStr: string) => {
   });
 };
 
-const ArticlePage = () => {
+const ArticlePageId = () => {
   const { articleId } = useParams<{ articleId: string }>();
   const user = useAuthStore(state => state.user);
+  const setUser = useAuthStore(state => state.setUser);
   const isAuthenticated = Boolean(user);
-  const queryClient = useQueryClient();
 
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
+  const isRequestInFlight = useRef(false);
+
+  useQuery({
+    queryKey: ['currentUser'],
+    queryFn: async () => {
+      const freshUser = await getCurrentUser();
+      setUser(freshUser);
+      return freshUser;
+    },
+    enabled: isAuthenticated,
+    staleTime: 0,
+  });
 
   const {
     data: article,
@@ -63,20 +76,30 @@ const ArticlePage = () => {
 
   const { mutate: addMutate, isPending: isAdding } = useMutation({
     mutationFn: () => addArticleToSaved(articleId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['savedArticles'] });
+    onSuccess: response => {
+      if (user) {
+        setUser({ ...user, savedArticles: response.data });
+      }
       toast.success('Article added to saved list');
     },
     onError: handleSaveError,
+    onSettled: () => {
+      isRequestInFlight.current = false;
+    },
   });
 
   const { mutate: removeMutate, isPending: isRemoving } = useMutation({
     mutationFn: () => removeArticleFromSaved(articleId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['savedArticles'] });
+    onSuccess: response => {
+      if (user) {
+        setUser({ ...user, savedArticles: response.data });
+      }
       toast.success('Article removed from saved list');
     },
     onError: handleSaveError,
+    onSettled: () => {
+      isRequestInFlight.current = false;
+    },
   });
 
   const isSaving = isAdding || isRemoving;
@@ -87,7 +110,9 @@ const ArticlePage = () => {
       return;
     }
 
-    if (isSaving) return;
+    if (isSaving || isRequestInFlight.current) return;
+
+    isRequestInFlight.current = true;
 
     if (isSaved) {
       removeMutate();
@@ -219,4 +244,4 @@ const ArticlePage = () => {
   );
 };
 
-export default ArticlePage;
+export default ArticlePageId;

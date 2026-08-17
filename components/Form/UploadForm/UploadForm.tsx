@@ -39,6 +39,15 @@ const UploadForm = () => {
     }
   };
 
+  const handleClose = () => {
+    if (selectedFile) {
+      handleReset();
+      return;
+    }
+
+    router.push('/');
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -84,8 +93,8 @@ const UploadForm = () => {
       <button
         type="button"
         className={css.cornerBtn}
-        onClick={handleReset}
-        aria-label="Reset"
+        onClick={handleClose}
+        aria-label={selectedFile ? 'Clear selected photo' : 'Skip photo upload'}
       >
         <svg className={css.cornerIcon}>
           <use href="/icons/symbol-defs.svg#icon-close-small" />

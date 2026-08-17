@@ -112,7 +112,7 @@ export const getSavedArticles = async (): Promise<Article[]> => {
 };
 
 export const updateArticle = async (articleId: string, formData: FormData): Promise<Article> => {
-  const { data } = await api.patch<CreateArticleResponse>(`/articles/${articleId}`, formData);
+  const { data } = await nextServer.patch<CreateArticleResponse>(`/articles/${articleId}`, formData);
 
   return data.data;
 };

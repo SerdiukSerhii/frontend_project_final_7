@@ -62,10 +62,6 @@ const AddArticleForm = () => {
 
         return (
           <Form className={css.form}>
-            <div className={css.heading}>
-              <h1 className={css.title}>Create an article</h1>
-            </div>
-
             <div className={css.fields}>
               <div className={css.titleField}>
                 <FormField

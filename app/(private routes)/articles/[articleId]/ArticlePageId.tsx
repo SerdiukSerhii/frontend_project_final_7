@@ -6,6 +6,7 @@ import { useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
+import DOMPurify from 'isomorphic-dompurify';
 
 import {
   getArticleById,
@@ -30,6 +31,24 @@ const formatDate = (dateStr: string) => {
     year: 'numeric',
   });
 };
+
+const richTextPattern = /<(?:p|h2|ul|ol|blockquote)\b[^>]*>/i;
+
+const sanitizeArticleHtml = (content: string) =>
+  DOMPurify.sanitize(content, {
+    ALLOWED_TAGS: [
+      'p',
+      'br',
+      'h2',
+      'strong',
+      'em',
+      'ul',
+      'ol',
+      'li',
+      'blockquote',
+    ],
+    ALLOWED_ATTR: [],
+  });
 
 const ArticlePageId = () => {
   const { articleId } = useParams<{ articleId: string }>();
@@ -133,7 +152,17 @@ const ArticlePageId = () => {
   const authorName = author?.name ?? 'Harmoniq Author';
   const authorId = author?._id;
 
-  const descriptionParagraphs = article.article.split('\n').filter(Boolean);
+  const isRichTextArticle = richTextPattern.test(article.article);
+
+  const sanitizedArticleHtml = isRichTextArticle
+    ? sanitizeArticleHtml(article.article)
+    : '';
+
+  const descriptionParagraphs = isRichTextArticle
+    ? []
+    : article.article
+        .split('\n')
+        .filter(paragraph => paragraph.trim());
 
   return (
     <section className="container">
@@ -152,14 +181,21 @@ const ArticlePageId = () => {
 
         <div className={css.layout}>
           <div className={css.content}>
-            {descriptionParagraphs.map((paragraph, index) => (
-              <p
-                key={index}
-                className={css.paragraph}
-              >
-                {paragraph}
-              </p>
-            ))}
+            {isRichTextArticle ? (
+              <div
+                className={css.richText}
+                dangerouslySetInnerHTML={{ __html: sanitizedArticleHtml }}
+              />
+            ) : (
+              descriptionParagraphs.map((paragraph, index) => (
+                <p
+                  key={index}
+                  className={css.paragraph}
+                >
+                  {paragraph}
+                </p>
+              ))
+            )}
           </div>
 
           <aside className={css.sidebar}>

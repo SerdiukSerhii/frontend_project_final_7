@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 const privateRoutes = [
   '/profile',
-  '/articles/new',
+  '/articles/edit',
 ];
 
 const publicRoutes = [
@@ -97,7 +97,7 @@ export async function proxy(request: NextRequest) {
 export const config = {
   matcher: [
     '/profile/:path*',
-    '/articles/new/:path*',
+    '/articles/edit/:path*',
     '/articles/:articleId/edit/:path*',
     '/login',
     '/register',

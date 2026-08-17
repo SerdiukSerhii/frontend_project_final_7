@@ -51,13 +51,12 @@
 | **Server State**      | TanStack Query                |
 | **State Management**  | Zustand                       |
 | **HTTP**              | Axios, REST API               |
-| **Backend**           | Yup                           |
-| **Server State**      | Node.js, Express.js           |
+| **Backend**           | Node.js, Express.js           |
 | **Database**          | MongoDB, Mongoose             |
 | **Authentication**    | Sessions, Cookies, bcrypt     |
 | **Validation**        | Joi, Celebrate                |
-| **File Upload**       | Toast notifications           |
-| **API Documentation** | Multer                        |
+| **File Upload**       | Multer                        |
+| **API Documentation** | Swagger / OpenAPI             |
 | **Code Quality**      | Prettier                      |
 | **Deployment**        | Vercel / Render               |
 

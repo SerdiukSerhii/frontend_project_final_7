@@ -6,18 +6,6 @@
   color: var(--black);
 }
 
-.heading {
-  display: flex;
-  flex-direction: column;
-}
-
-.title {
-  margin: 0;
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 1.2;
-}
-
 .fields {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -197,10 +185,6 @@
 
   .form {
     gap: 24px;
-  }
-
-  .title {
-    font-size: 32px;
   }
 
   .fields {

@@ -1,0 +1,13 @@
+.page {
+    padding: 48px 0;
+}
+
+.title {
+    font-family: var(--font-family);
+    font-size: 40px;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0;
+    color:  #000;
+    margin-bottom: 16px;
+}

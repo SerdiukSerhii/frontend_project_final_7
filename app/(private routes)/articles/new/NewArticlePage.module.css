@@ -1,29 +1,15 @@
 .page {
-    padding-top: 16px;
-}
-
-@media screen and (min-width: 375px) {
-    .page {
-        padding-top: 20px;
-    }
-}
-
-@media screen and (min-width: 768px) {
-    .page {
-        padding-top: 24px;
-    }
+  padding: 48px 0;
 }
 
 @media screen and (min-width: 1440px) {
-    .page {
-        padding-top: 32px;
-    }
-.container {
-  padding: 40px 0;
-}
+  .container {
+    padding: 40px 0;
+  }
 
-.title {
-  margin-bottom: 24px;
-  font-size: 32px;
-  font-weight: 700;
+  .title {
+    margin-bottom: 24px;
+    font-size: 32px;
+    font-weight: 700;
+  }
 }

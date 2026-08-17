@@ -8,11 +8,19 @@
   justify-content: space-between;
   align-items: center;
   gap: 16px;
+
+  text-decoration: none;
+  transition: transform 0.2s ease;
 }
 @media screen and (min-width: 768px) {
   .cardAuthors {
     max-width: 184px;
   }
+}
+
+.cardAuthors:hover,
+.cardAuthors:focus-visible {
+  transform: translateY(-2px);
 }
 
 .imageCardAuthors,
@@ -40,12 +48,21 @@
 
 .avatarAuthors {
   object-fit: cover;
+  transition: transform 0.3s ease;
 }
 
 .avatarIcon {
   width: 71px;
   height: 60px;
   display: block;
+  transition: transform 0.3s ease;
+}
+
+.cardAuthors:hover .avatarAuthors,
+.cardAuthors:focus-visible .avatarAuthors,
+.cardAuthors:hover .avatarIcon,
+.cardAuthors:focus-visible .avatarIcon {
+  transform: scale(1.05);
 }
 
 .nameAuthors {

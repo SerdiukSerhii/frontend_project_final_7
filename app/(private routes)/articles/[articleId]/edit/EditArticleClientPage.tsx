@@ -6,7 +6,7 @@ import { useAuthStore } from '@/lib/store/authStore';
 import { useArticleStore } from '@/lib/store/articleStore';
 import { getArticleById } from '@/lib/api/articles';
 import AddArticleForm from '@/components/Form/AddArticleForm/AddArticleForm';
-import css from '../../new/NewArticlePage.module.css';
+import css from './EditArticlePage.module.css';
 
 interface EditArticleClientPageProps {
   articleId: string;
@@ -36,6 +36,18 @@ export default function EditArticleClientPage({ articleId }: EditArticleClientPa
       try {
         setIsLoading(true);
         const data = await getArticleById(articleId);
+
+        // Перевірка авторства: порівнюємо ID користувача з автором статті
+        // (залежно від моделі поле може називатися data.owner, data.userId або data.author._id)
+        const articleOwnerId =
+          typeof data.ownerId === 'object' ? (data.ownerId as { _id?: string })?._id : data.ownerId;
+        const currentUserId = user?._id;
+
+        if (articleOwnerId && currentUserId && articleOwnerId !== currentUserId) {
+          setError('You do not have permission to edit this article.');
+          return;
+        }
+
         setEditingArticle(data);
       } catch {
         setError('Failed to load article details.');
@@ -44,12 +56,14 @@ export default function EditArticleClientPage({ articleId }: EditArticleClientPa
       }
     };
 
-    fetchArticle();
+    if (isAuthReady && user) {
+      fetchArticle();
+    }
 
     return () => {
       clearEditingArticle();
     };
-  }, [articleId, setEditingArticle, clearEditingArticle]);
+  }, [articleId, user, isAuthReady, setEditingArticle, clearEditingArticle]);
 
   if (!isAuthReady || !user || isLoading) {
     return <div className="container">Loading...</div>;
@@ -60,8 +74,8 @@ export default function EditArticleClientPage({ articleId }: EditArticleClientPa
   }
 
   return (
-    <section className="container">
-      <div className={css.container}>
+    <section className={css.page}>
+      <div className="container">
         <h1 className={css.title}>Edit article</h1>
         <AddArticleForm />
       </div>

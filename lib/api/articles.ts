@@ -110,3 +110,9 @@ export const getSavedArticles = async (): Promise<Article[]> => {
 
   return response.data ?? [];
 };
+
+export const updateArticle = async (articleId: string, formData: FormData): Promise<Article> => {
+  const { data } = await api.patch<CreateArticleResponse>(`/articles/${articleId}`, formData);
+
+  return data.data;
+};

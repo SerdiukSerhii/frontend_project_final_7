@@ -30,10 +30,12 @@
 .saved {
   background-color: var(--green);
   border-color: var(--green);
+  color: var(--white);
 }
 
 .saved:hover {
   background-color: var(--green-darker);
+  color: var(--white);
 }
 
 .icon {
@@ -47,6 +49,7 @@
 
 .saved .icon {
   stroke: var(--white);
+  color: var(--white);
 }
 .saved .icon:hover {
   stroke: var(--white);

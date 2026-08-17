@@ -1,0 +1,42 @@
+.authorSection {
+  padding: 46px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.authorProfileHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.avatar {
+  width: 124px;
+  height: 124px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+@media screen and (min-width: 768px) {
+  .avatar {
+    width: 137px;
+    height: 137px;
+  }
+}
+
+.authorInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.authorName {
+  font-weight: 700;
+  font-size: 32px;
+}
+
+.countText {
+  font-weight: 700;
+  font-size: 18px;
+}

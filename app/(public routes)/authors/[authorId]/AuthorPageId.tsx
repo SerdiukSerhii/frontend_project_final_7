@@ -1,6 +1,6 @@
 'use client';
 
-import { use, useState, useEffect, useRef } from 'react';
+import { use, useState, useEffect } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import ArticlesList from '@/components/ArticlesList/ArticlesList';
@@ -8,8 +8,9 @@ import Pagination from '@/components/Pagination/Pagination';
 import Loader from '@/components/Loader/Loader';
 import { getArticlesByUser } from '@/lib/api/articles';
 import { getUserById } from '@/lib/api/users';
-import css from '../../articles/ArticlesPage.module.css';
+import css from './AuthorPageId.module.css';
 import type { Author } from '@/types/articles';
+import Image from 'next/image';
 
 interface PageProps {
   params: Promise<{ authorId: string }>;
@@ -20,8 +21,6 @@ export default function AuthorArticlesPage({ params }: PageProps) {
 
   const [author, setAuthor] = useState<Author | null>(null);
   const [isAuthorLoading, setIsAuthorLoading] = useState(true);
-
-  const listTopRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     async function fetchAuthor() {
@@ -66,19 +65,13 @@ export default function AuthorArticlesPage({ params }: PageProps) {
 
   const totalCount = firstPage?.data.totalItems ?? articles.length;
 
-  const handleLoadMore = async () => {
-    const result = await fetchNextPage();
-
-    if (result.isSuccess && listTopRef.current) {
-      listTopRef.current.scrollIntoView({
-        behavior: 'smooth',
-      });
-    }
+  const handleLoadMore = () => {
+    fetchNextPage();
   };
 
   if (isLoading || isAuthorLoading) {
     return (
-      <div className={css.container}>
+      <div className="container">
         <Loader />
       </div>
     );
@@ -87,38 +80,36 @@ export default function AuthorArticlesPage({ params }: PageProps) {
   const avatarSrc = author?.avatarUrl || '/default-avatar.png';
 
   return (
-    <div
-      className={css.container}
-      ref={listTopRef}
-    >
-      {author && (
-        <div className={css.authorProfileHeader}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={avatarSrc}
-            alt=""
-            className={css.authorAvatar}
-          />
+    <section className={css.authorSection}>
+      <div className="container">
+        {author && (
+          <div className={css.authorProfileHeader}>
+            <Image
+              src={avatarSrc}
+              alt={author.name}
+              width={137}
+              height={137}
+              className={css.avatar}
+              priority
+            />
 
-          <div className={css.authorMeta}>
-            <h2 className={css.authorName}>{author.name}</h2>
-
-            <span className={css.countText}>{totalCount} articles</span>
+            <div className={css.authorInfo}>
+              <h2 className={css.authorName}>{author.name}</h2>
+              <p className={css.countText}>{totalCount} articles</p>
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      <ArticlesList articles={articles} />
+        <ArticlesList articles={articles} />
 
-      {isFetchingNextPage && <Loader />}
-
-      {hasNextPage && !isFetchingNextPage && (
-        <Pagination
-          hasMore={hasNextPage}
-          isLoading={isFetchingNextPage}
-          onLoadMore={handleLoadMore}
-        />
-      )}
-    </div>
+        {hasNextPage && (
+          <Pagination
+            hasMore={hasNextPage}
+            isLoading={isFetchingNextPage}
+            onLoadMore={handleLoadMore}
+          />
+        )}
+      </div>
+    </section>
   );
 }

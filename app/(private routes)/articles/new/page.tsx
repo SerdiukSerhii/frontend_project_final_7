@@ -9,11 +9,12 @@ export const metadata: Metadata = {
 
 const NewArticlePage = () => {
   return (
-    <section className={`container ${css.page}`}>
-      <AddArticleForm />
+    <section className="container">
+      <div className={css.page}>
+        <AddArticleForm />
+      </div>
     </section>
   );
 };
 
 export default NewArticlePage;
-

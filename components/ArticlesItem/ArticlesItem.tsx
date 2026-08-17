@@ -9,15 +9,11 @@ interface ArticlesItemProps {
   isOwner?: boolean;
 }
 
-export default function ArticlesItem({
-  article,
-  isOwner = false,
-}: ArticlesItemProps) {
+export default function ArticlesItem({ article, isOwner = false }: ArticlesItemProps) {
   const { _id, title, desc, img, ownerId } = article;
 
   const authorName =
     typeof ownerId === 'object' && ownerId !== null ? ownerId.name : 'Harmoniq Author';
-
   return (
     <li className={css.item}>
       <article className={css.card}>
@@ -73,10 +69,7 @@ export default function ArticlesItem({
               </svg>
             </Link>
           ) : (
-            <ButtonAddToBookmarks
-              articleId={_id}
-              isSaved={article.isSaved}
-            />
+            <ButtonAddToBookmarks articleId={_id} />
           )}
         </div>
       </article>

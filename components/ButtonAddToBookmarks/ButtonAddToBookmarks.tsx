@@ -14,9 +14,11 @@ import css from './ButtonAddToBookmarks.module.css';
 
 interface ButtonAddToBookmarksProps {
   articleId: string;
+  className?: string;
+  showText?: boolean;
 }
 
-const ButtonAddToBookmarks = ({ articleId }: ButtonAddToBookmarksProps) => {
+const ButtonAddToBookmarks = ({ articleId, className, showText }: ButtonAddToBookmarksProps) => {
   const user = useAuthStore(state => state.user);
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
 
@@ -88,7 +90,7 @@ const ButtonAddToBookmarks = ({ articleId }: ButtonAddToBookmarksProps) => {
     <>
       <button
         type="button"
-        className={`${css.button} ${saved ? css.saved : ''}`}
+        className={`${css.button} ${saved ? css.saved : ''} ${className ?? ''}`}
         onClick={handleClick}
         disabled={isPending}
         aria-pressed={saved}
@@ -100,12 +102,15 @@ const ButtonAddToBookmarks = ({ articleId }: ButtonAddToBookmarksProps) => {
             aria-hidden="true"
           />
         ) : (
-          <svg
-            className={css.icon}
-            aria-hidden="true"
-          >
-            <use href="/icons/symbol-defs.svg#icon-bookmark" />
-          </svg>
+          <>
+            {showText && <span>Save</span>}
+            <svg
+              className={css.icon}
+              aria-hidden="true"
+            >
+              <use href="/icons/symbol-defs.svg#icon-bookmark" />
+            </svg>
+          </>
         )}
       </button>
 

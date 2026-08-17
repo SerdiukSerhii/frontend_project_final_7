@@ -2,7 +2,7 @@ import Hero from '@/components/Hero/Hero';
 import AboutUs from '@/components/About/AboutUs';
 import PopularArticles from '@/components/PopularArticles/PopularArticles';
 import Creators from '@/components/Creators/Creators';
-import { getArticles } from '@/lib/api/articles';
+import { getArticlesServer } from '@/lib/api/serverApi';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 const HomePage = async () => {
-  const { articles } = await getArticles({
+  const { articles } = await getArticlesServer({
     page: 1,
     perPage: 12,
     category: 'popular',

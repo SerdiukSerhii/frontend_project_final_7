@@ -9,7 +9,7 @@ export type ApiError = AxiosError<ApiErrorResponse>;
 
 const baseURL = process.env.NEXT_PUBLIC_FRONT_API_URL + '/api';
 
-export const nextServer = axios.create({
+export const api = axios.create({
   baseURL: baseURL,
   withCredentials: true, 
 });

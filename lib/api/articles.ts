@@ -1,4 +1,4 @@
-import { nextServer } from './api';
+import { api } from './api';
 
 import type {
   Article,
@@ -11,7 +11,7 @@ import type {
 import type { CreateArticleResponse } from '@/types/createArticle';
 
 export const getArticles = async (params?: GetArticlesParams): Promise<GetArticlesResponse> => {
-  const { data } = await nextServer.get<GetArticlesResponse>('/articles', {
+  const { data } = await api.get<GetArticlesResponse>('/articles', {
     params: {
       page: params?.page || 1,
       perPage: params?.perPage,
@@ -23,7 +23,7 @@ export const getArticles = async (params?: GetArticlesParams): Promise<GetArticl
 };
 
 export const fetchArticles = async (page: number = 1): Promise<GetArticlesResponse> => {
-  const response = await nextServer.get<GetArticlesResponse>('/articles', {
+  const response = await api.get<GetArticlesResponse>('/articles', {
     params: {
       page,
     },
@@ -39,7 +39,7 @@ interface GetArticleByIdResponse {
 }
 
 export const getArticleById = async (articleId: string): Promise<Article> => {
-  const { data } = await nextServer.get<GetArticleByIdResponse>(`/articles/${articleId}`);
+  const { data } = await api.get<GetArticleByIdResponse>(`/articles/${articleId}`);
 
   return data.data;
 };
@@ -63,13 +63,13 @@ interface AddToSavedResponse {
 }
 
 export const addArticleToSaved = async (articleId: string) => {
-  const { data } = await nextServer.post<AddToSavedResponse>(`/users/saved-articles/${articleId}`);
+  const { data } = await api.post<AddToSavedResponse>(`/users/saved-articles/${articleId}`);
 
   return data;
 };
 
 export const removeArticleFromSaved = async (articleId: string) => {
-  const { data } = await nextServer.delete<AddToSavedResponse>(`/users/saved-articles/${articleId}`);
+  const { data } = await api.delete<AddToSavedResponse>(`/users/saved-articles/${articleId}`);
 
   return data;
 };
@@ -77,7 +77,7 @@ export const getArticlesByUser = async (
   userId: string,
   params?: GetArticlesParams
 ): Promise<ArticlesByUserResponse> => {
-  const { data } = await nextServer.get<ArticlesByUserResponse>(`/articles/user/${userId}`, {
+  const { data } = await api.get<ArticlesByUserResponse>(`/articles/user/${userId}`, {
     params: {
       page: params?.page || 1,
       perPage: params?.perPage,
@@ -88,7 +88,7 @@ export const getArticlesByUser = async (
 };
 
 export const createArticle = async (formData: FormData): Promise<Article> => {
-  const { data } = await nextServer.post<CreateArticleResponse>('/articles', formData);
+  const { data } = await api.post<CreateArticleResponse>('/articles', formData);
 
   return data.data;
 };
@@ -98,7 +98,7 @@ export const getUserArticles = async (
   page = 1,
   limit = 12
 ): Promise<GetUserArticlesResponse> => {
-  const { data } = await nextServer.get<GetUserArticlesResponse>(`/articles/user/${userId}`, {
+  const { data } = await api.get<GetUserArticlesResponse>(`/articles/user/${userId}`, {
     params: { page, limit },
   });
 
@@ -106,13 +106,13 @@ export const getUserArticles = async (
 };
 
 export const getSavedArticles = async (): Promise<Article[]> => {
-  const { data: response } = await nextServer.get<GetSavedArticlesResponse>('/users/saved-articles');
+  const { data: response } = await api.get<GetSavedArticlesResponse>('/users/saved-articles');
 
   return response.data ?? [];
 };
 
 export const updateArticle = async (articleId: string, formData: FormData): Promise<Article> => {
-  const { data } = await nextServer.patch<CreateArticleResponse>(`/articles/${articleId}`, formData);
+  const { data } = await api.patch<CreateArticleResponse>(`/articles/${articleId}`, formData);
 
   return data.data;
 };

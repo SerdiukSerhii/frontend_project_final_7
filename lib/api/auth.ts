@@ -1,5 +1,5 @@
 import type { User } from '@/types/user';
-import { nextServer } from './api';
+import { api } from './api';
 
 export interface RegisterRequest {
   name: string;
@@ -10,7 +10,7 @@ export interface RegisterRequest {
 export async function register(
   userData: RegisterRequest
 ): Promise<User> {
-  const { data } = await nextServer.post<User>(
+  const { data } = await api.post<User>(
     '/auth/register',
     userData
   );
@@ -26,7 +26,7 @@ export interface LoginRequest {
 export async function login(
   userData: LoginRequest
 ): Promise<User> {
-  const { data } = await nextServer.post<User>(
+  const { data } = await api.post<User>(
     '/auth/login',
     userData
   );
@@ -35,15 +35,15 @@ export async function login(
 }
 
 export async function getCurrentUser(): Promise<User> {
-  const { data } = await nextServer.get<User>('/users/me');
+  const { data } = await api.get<User>('/users/me');
 
   return data;
 }
 
 export async function refreshSession(): Promise<void> {
-  await nextServer.post('/auth/refresh');
+  await api.post('/auth/refresh');
 }
 
 export async function logout(): Promise<void> {
-  await nextServer.post('/auth/logout');
+  await api.post('/auth/logout');
 }

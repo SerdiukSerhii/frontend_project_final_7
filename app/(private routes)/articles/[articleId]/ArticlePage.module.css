@@ -58,6 +58,67 @@
   margin: 0;
 }
 
+.richText {
+  width: 100%;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.55;
+  color: #070721;
+}
+
+.richText p {
+  margin: 0 0 8px;
+}
+
+.richText p:last-child {
+  margin-bottom: 0;
+}
+
+.richText h2 {
+  margin: 24px 0 12px;
+  font-size: 24px;
+  line-height: 1.3;
+  font-weight: 700;
+}
+
+.richText h2:first-child {
+  margin-top: 0;
+}
+
+.richText ul,
+.richText ol {
+  margin: 0 0 16px;
+  padding-left: 24px;
+}
+
+.richText ul {
+  list-style: disc;
+}
+
+.richText ol {
+  list-style: decimal;
+}
+
+.richText li {
+  display: list-item;
+  margin-bottom: 4px;
+}
+
+.richText blockquote {
+  margin: 16px 0;
+  padding-left: 16px;
+  border-left: 3px solid var(--green);
+}
+
+.richText strong {
+  font-weight: 700;
+}
+
+.richText em {
+  font-style: italic;
+}
+
 .sidebar {
   display: flex;
   flex-direction: column;
@@ -188,22 +249,44 @@
   height: 57px;
   padding: 16px;
   margin-top: 9px;
-  border: none;
-
   border: 1px solid var(--green-darker);
-
+  border-radius: 64px;
+  color: var(--green);
+  background-color: transparent;
   font-family: var(--font-family);
   font-size: 18px;
   font-weight: 700;
   cursor: pointer;
   transition:
     background-color 0.2s ease,
-    opacity 0.2s ease;
+    border-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .saveBtn:hover:not(:disabled) {
   border-color: var(--green);
   color: var(--green-darker);
+}
+
+.saved {
+  background-color: var(--green);
+  border-color: var(--green);
+  color: var(--white);
+}
+
+.saveBtn.saved:hover:not(:disabled) {
+  background-color: var(--green-darker);
+  border-color: var(--green-darker);
+  color: var(--white);
+}
+
+.saveIcon {
+  width: 14px;
+  height: 18px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: currentColor;
+  transition: stroke 0.2s ease;
 }
 
 .saveBtn:disabled {

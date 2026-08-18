@@ -69,7 +69,32 @@ export default function ArticlesItem({ article, isOwner = false }: ArticlesItemP
               </svg>
             </Link>
           ) : (
-            <ButtonAddToBookmarks articleId={_id} />
+            <ButtonAddToBookmarks articleId={article._id}>
+              {({ saved, isPending, onClick }) => (
+                <button
+                  type="button"
+                  className={`${css.button} ${saved ? css.saved : ''}`}
+                  onClick={onClick}
+                  disabled={isPending}
+                  aria-pressed={saved}
+                  aria-label={saved ? 'Remove article from bookmarks' : 'Add article to bookmarks'}
+                >
+                  {isPending ? (
+                    <span
+                      className={css.spinner}
+                      aria-hidden="true"
+                    />
+                  ) : (
+                    <svg
+                      className={css.icon}
+                      aria-hidden="true"
+                    >
+                      <use href="/icons/symbol-defs.svg#icon-bookmark" />
+                    </svg>
+                  )}
+                </button>
+              )}
+            </ButtonAddToBookmarks>
           )}
         </div>
       </article>

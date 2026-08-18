@@ -161,11 +161,24 @@ const ArticlePageId = () => {
               </ul>
             )}
 
-            <ButtonAddToBookmarks
-              articleId={articleId}
-              className={css.saveBtn}
-              showText={true}
-            />
+            <ButtonAddToBookmarks articleId={articleId}>
+              {({ saved, isPending, onClick }) => (
+                <button
+                  type="button"
+                  className={`${css.saveBtn} ${saved ? css.saved : ''}`}
+                  onClick={onClick}
+                  disabled={isPending}
+                >
+                  {isPending ? 'Saving...' : saved ? 'Saved' : 'Save'}
+                  <svg
+                    className={css.saveIcon}
+                    aria-hidden="true"
+                  >
+                    <use href="/icons/symbol-defs.svg#icon-bookmark" />
+                  </svg>
+                </button>
+              )}
+            </ButtonAddToBookmarks>
           </aside>
         </div>
       </div>

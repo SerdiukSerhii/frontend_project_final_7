@@ -14,11 +14,10 @@ import css from './ButtonAddToBookmarks.module.css';
 
 interface ButtonAddToBookmarksProps {
   articleId: string;
-  className?: string;
-  showText?: boolean;
+  children: (state: { saved: boolean; isPending: boolean; onClick: () => void }) => React.ReactNode;
 }
 
-const ButtonAddToBookmarks = ({ articleId, className, showText }: ButtonAddToBookmarksProps) => {
+const ButtonAddToBookmarks = ({ articleId, children }: ButtonAddToBookmarksProps) => {
   const user = useAuthStore(state => state.user);
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
 
@@ -88,31 +87,7 @@ const ButtonAddToBookmarks = ({ articleId, className, showText }: ButtonAddToBoo
 
   return (
     <>
-      <button
-        type="button"
-        className={`${css.button} ${saved ? css.saved : ''} ${className ?? ''}`}
-        onClick={handleClick}
-        disabled={isPending}
-        aria-pressed={saved}
-        aria-label={saved ? 'Remove article from bookmarks' : 'Add article to bookmarks'}
-      >
-        {isPending ? (
-          <span
-            className={css.spinner}
-            aria-hidden="true"
-          />
-        ) : (
-          <>
-            {showText && <span>Save</span>}
-            <svg
-              className={css.icon}
-              aria-hidden="true"
-            >
-              <use href="/icons/symbol-defs.svg#icon-bookmark" />
-            </svg>
-          </>
-        )}
-      </button>
+      {children({ saved, isPending, onClick: handleClick })}
 
       {isErrorModalOpen && <ModalErrorSave onClose={() => setIsErrorModalOpen(false)} />}
     </>

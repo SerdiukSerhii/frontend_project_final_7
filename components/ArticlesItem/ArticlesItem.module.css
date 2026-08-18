@@ -153,3 +153,70 @@
   height: 15px;
   display: block;
 }
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--green-darker);
+  border-radius: 64px;
+  background-color: transparent;
+  color: var(--green);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.button:hover {
+  border-color: var(--green);
+  color: var(--green-darker);
+}
+
+.button:disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+
+.saved {
+  background-color: var(--green);
+  border-color: var(--green);
+}
+
+.saved:hover {
+  background-color: var(--green-darker);
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  transition: fill 0.2s ease;
+}
+
+.saved .icon {
+  stroke: var(--white);
+}
+.saved .icon:hover {
+  stroke: var(--white);
+}
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

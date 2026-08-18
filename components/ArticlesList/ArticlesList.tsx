@@ -18,7 +18,7 @@ export default function ArticlesList({
   alertTitle = 'Nothing found.',
   alertDescription = 'Be the first, who create an article',
   alertButtonText = 'Create an article',
-  alertButtonLink = '/articles/create',
+  alertButtonLink = '/articles/new',
 }: ArticlesListProps) {
   if (!articles || articles.length === 0) {
     return (

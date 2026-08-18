@@ -3,27 +3,48 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 12px;
-  max-width: 320px;
+  gap: 20px;
+  width: 100%;
+  max-width: 362px;
+  padding: 56px 32px 32px;
+  margin: 0 auto;
+}
+@media screen and (min-width: 768px) {
+  .content {
+    max-width: 499px;
+    min-width: 499px;
+  }
 }
 
 .title {
-  margin: 0;
-  font-size: 24px;
   font-weight: 700;
-  color: #1f2d24; 
+  font-size: 32px;
+  text-align: center;
 }
 
 .text {
-  margin: 0;
-  font-size: 14px;
-  color: #4b5b50; 
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+}
+@media screen and (min-width: 768px) {
+  .text {
+    max-width: 300px;
+  }
 }
 
 .actions {
   display: flex;
+  flex-direction: column;
   gap: 12px;
-  margin-top: 12px;
+  width: 100%;
+}
+@media screen and (min-width: 768px) {
+  .actions {
+    flex-direction: row;
+    gap: 27px;
+  }
 }
 
 .loginBtn,
@@ -31,30 +52,39 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 24px;
-  border-radius: 999px;
-  font-weight: 600;
+  border-radius: 64px;
+  padding: 12px 16px;
+  height: 46px;
+  width: 100%;
+
+  font-weight: 700;
+  font-size: 16px;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .loginBtn {
-  border: 1px solid #1f2d24;
-  color: #1f2d24;
+  border: 1px solid var(--black);
   background-color: transparent;
 }
 
-.loginBtn:hover {
-  background-color: #f1f4f2;
+.loginBtn:hover:not(:disabled) {
+  background-color: var(--green);
+  border-color: var(--green);
+  color: var(--white);
 }
 
 .registerBtn {
-  border: 1px solid transparent;
-  color: #ffffff;
-  background-color: #6b8f76; 
+  border: 1px solid var(--green);
+  background: var(--green);
+  color: var(--white);
 }
 
-.registerBtn:hover {
-  background-color: #557a61;
+.registerBtn:hover:not(:disabled) {
+  background-color: var(--green-darker);
+  border-color: var(--green-darker);
 }

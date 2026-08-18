@@ -13,14 +13,10 @@
 
 .modal {
   background-color: var(--light-green);
-  /* padding: 24px; */
-  max-width: 362px;
-  width: 100%;
-  min-width: 320px;
-  padding: 0 ;
-  position: relative;
   border-radius: 32px;
-  /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); */
+  max-width: calc(100% - 32px);
+  width: fit-content;
+  position: relative;
 }
 
 .closeBtn {
@@ -33,41 +29,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 16px 0 0;
-  padding: 2px;
+  padding: 0;
+  margin: 0;
   border: none;
   background: transparent;
-  
   cursor: pointer;
 }
-
-.closeIcon {
-  display: block;
-
-  width: 20px;
-  height: 20px;
-
- 
-
-  fill: none;
-  stroke: var(--black);
-
-}
-
-
-
-/* Tablet */
-@media (min-width: 768px) {
-
-  .modal {
-    max-width: 420px;
-    width: 420px;
-    
-  }
-
-  .closeButton {
-    top: 16px;
+@media screen and (min-width: 768px) {
+  .closeBtn {
     right: 32px;
   }
-
+}
+.closeIcon {
+  display: block;
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: var(--black);
 }

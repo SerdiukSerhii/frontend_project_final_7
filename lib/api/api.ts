@@ -11,9 +11,8 @@ const baseURL = process.env.NEXT_PUBLIC_FRONT_API_URL + '/api';
 
 export const api = axios.create({
   baseURL: baseURL,
-  withCredentials: true, 
+  withCredentials: true,
 });
-
 
 // const localApiUrl = process.env.NEXT_PUBLIC_LOCAL_API_URL;
 // const renderApiUrl = process.env.NEXT_PUBLIC_RENDER_API_URL;

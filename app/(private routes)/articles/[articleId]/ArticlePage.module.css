@@ -189,9 +189,7 @@
   padding: 16px;
   margin-top: 9px;
   border: none;
-
   border: 1px solid var(--green-darker);
-
   font-family: var(--font-family);
   font-size: 18px;
   font-weight: 700;

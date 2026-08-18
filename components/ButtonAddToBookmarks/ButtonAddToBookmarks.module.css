@@ -33,9 +33,11 @@
   color: var(--white);
 }
 
-.saved:hover {
+.button.button.saved:hover:not(:disabled) {
   background-color: var(--green-darker);
+  border-color: var(--green-darker);
   color: var(--white);
+  stroke: currentColor;
 }
 
 .icon {
@@ -47,13 +49,6 @@
   transition: fill 0.2s ease;
 }
 
-.saved .icon {
-  stroke: var(--white);
-  color: var(--white);
-}
-.saved .icon:hover {
-  stroke: var(--white);
-}
 .spinner {
   width: 16px;
   height: 16px;

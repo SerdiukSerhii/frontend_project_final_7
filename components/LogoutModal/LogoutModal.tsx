@@ -11,64 +11,60 @@ import Modal from '../Modal/Modal';
 import css from './LogoutModal.module.css';
 
 interface LogoutModalProps {
-    onClose: () => void;
+  onClose: () => void;
 }
 
 const LogoutModal = ({ onClose }: LogoutModalProps) => {
-    const router = useRouter();
-    const clearUser = useAuthStore(state => state.clearUser);
+  const router = useRouter();
+  const clearUser = useAuthStore(state => state.clearUser);
 
-    const logoutMutation = useMutation({
-        mutationFn: logout,
+  const logoutMutation = useMutation({
+    mutationFn: logout,
 
-        onError: () => {
-            toast.error(
-                'Server logout failed, but you were logged out on this device.',
-            );
-        },
-            
-        onSettled: () => {
-            clearUser();
-            onClose();
-            router.replace('/');
-        },
-    });
+    onError: () => {
+      toast.error('Server logout failed, but you were logged out on this device.');
+    },
 
-    const handleLogout = () => {
-        logoutMutation.mutate();
-    };
+    onSettled: () => {
+      clearUser();
+      onClose();
+      router.replace('/');
+    },
+  });
 
-    return (
-        <Modal onClose={onClose}>
-            <div className={css.logoutModal}>
-                <h2 className={css.title}>Are you sure?</h2>
+  const handleLogout = () => {
+    logoutMutation.mutate();
+  };
 
-                <p className={css.text}>We will miss you!</p>
+  return (
+    <Modal onClose={onClose}>
+      <div className={css.content}>
+        <h2 className={css.title}>Are you sure?</h2>
 
-                <div className={css.actions}>
-                <button
-                    type="button"
-                    className={css.logoutButton}
-                    onClick={handleLogout}
-                    disabled={logoutMutation.isPending}
-                >
-                    {logoutMutation.isPending
-                    ? 'Logging out...'
-                    : 'Log out'}
-                </button>
+        <p className={css.text}>We will miss you!</p>
 
-                <button
-                    type="button"
-                    className={css.cancelButton}
-                    onClick={onClose}
-                    disabled={logoutMutation.isPending}
-                >
-                    Cancel
-                </button>
-                </div>
-            </div>
-        </Modal>
-    );
+        <div className={css.actions}>
+          <button
+            type="button"
+            className={css.logoutButton}
+            onClick={handleLogout}
+            disabled={logoutMutation.isPending}
+          >
+            {logoutMutation.isPending ? 'Logging out...' : 'Log out'}
+          </button>
+
+          <button
+            type="button"
+            className={css.cancelButton}
+            onClick={onClose}
+            disabled={logoutMutation.isPending}
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </Modal>
+  );
 };
 
 export default LogoutModal;

@@ -103,7 +103,7 @@ const ButtonAddToBookmarks = ({ articleId, className, showText }: ButtonAddToBoo
           />
         ) : (
           <>
-            {showText && <span>Save</span>}
+            {showText && <span>{saved ? 'Saved' : 'Save'}</span>}
             <svg
               className={css.icon}
               aria-hidden="true"

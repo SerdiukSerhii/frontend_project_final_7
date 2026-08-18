@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 
 import UserBar from '@/components/UserBar/UserBar';
 import { useAuthStore } from '@/lib/store/authStore';
+import LogoutModal from '@/components/LogoutModal/LogoutModal';
 
 import css from './Header.module.css';
 
@@ -18,7 +19,8 @@ const Header = () => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // const isAuthenticated = Boolean(user);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] =
+    useState(false);
 
   const isAuthenticated = isAuthReady && Boolean(user);
 
@@ -45,6 +47,15 @@ const Header = () => {
 
   const closeMenu = () => {
     setIsMenuOpen(false);
+  };
+
+  const openLogoutModal = () => {
+    closeMenu();
+    setIsLogoutModalOpen(true);
+  };
+
+  const closeLogoutModal = () => {
+    setIsLogoutModalOpen(false);
   };
 
   return (
@@ -146,6 +157,7 @@ const Header = () => {
                 <UserBar
                   name={user.name}
                   avatar={user.avatarUrl}
+                  onLogoutClick={openLogoutModal}
                 />
               </>
             ) : (
@@ -201,23 +213,6 @@ const Header = () => {
             aria-controls="header-mobile-menu"
             onClick={toggleMenu}
           >
-            {/* <svg
-              className={`${css.menuIcon} ${
-                isMenuOpen ? css.closeIcon : ''
-                }`
-              }
-              width="24"
-              height="24"
-              aria-hidden="true"
-            >
-              <use
-                href={
-                  isMenuOpen
-                    ? '/icons/symbol-defs.svg#icon-close'
-                    : '/icons/symbol-defs.svg#icon-burger-menu'
-                }
-              />
-            </svg> */}
             <svg
               className={css.menuIcon}
               width="24"
@@ -330,6 +325,7 @@ const Header = () => {
                   <UserBar
                     name={user.name}
                     avatar={user.avatarUrl}
+                    onLogoutClick={openLogoutModal}
                   />
                 </div>
               </>
@@ -355,6 +351,9 @@ const Header = () => {
             )}
           </nav>
         </div>
+      )}
+      {isLogoutModalOpen && (
+        <LogoutModal onClose={closeLogoutModal} />
       )}
     </header>
   );

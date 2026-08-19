@@ -14,12 +14,15 @@
 
 .imageWrapper {
   width: 100%;
-  height: 280px;
-  background-image: url('/hero-bg.png');
+  max-width: 361px;
+  height: 321px;
+  background-image: image-set(
+    url('/hero/hero-bg-mob.webp') 1x,
+    url('/hero/hero-bg-mob-@2x.webp') 2x
+  );
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   background-position: center;
-  border-radius: 32px;
 }
 
 .textContent {

@@ -10,22 +10,21 @@ const Hero = () => {
             className={css.imageWrapper}
             aria-hidden="true"
           />
+        </div>
+        <div className={css.textContent}>
+          <h1 className={css.title}>
+            Find your <span className={css.harmony}>harmony</span> in community
+          </h1>
 
-          <div className={css.textContent}>
-            <h1 className={css.title}>
-              Find your <span className={css.harmony}>harmony</span> in community
-            </h1>
+          <div className={css.actions}>
+            <a
+              href="#popular-articles"
+              className={css.btnPrimary}
+            >
+              Go to Articles
+            </a>
 
-            <div className={css.actions}>
-              <a
-                href="#popular-articles"
-                className={css.btnPrimary}
-              >
-                Go to Articles
-              </a>
-
-              <RegisterButton className={css.btnSecondary} />
-            </div>
+            <RegisterButton className={css.btnSecondary} />
           </div>
         </div>
       </div>

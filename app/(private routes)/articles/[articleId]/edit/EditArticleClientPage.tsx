@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+
 import { useAuthStore } from '@/lib/store/authStore';
 import { useArticleStore } from '@/lib/store/articleStore';
 import { getArticleById } from '@/lib/api/articles';
 import AddArticleForm from '@/components/Form/AddArticleForm/AddArticleForm';
+
 import css from './EditArticlePage.module.css';
 
 interface EditArticleClientPageProps {
@@ -14,9 +16,11 @@ interface EditArticleClientPageProps {
 
 export default function EditArticleClientPage({ articleId }: EditArticleClientPageProps) {
   const router = useRouter();
+
   const user = useAuthStore(state => state.user);
   const isAuthReady = useAuthStore(state => state.isAuthReady);
 
+  const editingArticle = useArticleStore(state => state.editingArticle);
   const setEditingArticle = useArticleStore(state => state.setEditingArticle);
   const clearEditingArticle = useArticleStore(state => state.clearEditingArticle);
 
@@ -30,37 +34,49 @@ export default function EditArticleClientPage({ articleId }: EditArticleClientPa
   }, [isAuthReady, user, router]);
 
   useEffect(() => {
-    if (!articleId) return;
+    if (!articleId || !isAuthReady || !user) {
+      return;
+    }
+
+    let isCancelled = false;
 
     const fetchArticle = async () => {
+      clearEditingArticle();
+      setIsLoading(true);
+      setError(null);
+
       try {
-        setIsLoading(true);
         const data = await getArticleById(articleId);
 
-        // Перевірка авторства: порівнюємо ID користувача з автором статті
-        // (залежно від моделі поле може називатися data.owner, data.userId або data.author._id)
-        const articleOwnerId =
-          typeof data.ownerId === 'object' ? (data.ownerId as { _id?: string })?._id : data.ownerId;
-        const currentUserId = user?._id;
+        if (isCancelled) {
+          return;
+        }
 
-        if (articleOwnerId && currentUserId && articleOwnerId !== currentUserId) {
+        const articleOwnerId = typeof data.ownerId === 'object' ? data.ownerId._id : data.ownerId;
+
+        const isOwner = data.isOwner === true || articleOwnerId === user._id;
+
+        if (!isOwner) {
           setError('You do not have permission to edit this article.');
           return;
         }
 
         setEditingArticle(data);
       } catch {
-        setError('Failed to load article details.');
+        if (!isCancelled) {
+          setError('Failed to load article details.');
+        }
       } finally {
-        setIsLoading(false);
+        if (!isCancelled) {
+          setIsLoading(false);
+        }
       }
     };
 
-    if (isAuthReady && user) {
-      fetchArticle();
-    }
+    void fetchArticle();
 
     return () => {
+      isCancelled = true;
       clearEditingArticle();
     };
   }, [articleId, user, isAuthReady, setEditingArticle, clearEditingArticle]);
@@ -71,6 +87,10 @@ export default function EditArticleClientPage({ articleId }: EditArticleClientPa
 
   if (error) {
     return <div className="container">{error}</div>;
+  }
+
+  if (!editingArticle) {
+    return <div className="container">Article is unavailable for editing.</div>;
   }
 
   return (

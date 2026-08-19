@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import { updateUserAvatar } from '@/lib/api/users';
+import { useAuthStore } from '@/lib/store/authStore';
 import css from './UploadForm.module.css';
 
 const UploadForm = () => {
@@ -13,6 +14,8 @@ const UploadForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+  const user = useAuthStore(state => state.user);
+  const setUser = useAuthStore(state => state.setUser);
 
   const openFilePicker = () => inputRef.current?.click();
 
@@ -59,7 +62,14 @@ const UploadForm = () => {
     setIsSubmitting(true);
 
     try {
-      await updateUserAvatar(selectedFile);
+      const { url } = await updateUserAvatar(selectedFile);
+
+      if (user) {
+        setUser({
+          ...user,
+          avatarUrl: url,
+        });
+      }
       toast.success('Photo uploaded successfully!');
       router.push('/');
     } catch (error) {

@@ -23,6 +23,10 @@
   min-width: 0;
 }
 
+.titleField input {
+  background-color: transparent;
+}
+
 .fieldGroup {
   display: flex;
   flex-direction: column;

@@ -1,11 +1,13 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Form, Formik } from 'formik';
 
 import { useCreateArticleSubmit } from '@/hooks/useCreateArticleSubmit';
-import { createArticleSchema } from '@/lib/validation/createArticleSchema';
-import { initialAddArticleFormValues } from '@/types/createArticle';
+import { createArticleSchema, editArticleSchema } from '@/lib/validation/createArticleSchema';
+import { extractArticleText } from '@/lib/utils/createArticle';
+import { useArticleStore } from '@/lib/store/articleStore';
+import { initialAddArticleFormValues, type AddArticleFormValues } from '@/types/createArticle';
 
 import FormField from '../FormField/FormField';
 import RichTextEditor from '../RichTextEditor/RichTextEditor';
@@ -13,13 +15,29 @@ import css from './AddArticleForm.module.css';
 
 const AddArticleForm = () => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const editingArticle = useArticleStore(state => state.editingArticle);
+  const isEditing = Boolean(editingArticle);
+
+  const initialValues = useMemo<AddArticleFormValues>(() => {
+    if (!editingArticle) {
+      return { ...initialAddArticleFormValues };
+    }
+
+    return {
+      title: editingArticle.title,
+      article: editingArticle.article,
+      articleText: extractArticleText(editingArticle.article),
+      image: null,
+    };
+  }, [editingArticle]);
+
+  const [previewUrl, setPreviewUrl] = useState<string | null>(editingArticle?.img ?? null);
 
   const handleSubmit = useCreateArticleSubmit();
 
   useEffect(() => {
     return () => {
-      if (previewUrl) {
+      if (previewUrl?.startsWith('blob:')) {
         URL.revokeObjectURL(previewUrl);
       }
     };
@@ -27,14 +45,15 @@ const AddArticleForm = () => {
 
   return (
     <Formik
-      initialValues={initialAddArticleFormValues}
-      validationSchema={createArticleSchema}
+      initialValues={initialValues}
+      validationSchema={isEditing ? editArticleSchema : createArticleSchema}
+
+      enableReinitialize
       validateOnMount
       onSubmit={handleSubmit}
     >
       {({ errors, isSubmitting, isValid, setFieldTouched, setFieldValue, touched, values }) => {
         const imageError = touched.image && errors.image ? String(errors.image) : null;
-
         const editorError =
           touched.articleText && (errors.articleText || errors.article)
             ? String(errors.articleText || errors.article)
@@ -52,8 +71,7 @@ const AddArticleForm = () => {
         const removeImage = async () => {
           await setFieldValue('image', null);
           await setFieldTouched('image', true, true);
-
-          setPreviewUrl(null);
+          setPreviewUrl(editingArticle?.img ?? null);
 
           if (inputRef.current) {
             inputRef.current.value = '';
@@ -83,16 +101,18 @@ const AddArticleForm = () => {
                         alt="Selected article preview"
                       />
 
-                      <button
-                        type="button"
-                        className={css.removeImageButton}
-                        aria-label="Remove selected photo"
-                        onClick={removeImage}
-                      >
-                        <svg>
-                          <use href="/icons/symbol-defs.svg#icon-close-small" />
-                        </svg>
-                      </button>
+                      {(!isEditing || values.image) && (
+                        <button
+                          type="button"
+                          className={css.removeImageButton}
+                          aria-label="Remove selected photo"
+                          onClick={removeImage}
+                        >
+                          <svg>
+                            <use href="/icons/symbol-defs.svg#icon-close-small" />
+                          </svg>
+                        </button>
+                      )}
                     </div>
                   ) : (
                     <button
@@ -128,10 +148,8 @@ const AddArticleForm = () => {
                     Change photo
                   </button>
                 )}
-
                 {imageError && <span className={css.error}>{imageError}</span>}
               </div>
-
               <div className={`${css.fieldGroup} ${css.editorGroup}`}>
                 <RichTextEditor
                   value={values.article}
@@ -142,20 +160,23 @@ const AddArticleForm = () => {
                   }}
                   onBlur={() => {
                     void setFieldTouched('article', true, true);
-
                     void setFieldTouched('articleText', true, true);
                   }}
                 />
-
                 {editorError && <span className={css.error}>{editorError}</span>}
               </div>
-
               <button
                 type="submit"
                 className={css.submitButton}
                 disabled={isSubmitting || !isValid}
               >
-                {isSubmitting ? 'Publishing...' : 'Publish Article'}
+                {isSubmitting
+                  ? isEditing
+                    ? 'Saving...'
+                    : 'Publishing...'
+                  : isEditing
+                    ? 'Save Changes'
+                    : 'Publish Article'}
               </button>
             </div>
           </Form>

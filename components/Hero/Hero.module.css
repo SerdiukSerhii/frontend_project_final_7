@@ -121,18 +121,37 @@
   .heroContainer {
     flex-direction: row;
     align-items: start;
-    gap: 0;
-    justify-content: flex-end;
+    position: relative;
+  }
+  .wrapper {
+    flex-direction: row;
+    justify-content: start;
+    position: relative;
   }
 
   .textContent {
     order: 1;
+    position: relative;
+    z-index: 1;
+    width: 400px;
+    height: 383px;
+    max-width: 400px;
+    gap: 133px;
   }
 
   .imageWrapper {
+    position: absolute;
+    z-index: 2;
+    right: 0;
+    top: 0;
+    width: 100%;
+    max-width: 430px;
+    height: 384px;
     order: 2;
-    flex: 0 0 320px;
-    height: 280px;
+    background-image: image-set(
+      url('/hero/hero-bg-tablet.webp') 1x,
+      url('/hero/hero-bg-tablet-@2x.webp') 2x
+    );
   }
 
   .title {
@@ -148,11 +167,7 @@
     gap: 24px;
     max-width: 249px;
     margin-top: 16px;
-  }
-
-  .btnPrimary,
-  .btnSecondary {
-    width: 249px;
+    width: 100%;
   }
 }
 
@@ -175,8 +190,8 @@
   }
 
   .imageWrapper {
-    flex: 0 0 599px;
-    height: 389px;
+    max-width: 806px;
+    height: 562px;
   }
 
   .title {

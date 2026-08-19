@@ -10,12 +10,14 @@ interface ProfileLayoutProps {
 
 export default function ProfileLayout({ myArticles, savedArticles }: ProfileLayoutProps) {
   return (
-    <section className="container">
-      <ProfileHeader />
-      <ProfileTabs />
+    <section style={{ padding: '46px 0' }}>
+      <div className="container">
+        <ProfileHeader />
+        <ProfileTabs />
 
-      {myArticles}
-      {savedArticles}
+        {myArticles}
+        {savedArticles}
+      </div>
     </section>
   );
 }

@@ -33,8 +33,7 @@
 
 .authorName {
   font-weight: 700;
-  font-size: 32px;
-}
+  font-size: clamp(18px, 8.3vw, 32px);}
 
 .countText {
   font-weight: 700;

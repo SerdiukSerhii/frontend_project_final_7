@@ -120,7 +120,6 @@
 |  <img src="https://github.com/YuriiOlesich.png" width="50" height="50">   | [Юрій Олесіч](https://github.com/YuriiOlesich)        | Fullstack Developer |
 |     <img src="https://github.com/WKGHSN.png" width="50" height="50">      | [Наталія Коростельова](https://github.com/WKGHSN)     | **Team Lead QA**    |
 |    <img src="https://github.com/Uliana-87.png" width="50" height="50">    | [Уляна Гвозд](https://github.com/Uliana-87)           | QA                  |
-| <img src="https://github.com/bohdanvykhrenko.png" width="50" height="50"> | [Богдан Вихренко](https://github.com/bohdanvykhrenko) | QA                  |
 
 ---
 

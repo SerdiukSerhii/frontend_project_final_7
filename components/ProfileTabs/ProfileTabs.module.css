@@ -1,6 +1,5 @@
 .tabs {
   display: flex;
-  align-items: center;
   gap: 38px;
   margin-bottom: 24px;
 }
@@ -8,8 +7,9 @@
 .tab {
   font-weight: 700;
   font-size: 16px;
-  color: #374f42;
+  color: var(--green-darker);
   padding-bottom: 4px;
+
   border-bottom: 1px solid transparent;
   transition: opacity 0.2s ease;
 }
@@ -19,5 +19,5 @@
 }
 
 .active {
-  border-bottom-color: #374f42;
+  border-bottom-color: var(--green-darker);
 }

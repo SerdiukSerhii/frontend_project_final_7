@@ -9,7 +9,7 @@ import ArticlesList from '@/components/ArticlesList/ArticlesList';
 import Pagination from '@/components/Pagination/Pagination';
 import Loader from '@/components/Loader/Loader';
 
-const PAGE_SIZE = 12;
+const PAGE_SIZE = 1;
 
 export default function SavedArticlesView() {
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
@@ -25,14 +25,16 @@ export default function SavedArticlesView() {
     }
   }, [error]);
 
-  if (isLoading) return <Loader />;
+  if (isLoading) {
+    return <Loader fullScreen={false} />;
+  }
 
   const articles = data ?? [];
   const visibleArticles = articles.slice(0, visibleCount);
+  const hasMore = visibleCount < articles.length;
 
   const handleLoadMore = () => {
     setVisibleCount(prev => prev + PAGE_SIZE);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -45,11 +47,13 @@ export default function SavedArticlesView() {
         alertButtonLink="/articles"
       />
 
-      <Pagination
-        hasMore={visibleCount < articles.length}
-        isLoading={false}
-        onLoadMore={handleLoadMore}
-      />
+      {hasMore && (
+        <Pagination
+          hasMore={hasMore}
+          isLoading={false}
+          onLoadMore={handleLoadMore}
+        />
+      )}
     </>
   );
 }

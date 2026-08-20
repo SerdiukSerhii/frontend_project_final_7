@@ -103,11 +103,9 @@ const ArticlePageId = () => {
     ? sanitizeArticleHtml(article.article)
     : '';
 
-  const descriptionParagraphs = isRichTextArticle
-    ? []
-    : article.article
-        .split('\n')
-        .filter(paragraph => paragraph.trim());
+ const descriptionParagraphs = isRichTextArticle
+   ? []
+   : article.article.split(/\s*(?:\\n|\/n)\s*|\n/).filter(paragraph => paragraph.trim());
 
   return (
     <section className="container">

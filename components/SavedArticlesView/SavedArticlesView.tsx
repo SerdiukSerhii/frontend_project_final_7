@@ -9,7 +9,7 @@ import ArticlesList from '@/components/ArticlesList/ArticlesList';
 import Pagination from '@/components/Pagination/Pagination';
 import Loader from '@/components/Loader/Loader';
 
-const PAGE_SIZE = 1;
+const PAGE_SIZE = 12;
 
 export default function SavedArticlesView() {
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);

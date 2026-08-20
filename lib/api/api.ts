@@ -13,38 +13,3 @@ export const api = axios.create({
   baseURL: baseURL,
   withCredentials: true,
 });
-
-// const localApiUrl = process.env.NEXT_PUBLIC_LOCAL_API_URL;
-// const renderApiUrl = process.env.NEXT_PUBLIC_RENDER_API_URL;
-
-// const baseURL = process.env.NODE_ENV === 'production' ? renderApiUrl : localApiUrl;
-
-// export const api = axios.create({
-//   baseURL,
-//   withCredentials: true,
-// });
-
-// type RetryConfig = InternalAxiosRequestConfig & {
-//   _usedRenderFallback?: boolean;
-// };
-
-// api.interceptors.response.use(
-//   response => response,
-//   async error => {
-//     const config = error.config as RetryConfig | undefined;
-
-//     const isLocalApi = config?.baseURL === localApiUrl;
-
-//     const isNetworkError =
-//       error.code === 'ERR_NETWORK' || error.code === 'ECONNREFUSED' || error.code === 'ETIMEDOUT';
-
-//     if (config && isLocalApi && isNetworkError && !config._usedRenderFallback) {
-//       config._usedRenderFallback = true;
-//       config.baseURL = renderApiUrl;
-
-//       return api(config);
-//     }
-
-//     return Promise.reject(error);
-//   }
-// );

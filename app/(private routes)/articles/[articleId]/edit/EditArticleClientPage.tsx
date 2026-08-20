@@ -8,6 +8,8 @@ import { useArticleStore } from '@/lib/store/articleStore';
 import { getArticleById } from '@/lib/api/articles';
 import AddArticleForm from '@/components/Form/AddArticleForm/AddArticleForm';
 
+import Loader from '@/components/Loader/Loader';
+
 import css from './EditArticlePage.module.css';
 
 interface EditArticleClientPageProps {
@@ -82,7 +84,7 @@ export default function EditArticleClientPage({ articleId }: EditArticleClientPa
   }, [articleId, user, isAuthReady, setEditingArticle, clearEditingArticle]);
 
   if (!isAuthReady || !user || isLoading) {
-    return <div className="container">Loading...</div>;
+    return <Loader />;
   }
 
   if (error) {

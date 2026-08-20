@@ -4,9 +4,13 @@ import styles from './Footer.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useAuthStore } from '@/lib/store/authStore';
+import { usePathname } from 'next/navigation';
 
 export default function Footer() {
   const user = useAuthStore(state => state.user);
+  const pathname = usePathname();
+
+  const hideAccount = pathname === '/register' || pathname === '/login' || pathname === '/photo';
 
   return (
     <footer className={styles.footer}>
@@ -39,12 +43,14 @@ export default function Footer() {
               Articles
             </Link>
 
-            <Link
-              href={user ? '/profile' : '/login'}
-              className={styles.link}
-            >
-              Account
-            </Link>
+            {!hideAccount && (
+              <Link
+                href={user ? '/profile' : '/login'}
+                className={styles.link}
+              >
+                Account
+              </Link>
+            )}
           </nav>
         </div>
       </div>

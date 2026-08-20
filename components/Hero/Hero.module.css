@@ -14,14 +14,15 @@
 
 .imageWrapper {
   width: 100%;
-  height: 280px;
-
-  background-image: url('/hero-bg.png');
+  max-width: 361px;
+  height: 321px;
+  background-image: image-set(
+    url('/hero/hero-bg-mob.webp') 1x,
+    url('/hero/hero-bg-mob-@2x.webp') 2x
+  );
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   background-position: center;
-
-  border-radius: 32px;
 }
 
 .textContent {
@@ -118,38 +119,47 @@
   }
 
   .heroContainer {
-    max-width: 704px;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 32px;
+    align-items: start;
+    position: relative;
+  }
+  .wrapper {
+    flex-direction: row;
+    justify-content: start;
+    position: relative;
   }
 
   .textContent {
     order: 1;
-    flex: 0 0 320px;
+    position: relative;
+    z-index: 1;
+    height: 383px;
+    max-width: 400px;
+    gap: 133px;
   }
 
   .imageWrapper {
+    position: absolute;
+    z-index: 2;
+    right: 0;
+    top: 0;
+    width: 100%;
+    max-width: 430px;
+    height: 384px;
     order: 2;
-    flex: 0 0 320px;
-    height: 280px;
-  }
-
-  .title {
-    font-size: 40px;
+    background-image: image-set(
+      url('/hero/hero-bg-tablet.webp') 1x,
+      url('/hero/hero-bg-tablet-@2x.webp') 2x
+    );
   }
 
   .actions {
     flex-direction: column;
     align-items: flex-start;
     gap: 24px;
+    max-width: 249px;
     margin-top: 16px;
-  }
-
-  .btnPrimary,
-  .btnSecondary {
-    width: 249px;
+    width: 100%;
   }
 }
 
@@ -158,22 +168,28 @@
    ========================================================== */
 @media screen and (min-width: 1440px) {
   .heroSection {
+    height: 646px;
     padding-top: 48px;
     padding-bottom: 0;
   }
 
-  .heroContainer {
-    max-width: 1224px;
-    gap: 26px;
-  }
-
   .textContent {
-    flex: 0 0 599px;
+    height: 389px;
+    max-width: 599px;
+    gap: 56px;
   }
 
   .imageWrapper {
-    flex: 0 0 599px;
-    height: 389px;
+    max-width: 806px;
+    height: 562px;
+    width: 100%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: image-set(
+      url('/hero/hero-bg-desk.webp') 1x,
+      url('/hero/hero-bg-desk-@2x.webp') 2x
+    );
   }
 
   .title {
@@ -186,6 +202,7 @@
     align-items: center;
     gap: 24px;
     margin-top: 56px;
+    max-width: 392px;
   }
 
   .btnPrimary,

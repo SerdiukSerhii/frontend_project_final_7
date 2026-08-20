@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import css from './Hero.module.css';
+import RegisterButton from './RegisterButton/RegisterButton';
 
 const Hero = () => {
   return (
@@ -9,7 +9,7 @@ const Hero = () => {
           <div
             className={css.imageWrapper}
             aria-hidden="true"
-          />
+          ></div>
 
           <div className={css.textContent}>
             <h1 className={css.title}>
@@ -24,12 +24,7 @@ const Hero = () => {
                 Go to Articles
               </a>
 
-              <Link
-                href="/register"
-                className={css.btnSecondary}
-              >
-                Register
-              </Link>
+              <RegisterButton className={css.btnSecondary} />
             </div>
           </div>
         </div>

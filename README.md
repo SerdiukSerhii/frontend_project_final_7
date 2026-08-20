@@ -1,7 +1,7 @@
 # 🧘 Harmoniq — Твій простір. Твої люди. Твоя гармонія.
 
 <p align="center">
-  <img src="public/img/hero-section-preview.png" alt="Harmoniq Preview" width="100%">
+  <img src="public/img/hero-section-preview.webp" alt="Harmoniq Preview" width="100%">
 </p>
 
 ---
@@ -65,7 +65,8 @@
 
 ## 🔙 Backend
 
-[Backend](https://github.com/SerdiukSerhii/project-backend-final-7) реалізований як RESTful API на базі Node.js та Express.js.
+[Backend](https://github.com/SerdiukSerhii/project-backend-final-7) реалізований як RESTful API на
+базі Node.js та Express.js.
 
 **Основний функціонал:**
 
@@ -79,8 +80,7 @@
 - завантаження зображень;
 - валідація даних через Joi;
 - централізована обробка HTTP-помилок;
-- документація API через [Swagger / OpenAPI
-](https://fs-125-7-back.onrender.com/api-docs).
+- документація API через [Swagger / OpenAPI ](https://fs-125-7-back.onrender.com/api-docs).
 
 Дані зберігаються в MongoDB, а взаємодія з базою реалізована через Mongoose.
 
@@ -103,23 +103,23 @@
 
 ## 👥 Наша Команда
 
-|                                  Аватар                                   | Учасник команди                                       | Роль                |
-| :-----------------------------------------------------------------------: | :---------------------------------------------------- | :------------------ |
-|  <img src="https://github.com/SerdiukSerhii.png" width="50" height="50">  | [Сергій Сердюк](https://github.com/SerdiukSerhii)     | **Team Lead Fullstack**       |
-| <img src="https://github.com/OlhaBorzhynska.png" width="50" height="50">  | [Ольга Боржинська](https://github.com/OlhaBorzhynska) | **Scrum Master**    |
-|   <img src="https://github.com/YuliaKozak.png" width="50" height="50">    | [Юлія Козак](https://github.com/YuliaKozak)           | Fullstack Developer |
-|   <img src="https://github.com/Alinavinnik.png" width="50" height="50">   | [Аліна Лужняк](https://github.com/Alinavinnik)        | Fullstack Developer |
-|   <img src="https://github.com/alrozental.png" width="50" height="50">    | [Аліна Розенталь](https://github.com/alrozental)      | Fullstack Developer |
-|     <img src="https://github.com/amlnkk.png" width="50" height="50">      | [Аліна Мельник](https://github.com/amlnkk)            | Fullstack Developer |
-|    <img src="https://github.com/Karina-Ll.png" width="50" height="50">    | [Каріна Лубенська](https://github.com/Karina-Ll)      | Fullstack Developer |
-|    <img src="https://github.com/Mary1-com.png" width="50" height="50">    | [Марина Віннікова](https://github.com/Mary1-com)      | Fullstack Developer |
-|  <img src="https://github.com/Orest-Stetsyk.png" width="50" height="50">  | [Орест Стецик](https://github.com/Orest-Stetsyk)      | Fullstack Developer |
-|   <img src="https://github.com/svetlanagim.png" width="50" height="50">   | [Світлана Гіміш](https://github.com/svetlanagim)      | Fullstack Developer |
-|  <img src="https://github.com/vakulahelena.png" width="50" height="50">   | [Олена Вакула](https://github.com/vakulahelena)       | Fullstack Developer |
-|  <img src="https://github.com/Yuliia-sketch.png" width="50" height="50">  | [Юлія Карнаух](https://github.com/Yuliia-sketch)      | Fullstack Developer |
-|  <img src="https://github.com/YuriiOlesich.png" width="50" height="50">   | [Юрій Олесіч](https://github.com/YuriiOlesich)        | Fullstack Developer |
-|     <img src="https://github.com/WKGHSN.png" width="50" height="50">      | [Наталія Коростельова](https://github.com/WKGHSN)     | **Team Lead QA**    |
-|    <img src="https://github.com/Uliana-87.png" width="50" height="50">    | [Уляна Гвозд](https://github.com/Uliana-87)           | QA                  |
+|                                  Аватар                                  | Учасник команди                                       | Роль                    |
+| :----------------------------------------------------------------------: | :---------------------------------------------------- | :---------------------- |
+| <img src="https://github.com/SerdiukSerhii.png" width="50" height="50">  | [Сергій Сердюк](https://github.com/SerdiukSerhii)     | **Team Lead Fullstack** |
+| <img src="https://github.com/OlhaBorzhynska.png" width="50" height="50"> | [Ольга Боржинська](https://github.com/OlhaBorzhynska) | **Scrum Master**        |
+|   <img src="https://github.com/YuliaKozak.png" width="50" height="50">   | [Юлія Козак](https://github.com/YuliaKozak)           | Fullstack Developer     |
+|  <img src="https://github.com/Alinavinnik.png" width="50" height="50">   | [Аліна Лужняк](https://github.com/Alinavinnik)        | Fullstack Developer     |
+|   <img src="https://github.com/alrozental.png" width="50" height="50">   | [Аліна Розенталь](https://github.com/alrozental)      | Fullstack Developer     |
+|     <img src="https://github.com/amlnkk.png" width="50" height="50">     | [Аліна Мельник](https://github.com/amlnkk)            | Fullstack Developer     |
+|   <img src="https://github.com/Karina-Ll.png" width="50" height="50">    | [Каріна Лубенська](https://github.com/Karina-Ll)      | Fullstack Developer     |
+|   <img src="https://github.com/Mary1-com.png" width="50" height="50">    | [Марина Віннікова](https://github.com/Mary1-com)      | Fullstack Developer     |
+| <img src="https://github.com/Orest-Stetsyk.png" width="50" height="50">  | [Орест Стецик](https://github.com/Orest-Stetsyk)      | Fullstack Developer     |
+|  <img src="https://github.com/svetlanagim.png" width="50" height="50">   | [Світлана Гіміш](https://github.com/svetlanagim)      | Fullstack Developer     |
+|  <img src="https://github.com/vakulahelena.png" width="50" height="50">  | [Олена Вакула](https://github.com/vakulahelena)       | Fullstack Developer     |
+| <img src="https://github.com/Yuliia-sketch.png" width="50" height="50">  | [Юлія Карнаух](https://github.com/Yuliia-sketch)      | Fullstack Developer     |
+|  <img src="https://github.com/YuriiOlesich.png" width="50" height="50">  | [Юрій Олесіч](https://github.com/YuriiOlesich)        | Fullstack Developer     |
+|     <img src="https://github.com/WKGHSN.png" width="50" height="50">     | [Наталія Коростельова](https://github.com/WKGHSN)     | **Team Lead QA**        |
+|   <img src="https://github.com/Uliana-87.png" width="50" height="50">    | [Уляна Гвозд](https://github.com/Uliana-87)           | QA                      |
 
 ---
 

@@ -1,28 +1,26 @@
 'use client';
 
+import { useState, useEffect } from 'react';
+import toast from 'react-hot-toast';
+import { useQuery } from '@tanstack/react-query';
+
 import { getUserArticles } from '@/lib/api/articles';
 import { useAuthStore } from '@/lib/store/authStore';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import Loader from '../Loader/Loader';
-import ArticlesList from '../ArticlesList/ArticlesList';
-import Pagination from '../Pagination/Pagination';
-import toast from 'react-hot-toast';
-import { useEffect } from 'react';
+import ArticlesList from '@/components/ArticlesList/ArticlesList';
+import Pagination from '@/components/Pagination/Pagination';
+import Loader from '@/components/Loader/Loader';
 
-const LIMIT = 12;
+const PAGE_SIZE = 12;
 
 export default function MyArticlesView() {
   const userId = useAuthStore(state => state.user?._id);
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
-  const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage, error } =
-    useInfiniteQuery({
-      queryKey: ['userArticles', userId],
-      queryFn: ({ pageParam }) => getUserArticles(userId as string, pageParam, LIMIT),
-      initialPageParam: 1,
-      getNextPageParam: lastPage =>
-        lastPage.data.hasNextPage ? lastPage.data.page + 1 : undefined,
-      enabled: Boolean(userId),
-    });
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['userArticlesList', userId],
+    queryFn: () => getUserArticles(userId as string, 1, 100),
+    enabled: Boolean(userId),
+  });
 
   useEffect(() => {
     if (error) {
@@ -30,32 +28,37 @@ export default function MyArticlesView() {
     }
   }, [error]);
 
-  if (isLoading) {
-    return <Loader />;
-  }
+  if (isLoading) return <Loader fullScreen={false} />;
 
-  const articles = data?.pages.flatMap(page => page.data.articles) ?? [];
+  // 🪄 Бронебойное считывание статей в любых форматах ответа сервера:
+  const rawData = data as unknown as { data?: unknown };
+  const articles = Array.isArray(rawData?.data)
+    ? rawData.data
+    : Array.isArray((rawData?.data as { articles?: unknown })?.articles)
+      ? (rawData?.data as { articles: [] }).articles
+      : [];
+
+  const visibleArticles = articles.slice(0, visibleCount);
+  const hasMore = visibleCount < articles.length;
 
   const handleLoadMore = () => {
-    fetchNextPage();
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
+    setVisibleCount(prev => prev + 12);
   };
 
   return (
     <>
       <ArticlesList
-        articles={articles}
+        articles={visibleArticles}
         isOwner
       />
 
-      <Pagination
-        hasMore={Boolean(hasNextPage)}
-        isLoading={isFetchingNextPage}
-        onLoadMore={handleLoadMore}
-      />
+      {hasMore && (
+        <Pagination
+          hasMore={hasMore}
+          isLoading={false}
+          onLoadMore={handleLoadMore}
+        />
+      )}
     </>
   );
 }

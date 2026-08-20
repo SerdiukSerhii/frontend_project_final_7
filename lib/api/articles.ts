@@ -99,7 +99,7 @@ export const getUserArticles = async (
   limit = 12
 ): Promise<GetUserArticlesResponse> => {
   const { data } = await api.get<GetUserArticlesResponse>(`/articles/user/${userId}`, {
-    params: { page, limit },
+    params: { page, perPage: limit, limit },
   });
 
   return data;

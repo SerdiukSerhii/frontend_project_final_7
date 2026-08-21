@@ -50,16 +50,6 @@ main {
   padding: 0 16px;
 }
 
-.logoImage {
-  display: block;
-  width: 113px;
-  height: auto;
-}
-
-.mobileCreateLink {
-  display: inline-flex;
-}
-
 @media screen and (min-width: 768px) {
   .container {
     max-width: 768px;

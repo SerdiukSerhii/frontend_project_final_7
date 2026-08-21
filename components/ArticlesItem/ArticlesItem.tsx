@@ -23,6 +23,7 @@ export default function ArticlesItem({ article, isOwner = false }: ArticlesItemP
             alt={title}
             fill
             className={css.image}
+            unoptimized
           />
         </div>
 

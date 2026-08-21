@@ -19,8 +19,7 @@ const Header = () => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const [isLogoutModalOpen, setIsLogoutModalOpen] =
-    useState(false);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
   const isAuthenticated = isAuthReady && Boolean(user);
 
@@ -32,13 +31,8 @@ const Header = () => {
     return pathname === href || pathname.startsWith(`${href}/`);
   };
 
-  const getNavLinkClassName = (
-    href: string,
-    baseClassName: string
-  ) => {
-    return `${baseClassName} ${
-      isActivePath(href) ? css.activeNavLink : ''
-    }`;
+  const getNavLinkClassName = (href: string, baseClassName: string) => {
+    return `${baseClassName} ${isActivePath(href) ? css.activeNavLink : ''}`;
   };
 
   const toggleMenu = () => {
@@ -85,39 +79,24 @@ const Header = () => {
           >
             <Link
               href="/"
-              className={getNavLinkClassName(
-                '/',
-                css.navLink
-              )}
-              aria-current={
-                isActivePath('/') ? 'page' : undefined
-              }
+              className={getNavLinkClassName('/', css.navLink)}
+              aria-current={isActivePath('/') ? 'page' : undefined}
             >
               Home
             </Link>
 
             <Link
               href="/articles"
-              className={getNavLinkClassName(
-                '/articles',
-                css.navLink
-              )}
-              aria-current={
-                isActivePath('/articles') ? 'page' : undefined
-              }
+              className={getNavLinkClassName('/articles', css.navLink)}
+              aria-current={isActivePath('/articles') ? 'page' : undefined}
             >
               Articles
             </Link>
 
             <Link
               href="/authors"
-              className={getNavLinkClassName(
-                '/authors',
-                css.navLink
-              )}
-              aria-current={
-                isActivePath('/authors') ? 'page' : undefined
-              }
+              className={getNavLinkClassName('/authors', css.navLink)}
+              aria-current={isActivePath('/authors') ? 'page' : undefined}
             >
               Creators
             </Link>
@@ -125,13 +104,8 @@ const Header = () => {
             {isAuthenticated && (
               <Link
                 href="/profile"
-                className={getNavLinkClassName(
-                  '/profile',
-                  css.navLink
-                )}
-                aria-current={
-                  isActivePath('/profile') ? 'page' : undefined
-                }
+                className={getNavLinkClassName('/profile', css.navLink)}
+                aria-current={isActivePath('/profile') ? 'page' : undefined}
               >
                 My Profile
               </Link>
@@ -180,35 +154,41 @@ const Header = () => {
           </div>
 
           {/* Tablet contextual action */}
-          {isAuthReady && (
-            <div className={css.tabletAction}>
-              {isAuthenticated ? (
-                <Link
-                  href="/articles/new"
-                  className={css.primaryLink}
-                  onClick={closeMenu}
-                >
-                  Create an article
-                </Link>
-              ) : (
-                <Link
-                  href="/register"
-                  className={css.primaryLink}
-                  onClick={closeMenu}
-                >
-                  Join now
-                </Link>
-              )}
-            </div>
-          )}
+
+          <div className={css.tabletAction}>
+            {!isAuthReady ? (
+              <Link
+                href="/register"
+                className={`${css.primaryLink} ${css.invisibleAction}`}
+                aria-hidden="true"
+                tabIndex={-1}
+              >
+                Join now
+              </Link>
+            ) : isAuthenticated ? (
+              <Link
+                href="/articles/new"
+                className={css.primaryLink}
+                onClick={closeMenu}
+              >
+                Create an article
+              </Link>
+            ) : (
+              <Link
+                href="/register"
+                className={css.primaryLink}
+                onClick={closeMenu}
+              >
+                Join now
+              </Link>
+            )}
+          </div>
 
           {/* Mobile and tablet menu button */}
           <button
             className={css.menuButton}
             type="button"
-            aria-label={
-              isMenuOpen ? 'Close menu' : 'Open menu'
-            }
+            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={isMenuOpen}
             aria-controls="header-mobile-menu"
             onClick={toggleMenu}
@@ -249,13 +229,8 @@ const Header = () => {
           >
             <Link
               href="/"
-              className={getNavLinkClassName(
-                '/',
-                css.mobileNavLink
-              )}
-              aria-current={
-                isActivePath('/') ? 'page' : undefined
-              }
+              className={getNavLinkClassName('/', css.mobileNavLink)}
+              aria-current={isActivePath('/') ? 'page' : undefined}
               onClick={closeMenu}
             >
               Home
@@ -263,13 +238,8 @@ const Header = () => {
 
             <Link
               href="/articles"
-              className={getNavLinkClassName(
-                '/articles',
-                css.mobileNavLink
-              )}
-              aria-current={
-                isActivePath('/articles') ? 'page' : undefined
-              }
+              className={getNavLinkClassName('/articles', css.mobileNavLink)}
+              aria-current={isActivePath('/articles') ? 'page' : undefined}
               onClick={closeMenu}
             >
               Articles
@@ -277,13 +247,8 @@ const Header = () => {
 
             <Link
               href="/authors"
-              className={getNavLinkClassName(
-                '/authors',
-                css.mobileNavLink
-              )}
-              aria-current={
-                isActivePath('/authors') ? 'page' : undefined
-              }
+              className={getNavLinkClassName('/authors', css.mobileNavLink)}
+              aria-current={isActivePath('/authors') ? 'page' : undefined}
               onClick={closeMenu}
             >
               Creators
@@ -298,15 +263,8 @@ const Header = () => {
               <>
                 <Link
                   href="/profile"
-                  className={getNavLinkClassName(
-                    '/profile',
-                    css.mobileNavLink
-                  )}
-                  aria-current={
-                    isActivePath('/profile')
-                      ? 'page'
-                      : undefined
-                  }
+                  className={getNavLinkClassName('/profile', css.mobileNavLink)}
+                  aria-current={isActivePath('/profile') ? 'page' : undefined}
                   onClick={closeMenu}
                 >
                   My Profile
@@ -352,9 +310,7 @@ const Header = () => {
           </nav>
         </div>
       )}
-      {isLogoutModalOpen && (
-        <LogoutModal onClose={closeLogoutModal} />
-      )}
+      {isLogoutModalOpen && <LogoutModal onClose={closeLogoutModal} />}
     </header>
   );
 };

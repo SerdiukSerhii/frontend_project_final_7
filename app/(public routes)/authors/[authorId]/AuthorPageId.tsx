@@ -91,6 +91,7 @@ export default function AuthorArticlesPage({ params }: PageProps) {
               height={137}
               className={css.avatar}
               priority
+              unoptimized
             />
 
             <div className={css.authorInfo}>

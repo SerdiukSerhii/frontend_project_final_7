@@ -25,6 +25,7 @@ export default function AuthorsItem({ author }: AuthorsItemProps) {
               fill
               sizes="(min-width: 768px) 262px, 148px"
               className={css.image}
+              unoptimized
             />
           )}
         </div>

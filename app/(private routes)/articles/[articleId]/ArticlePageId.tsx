@@ -35,17 +35,7 @@ const richTextPattern = /<(?:p|h2|ul|ol|blockquote)\b[^>]*>/i;
 
 const sanitizeArticleHtml = (content: string) =>
   DOMPurify.sanitize(content, {
-    ALLOWED_TAGS: [
-      'p',
-      'br',
-      'h2',
-      'strong',
-      'em',
-      'ul',
-      'ol',
-      'li',
-      'blockquote',
-    ],
+    ALLOWED_TAGS: ['p', 'br', 'h2', 'strong', 'em', 'ul', 'ol', 'li', 'blockquote'],
     ALLOWED_ATTR: [],
   });
 
@@ -99,13 +89,11 @@ const ArticlePageId = () => {
 
   const isRichTextArticle = richTextPattern.test(article.article);
 
-  const sanitizedArticleHtml = isRichTextArticle
-    ? sanitizeArticleHtml(article.article)
-    : '';
+  const sanitizedArticleHtml = isRichTextArticle ? sanitizeArticleHtml(article.article) : '';
 
- const descriptionParagraphs = isRichTextArticle
-   ? []
-   : article.article.split(/\s*(?:\\n|\/n)\s*|\n/).filter(paragraph => paragraph.trim());
+  const descriptionParagraphs = isRichTextArticle
+    ? []
+    : article.article.split(/\s*(?:\\n|\/n)\s*|\n/).filter(paragraph => paragraph.trim());
 
   return (
     <section className="container">
@@ -119,6 +107,7 @@ const ArticlePageId = () => {
             fill
             priority
             className={css.image}
+            unoptimized
           />
         </div>
 

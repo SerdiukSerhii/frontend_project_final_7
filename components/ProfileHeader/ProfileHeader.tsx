@@ -43,6 +43,7 @@ export default function ProfileHeader() {
           height={137}
           className={css.avatar}
           priority
+          unoptimized
         />
         <div className={css.info}>
           <p className={css.name}>{user.name}</p>

@@ -30,6 +30,7 @@ export default function CreatorsItem({ author }: CreatorsItemProps) {
               alt={name}
               fill
               className={css.avatarAuthors}
+              unoptimized
             />
           </div>
         ) : (
